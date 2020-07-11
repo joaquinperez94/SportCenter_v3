@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+
+	<bean id="userAccountAdmin1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountGestor1" class="security.UserAccount">
+		<property name="username" value="kisko" />
+		<property name="password" value="e10adc3949ba59abbe56e057f20f883e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GESTOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountGestor2" class="security.UserAccount">
+		<property name="username" value="marin" />
+		<property name="password" value="e10adc3949ba59abbe56e057f20f883e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GESTOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountGestor3" class="security.UserAccount">
+		<property name="username" value="amparo" />
+		<property name="password" value="e10adc3949ba59abbe56e057f20f883e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GESTOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountGestor4" class="security.UserAccount">
+		<property name="username" value="ezequiel" />
+		<property name="password" value="e10adc3949ba59abbe56e057f20f883e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="GESTOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountUsuario1" class="security.UserAccount">
+		<property name="username" value="joaquin" />
+		<property name="password" value="e10adc3949ba59abbe56e057f20f883e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USUARIO" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountUsuario2" class="security.UserAccount">
+		<property name="username" value="paula" />
+		<property name="password" value="e10adc3949ba59abbe56e057f20f883e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USUARIO" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountUsuario3" class="security.UserAccount">
+		<property name="username" value="kike1" />
+		<property name="password" value="e10adc3949ba59abbe56e057f20f883e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USUARIO" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Admin -->
+	
+	<bean id="admin" class="domain.Administrador">
+		<property name="userAccount" ref="userAccountAdmin1" />
+		<property name="nombre" value="Francisco" />
+		<property name="apellidos" value="Perez" />
+		<property name="telefono" value="+34662657111" />
+		<property name="direccion" value="Calle San Pedro 25" />
+		<property name="provincia" value="SEVILLA" />
+		<property name="email" value="kisko@gmail.com" />
+	</bean>
+	
+	<!--************************* Gestor *********************************-->
+	<bean id="gestor1" class="domain.Gestor">
+		<property name="userAccount" ref="userAccountGestor1" />
+		<property name="nombre" value="Francisco" />
+		<property name="apellidos" value="Perez Morilla" />
+		<property name="telefono" value="+34662657111" />
+		<property name="direccion" value="Calle San Pedro 25" />
+		<property name="provincia" value="SEVILLA" />
+		<property name="email" value="kisko@gmail.com" />
+		<property name="centros">
+			<list>
+				<ref bean="centro1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="gestor2" class="domain.Gestor">
+		<property name="userAccount" ref="userAccountGestor2" />
+		<property name="nombre" value="Marin" />
+		<property name="apellidos" value="Suárez Perez" />
+		<property name="telefono" value="+34663223098" />
+		<property name="direccion" value="Calle Laguna 3" />
+		<property name="provincia" value="SEVILLA" />
+		<property name="email" value="marin@gmail.com" />
+		<property name="centros">
+			<list>
+				<ref bean="centro2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="gestor3" class="domain.Gestor">
+		<property name="userAccount" ref="userAccountGestor3" />
+		<property name="nombre" value="Amparo" />
+		<property name="apellidos" value="Morilla Perez" />
+		<property name="telefono" value="+34663220000" />
+		<property name="direccion" value="Calle Estepa 12" />
+		<property name="provincia" value="SEVILLA" />
+		<property name="email" value="amparo@gmail.com" />
+		<property name="centros">
+			<list>
+				<ref bean="centro3" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="gestor4" class="domain.Gestor">
+		<property name="userAccount" ref="userAccountGestor4" />
+		<property name="nombre" value="Ezequiel" />
+		<property name="apellidos" value="Barrera Soez" />
+		<property name="telefono" value="+34663111222" />
+		<property name="direccion" value="Calle Cortinar 56" />
+		<property name="provincia" value="SEVILLA" />
+		<property name="email" value="ezequiel223@gmail.com" />
+		<property name="centros">
+			<list>
+				<ref bean="centro4" />
+			</list>
+		</property>
+	</bean>
+	
+	<!--************************* Usuario *********************************-->
+	<bean id="usuario1" class="domain.Usuario">
+		<property name="userAccount" ref="userAccountUsuario1" />
+		<property name="nombre" value="Joaquin" />
+		<property name="apellidos" value="Lozano Portillo" />
+		<property name="telefono" value="+34662657000" />
+		<property name="direccion" value="Calle Pedrera 38" />
+		<property name="provincia" value="SEVILLA" />
+		<property name="email" value="joaquin@gmail.com" />
+		<property name="centros">
+			<list>
+
+			</list>
+		</property>
+		<property name="reservas">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="usuario2" class="domain.Usuario">
+		<property name="userAccount" ref="userAccountUsuario2" />
+		<property name="nombre" value="Paula" />
+		<property name="apellidos" value="Diaz Saucedo" />
+		<property name="telefono" value="+34662657222" />
+		<property name="direccion" value="Calle Horno 70" />
+		<property name="provincia" value="SEVILLA" />
+		<property name="email" value="paula@gmail.com" />
+		<property name="centros">
+			<list>
+
+			</list>
+		</property>
+		<property name="reservas">
+			<list>
+			</list>
+		</property>
+	</bean>
+		
+	<bean id="usuario3" class="domain.Usuario">
+		<property name="userAccount" ref="userAccountUsuario3" />
+		<property name="nombre" value="Enrique" />
+		<property name="apellidos" value="Montero Parrilla" />
+		<property name="telefono" value="+34662657333" />
+		<property name="direccion" value="Calle Velazquez 21" />
+		<property name="provincia" value="SEVILLA" />
+		<property name="email" value="enrique212@gmail.com" />
+		<property name="centros">
+			<list>
+
+			</list>
+		</property>
+		<property name="reservas">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!--************************** Centro **********************************-->
+	<bean id="centro1" class="domain.Centro">
+		<property name="nombre" value="Polideportivo Municipal Paradas" />
+		<property name="descripcion" value="El complejo polideportivo se ubica en un solar situado entre las calles Pablo Neruda y Pedro Salinas, al Noroeste de la población, junto al recinto ferial. " />
+		<property name="tipo" value="Polideportivo" />
+		<property name="direccion" value="Calle Pablo Neruda 32" />
+		<property name="valoracion" value="8" />
+		<property name="gestor" ref="gestor1" />
+		<property name="comentarios">
+			<list>
+
+			</list>
+		</property>
+		<property name="servicios">
+			<list>
+
+			</list>
+		</property>
+		<property name="horarios">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="centro2" class="domain.Centro">
+		<property name="nombre" value="Polideportivo Municipal Mairena" />
+		<property name="descripcion" value="El complejo polideportivo se ubica en un solar situado entre las calles Pablo Neruda y Pedro Salinas, al Noroeste de la población, junto al recinto ferial. " />
+		<property name="tipo" value="Polideportivo" />
+		<property name="direccion" value="Calle Palacios 42" />
+		<property name="valoracion" value="6" />
+		<property name="gestor" ref="gestor2" />
+		<property name="comentarios">
+			<list>
+				<ref bean="comentario1" />
+			</list>
+		</property>
+		<property name="servicios">
+			<list>
+
+			</list>
+		</property>
+		<property name="horarios">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="centro3" class="domain.Centro">
+		<property name="nombre" value="Gimnasio Fitness" />
+		<property name="descripcion" value="Si estás buscando un gimnasio en Sevilla cerca de ti para que te ayude en tu preparación física, enhorabuena porque lo acabas de encontrar. Century Fitness es tu gimnasio; todo un referente en el mundo del Fitness." />
+		<property name="tipo" value="Gimnasio" />
+		<property name="direccion" value="Calle Terraplen 42" />
+		<property name="valoracion" value="3" />
+		<property name="gestor" ref="gestor3" />
+		<property name="servicios">
+			<list>
+
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+
+			</list>
+		</property>
+		<property name="horarios">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="centro4" class="domain.Centro">
+		<property name="nombre" value="Gimnasio La Cartuja" />
+		<property name="descripcion" value="Si estás buscando un gimnasio en Sevilla cerca de ti para que te ayude en tu preparación física, enhorabuena porque lo acabas de encontrar. Century Fitness es tu gimnasio; todo un referente en el mundo del Fitness." />
+		<property name="tipo" value="Gimnasio" />
+		<property name="direccion" value="Calle Cartuja 42" />
+		<property name="valoracion" value="8" />
+		<property name="gestor" ref="gestor4" />
+		<property name="servicios">
+			<list>
+
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+
+			</list>
+		</property>
+		<property name="horarios">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<!--************************** Servicio **********************************-->
+	<!--<bean id="servicio11" class="domain.Servicio">
+		<property name="nombre" value="Pista Padel 1" />
+		<property name="imagen" value="" />
+		<property name="tipoServicio" value="Padel" />
+		<property name="descripcion" value="Calle Cartuja 42" />
+		<property name="precio" value="7.5" />
+		<property name="duracion" value="1.5" />
+	</bean>-->
+	
+	
+	<bean id="comentario1" class="domain.Comentario">
+		<property name="texto" value="Pista Padel345534354 1" />
+		<property name="valoracion" value="34" />
+		<property name="fechaCreacion" value="2018/04/04 12:22" />
+		<property name="centro" ref="centro2" />
+	</bean>
+</beans>

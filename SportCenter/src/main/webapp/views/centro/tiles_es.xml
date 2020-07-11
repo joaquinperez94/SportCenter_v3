@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+	
+	<definition name="centro/edit" extends="master.page">
+		<put-attribute name="title" value="Editar centro" />
+		<put-attribute name="body" value="/views/centro/edit.jsp" />
+	</definition>
+
+	<definition name="centro/display" extends="master.page">
+		<put-attribute name="title" value="Mostrar centro" />
+		<put-attribute name="body" value="/views/centro/display.jsp" />
+	</definition>
+	
+	<definition name="centro/list" extends="master.page">
+		<put-attribute name="title" value="Listar centros" />
+		<put-attribute name="body" value="/views/centro/list.jsp" />
+	</definition>
+	
+</tiles-definitions>
