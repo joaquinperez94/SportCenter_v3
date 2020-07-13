@@ -61,7 +61,7 @@
 	<div>
 		<input type="button" name="edit"
 			value="<spring:message code="centro.crear" />"
-			onclick="javascript: window.location.replace('centro/gestor/create.do');" />
+			onclick="javascript: window.location.replace('centro/gestor/create.do?centroId=${row.id}');" />
 	</div>
 </security:authorize>
 

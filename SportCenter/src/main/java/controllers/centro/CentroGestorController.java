@@ -1,14 +1,12 @@
 
 package controllers.centro;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,15 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import services.CentroService;
 import services.ComentarioService;
 import services.GestorService;
-import services.HorarioService;
 import services.ServicioService;
 import controllers.AbstractController;
 import domain.Centro;
 import domain.Comentario;
 import domain.Gestor;
-import domain.Horario;
 import domain.Servicio;
-import forms.CentroForm;
 
 @Controller
 @RequestMapping("/centro/gestor")
@@ -41,9 +36,6 @@ public class CentroGestorController extends AbstractController {
 
 	@Autowired
 	private ComentarioService	comentarioService;
-
-	@Autowired
-	private HorarioService		horarioService;
 
 	@Autowired
 	private GestorService		gestorService;
@@ -70,18 +62,13 @@ public class CentroGestorController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		Centro centro;
-		Horario horario;
 
 		centro = this.centroService.crearCentro();
-		horario = this.horarioService.create();
-		CentroForm centroForm;
 
-		centroForm = new CentroForm(centro, horario);
+		result = this.createEditModelAndView(centro);
 
-		final Collection<Horario> horarios = new ArrayList<>(centro.getHorarios());
-		result = new ModelAndView("centro/edit");
-		result.addObject("centroForm", centroForm);
-		result.addObject("horarios", horarios);
+		result.addObject("centro", centro);
+
 		result.addObject("requestURI", "centro/gestor/edit.do");
 		return result;
 
@@ -103,21 +90,17 @@ public class CentroGestorController extends AbstractController {
 
 	// Save -----------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("centroForm") CentroForm centroForm, final BindingResult binding) {
+	public ModelAndView save(final Centro centro, final BindingResult binding) {
 		ModelAndView result;
-		Collection<Horario> horariosCentro = new ArrayList<>();
 
-		horariosCentro = this.centroService.manipularHorarios(centroForm);
-		centroForm = this.centroService.reconstruct(centroForm, binding);
 		if (binding.hasErrors())
-			result = this.createEditModelAndView2(centroForm, "centro.mio");
+			result = this.createEditModelAndView(centro, "centro.mio");
 		else
 			try {
-				result = this.createEditModelAndView2(centroForm, "centro.mio");
-				//this.centroService.save(centroForm.getCentro());
-				//result = new ModelAndView("redirect:my-center.do");
+				this.centroService.save(centro);
+				result = new ModelAndView("redirect:my-center.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView2(centroForm, "centro.commit.error");
+				result = this.createEditModelAndView(centro, "centro.commit.error");
 			}
 		return result;
 	}
@@ -221,32 +204,12 @@ public class CentroGestorController extends AbstractController {
 
 		ModelAndView result;
 
-		//TODO: AÑADIR CREACION DE HORARIO AQUI
 		result = new ModelAndView("centro/edit");
 		result.addObject("centro", centro);
 		result.addObject("message", messageCode);
-		result.addObject("horarios", centro.getHorarios());
-		return result;
-
-	}
-
-	protected ModelAndView createEditModelAndView2(final CentroForm centro) {
-
-		Assert.notNull(centro);
-		ModelAndView result;
-		result = this.createEditModelAndView2(centro, null);
-		return result;
-	}
-
-	protected ModelAndView createEditModelAndView2(final CentroForm centroForm, final String messageCode) {
-		ModelAndView result;
-
-		result = new ModelAndView("centro/edit");
-		result.addObject("centroForm", centroForm);
-		result.addObject("horarios", centroForm.getHorario());
-		result.addObject("requestURI", "centro/gestor/edit.do");
 
 		return result;
 
 	}
+
 }

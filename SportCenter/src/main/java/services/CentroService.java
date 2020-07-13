@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 
 import repositories.CentroRepository;
 import domain.Centro;
@@ -33,8 +31,6 @@ public class CentroService {
 	@Autowired
 	GestorService				gestorService;
 	@Autowired
-	private Validator			validator;
-	@Autowired
 	HorarioService				horarioService;
 
 
@@ -51,24 +47,6 @@ public class CentroService {
 		Gestor gestorPrincipal;
 		Collection<Servicio> servicios;
 		Collection<Comentario> comentarios;
-		Collection<Horario> horarios;
-		Collection<String> diasSemana;
-
-		horarios = new ArrayList<>();
-		diasSemana = new ArrayList<>();
-		diasSemana.add("Lunes");
-		diasSemana.add("Martes");
-		diasSemana.add("Miércoles");
-		diasSemana.add("Jueves");
-		diasSemana.add("Viernes");
-		diasSemana.add("Sábado");
-		diasSemana.add("Domingo");
-
-		for (final String dia : diasSemana) {
-			final Horario h = this.horarioService.create();
-			h.setDiaSemana(dia);
-			horarios.add(h);
-		}
 
 		result = new Centro();
 		servicios = new ArrayList<Servicio>();
@@ -78,8 +56,6 @@ public class CentroService {
 		result.setGestor(gestorPrincipal);
 		result.setServicios(servicios);
 		result.setComentarios(comentarios);
-		result.setHorarios(horarios);
-
 		return result;
 	}
 
@@ -141,42 +117,44 @@ public class CentroService {
 		return result;
 	}
 
-	public CentroForm reconstruct(final CentroForm centroForm, final BindingResult bindingResult) {
-		CentroForm result = null;
-		Centro centroBD;
-		centroBD = centroForm.getCentro();
-
-		if (centroBD.getId() == 0) {
-			Gestor gestor;
-			Collection<Servicio> servicios;
-			Collection<Comentario> comentarios;
-			final Collection<Horario> horarios;
-
-			gestor = this.gestorService.findByPrincipal();
-			servicios = new ArrayList<Servicio>();
-			comentarios = new ArrayList<Comentario>();
-			//horarios = new ArrayList<Horario>(centroForm.getHorarios());
-
-			//Alomejor falta cogerle en centro al centroForm
-			centroForm.getCentro().setComentarios(comentarios);
-			//centroForm.getCentro().setHorarios(horarios);
-			centroForm.getCentro().setServicios(servicios);
-			centroForm.getCentro().setGestor(gestor);
-
-			result = centroForm;
-		} else {
-			centroBD = this.centroRepository.findOne(centroForm.getCentro().getId());
-			centroForm.getCentro().setId(centroBD.getId());
-			centroForm.getCentro().setVersion(centroBD.getVersion());
-			centroForm.getCentro().setServicios(centroBD.getServicios());
-			centroForm.getCentro().setComentarios(centroBD.getComentarios());
-			centroForm.getCentro().setHorarios(centroBD.getHorarios());
-			centroForm.getCentro().setGestor(centroBD.getGestor());
-			result = centroForm;
-		}
-		this.validator.validate(result, bindingResult);
-		return result;
-	}
+	/*
+	 * public CentroForm reconstruct(final CentroForm centroForm, final BindingResult bindingResult) {
+	 * CentroForm result = null;
+	 * Centro centroBD;
+	 * centroBD = centroForm.getCentro();
+	 * 
+	 * if (centroBD.getId() == 0) {
+	 * Gestor gestor;
+	 * Collection<Servicio> servicios;
+	 * Collection<Comentario> comentarios;
+	 * final Collection<Horario> horarios;
+	 * 
+	 * gestor = this.gestorService.findByPrincipal();
+	 * servicios = new ArrayList<Servicio>();
+	 * comentarios = new ArrayList<Comentario>();
+	 * //horarios = new ArrayList<Horario>(centroForm.getHorarios());
+	 * 
+	 * //Alomejor falta cogerle en centro al centroForm
+	 * centroForm.getCentro().setComentarios(comentarios);
+	 * //centroForm.getCentro().setHorarios(horarios);
+	 * centroForm.getCentro().setServicios(servicios);
+	 * centroForm.getCentro().setGestor(gestor);
+	 * 
+	 * result = centroForm;
+	 * } else {
+	 * centroBD = this.centroRepository.findOne(centroForm.getCentro().getId());
+	 * centroForm.getCentro().setId(centroBD.getId());
+	 * centroForm.getCentro().setVersion(centroBD.getVersion());
+	 * centroForm.getCentro().setServicios(centroBD.getServicios());
+	 * centroForm.getCentro().setComentarios(centroBD.getComentarios());
+	 * centroForm.getCentro().setHorarios(centroBD.getHorarios());
+	 * centroForm.getCentro().setGestor(centroBD.getGestor());
+	 * result = centroForm;
+	 * }
+	 * this.validator.validate(result, bindingResult);
+	 * return result;
+	 * }
+	 */
 
 	public Collection<Horario> manipularHorarios(final CentroForm centroForm) {
 		Collection<Horario> result;

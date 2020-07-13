@@ -76,7 +76,6 @@ public class Centro extends DomainEntity {
 	private Gestor					gestor;
 	private Collection<Servicio>	servicios;
 	private Collection<Comentario>	comentarios;
-	private Collection<Horario>		horarios;
 
 
 	@Valid
@@ -109,17 +108,6 @@ public class Centro extends DomainEntity {
 
 	public void setComentarios(final Collection<Comentario> comentarios) {
 		this.comentarios = comentarios;
-	}
-
-	@NotNull
-	@Valid
-	@OneToMany(cascade = CascadeType.REMOVE)
-	public Collection<Horario> getHorarios() {
-		return this.horarios;
-	}
-
-	public void setHorarios(final Collection<Horario> horarios) {
-		this.horarios = horarios;
 	}
 
 }

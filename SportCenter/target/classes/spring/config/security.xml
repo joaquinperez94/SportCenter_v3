@@ -47,6 +47,7 @@
 		<security:intercept-url pattern="/perfil/usuario/**" access="hasRole('USUARIO')"/>	
 		
 		<security:intercept-url pattern="/centro/gestor/**" access="hasRole('GESTOR')"/>	
+		<security:intercept-url pattern="/servicio/gestor/**" access="hasRole('GESTOR')"/>	
 		
 		
 

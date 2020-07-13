@@ -67,3 +67,11 @@
 		</display:column>
 	</display:table>
 	</jstl:if>
+	
+<security:authorize access="hasRole('GESTOR')">
+	<div>
+		<input type="button" name="edit"
+			value="<spring:message code="centro.servicio.crear" />"
+			onclick="javascript: window.location.replace('servicio/gestor/create.do?centroId=${row.id}');" />
+	</div>
+</security:authorize>

@@ -27,12 +27,11 @@
 		<value>/views/usuario/tiles.xml</value>
 		<value>/views/gestor/tiles.xml</value>
 		<value>/views/centro/tiles.xml</value>
+		<value>/views/servicio/tiles.xml</value>
 		<!-- 
 		<value>/views/comentario/tiles.xml</value>
 		<value>/views/administrador/tiles.xml</value>	
-		
 		<value>/views/reserva/tiles.xml</value>
-		<value>/views/servicio/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>-->
 	</util:list>
 
