@@ -1,6 +1,7 @@
 
 package controllers.centro;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import services.CentroService;
 import services.ComentarioService;
 import services.GestorService;
+import services.HorarioService;
 import services.ServicioService;
 import controllers.AbstractController;
 import domain.Centro;
 import domain.Comentario;
 import domain.Gestor;
+import domain.Horario;
 import domain.Servicio;
 import forms.CentroForm;
 
@@ -38,6 +41,9 @@ public class CentroGestorController extends AbstractController {
 
 	@Autowired
 	private ComentarioService	comentarioService;
+
+	@Autowired
+	private HorarioService		horarioService;
 
 	@Autowired
 	private GestorService		gestorService;
@@ -64,19 +70,22 @@ public class CentroGestorController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		Centro centro;
+		Horario horario;
 
 		centro = this.centroService.crearCentro();
+		horario = this.horarioService.create();
 		CentroForm centroForm;
-		centroForm = new CentroForm(centro);
 
+		centroForm = new CentroForm(centro, horario);
+
+		final Collection<Horario> horarios = new ArrayList<>(centro.getHorarios());
 		result = new ModelAndView("centro/edit");
 		result.addObject("centroForm", centroForm);
-		result.addObject("horarios", centro.getHorarios());
+		result.addObject("horarios", horarios);
 		result.addObject("requestURI", "centro/gestor/edit.do");
 		return result;
 
 	}
-
 	//Editar -----------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int centroId) {
@@ -96,14 +105,17 @@ public class CentroGestorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute("centroForm") CentroForm centroForm, final BindingResult binding) {
 		ModelAndView result;
+		Collection<Horario> horariosCentro = new ArrayList<>();
 
+		horariosCentro = this.centroService.manipularHorarios(centroForm);
 		centroForm = this.centroService.reconstruct(centroForm, binding);
 		if (binding.hasErrors())
-			result = this.createEditModelAndView2(centroForm);
+			result = this.createEditModelAndView2(centroForm, "centro.mio");
 		else
 			try {
-				this.centroService.save(centroForm.getCentro());
-				result = new ModelAndView("redirect:my-center.do");
+				result = this.createEditModelAndView2(centroForm, "centro.mio");
+				//this.centroService.save(centroForm.getCentro());
+				//result = new ModelAndView("redirect:my-center.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView2(centroForm, "centro.commit.error");
 			}
@@ -226,16 +238,14 @@ public class CentroGestorController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView2(final CentroForm centro, final String messageCode) {
-		assert centro != null;
-
+	protected ModelAndView createEditModelAndView2(final CentroForm centroForm, final String messageCode) {
 		ModelAndView result;
 
-		//TODO: AÑADIR CREACION DE HORARIO AQUI
 		result = new ModelAndView("centro/edit");
-		result.addObject("centro", centro);
-		result.addObject("message", messageCode);
-		result.addObject("horarios", centro.getHorarios());
+		result.addObject("centroForm", centroForm);
+		result.addObject("horarios", centroForm.getHorario());
+		result.addObject("requestURI", "centro/gestor/edit.do");
+
 		return result;
 
 	}

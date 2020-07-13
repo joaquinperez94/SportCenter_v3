@@ -2,7 +2,9 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -148,16 +150,16 @@ public class CentroService {
 			Gestor gestor;
 			Collection<Servicio> servicios;
 			Collection<Comentario> comentarios;
-			Collection<Horario> horarios;
+			final Collection<Horario> horarios;
 
 			gestor = this.gestorService.findByPrincipal();
 			servicios = new ArrayList<Servicio>();
 			comentarios = new ArrayList<Comentario>();
-			horarios = new ArrayList<Horario>(centroForm.getHorarios());
+			//horarios = new ArrayList<Horario>(centroForm.getHorarios());
 
 			//Alomejor falta cogerle en centro al centroForm
 			centroForm.getCentro().setComentarios(comentarios);
-			centroForm.getCentro().setHorarios(horarios);
+			//centroForm.getCentro().setHorarios(horarios);
 			centroForm.getCentro().setServicios(servicios);
 			centroForm.getCentro().setGestor(gestor);
 
@@ -173,6 +175,78 @@ public class CentroService {
 			result = centroForm;
 		}
 		this.validator.validate(result, bindingResult);
+		return result;
+	}
+
+	public Collection<Horario> manipularHorarios(final CentroForm centroForm) {
+		Collection<Horario> result;
+
+		ArrayList<String> diasSemana;
+
+		diasSemana = new ArrayList<>();
+		final String[] horaInicioM = centroForm.getHorario().getHorarioInicioM().split(",");
+		final String[] horaFinM = centroForm.getHorario().getHorarioFinM().split(",");
+		final String[] horaInicioT = centroForm.getHorario().getHorarioInicioT().split(",");
+		final String[] horaFinT = centroForm.getHorario().getHorarioFinT().split(",");
+
+		final List<String> horaInicioM_L = Arrays.asList(horaInicioM);
+		final List<String> horaFinM_L = Arrays.asList(horaFinM);
+		final List<String> horaInicioT_L = Arrays.asList(horaInicioT);
+		final List<String> horaFinT_L = Arrays.asList(horaFinT);
+
+		final ArrayList<String> horaInicioM_A = new ArrayList<String>(horaInicioM_L);
+		final ArrayList<String> horaFinM_A = new ArrayList<String>(horaFinM_L);
+		final ArrayList<String> horaInicioT_A = new ArrayList<String>(horaInicioT_L);
+		final ArrayList<String> horaFinT_A = new ArrayList<String>(horaFinT_L);
+
+		diasSemana.add("Lunes");
+		diasSemana.add("Martes");
+		diasSemana.add("Miércoles");
+		diasSemana.add("Jueves");
+		diasSemana.add("Viernes");
+		diasSemana.add("Sábado");
+		diasSemana.add("Domingo");
+
+		result = new ArrayList<>();
+		final int tamanoA = horaInicioM_A.size();
+		final int tamanoB = horaFinM_A.size();
+		final int tamanoC = horaInicioT_A.size();
+		final int tamanoD = horaFinT_A.size();
+
+		for (int i = 0; i < 7; ++i) {
+			final Horario h = new Horario();
+			h.setDiaSemana(diasSemana.get(i));
+
+			if (i >= tamanoA)
+				h.setHorarioInicioM("-");
+			else if (horaInicioM_A.get(i).isEmpty())
+				h.setHorarioInicioM("-");
+			else
+				h.setHorarioInicioM(horaInicioM_A.get(i));
+
+			if (i >= tamanoB)
+				h.setHorarioFinM("-");
+			else if (horaFinM_A.get(i).isEmpty())
+				h.setHorarioFinM("-");
+			else
+				h.setHorarioFinM(horaFinM_A.get(i));
+
+			if (i >= tamanoC)
+				h.setHorarioInicioT("-");
+			else if (horaInicioT_A.get(i).isEmpty())
+				h.setHorarioInicioT("-");
+			else
+				h.setHorarioInicioT(horaInicioT_A.get(i));
+
+			if (i >= tamanoD)
+				h.setHorarioFinT("-");
+			else if (horaFinT_A.get(i).isEmpty())
+				h.setHorarioFinT("-");
+			else
+				h.setHorarioFinT(horaFinT_A.get(i));
+			result.add(h);
+		}
+
 		return result;
 	}
 

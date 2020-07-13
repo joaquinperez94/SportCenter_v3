@@ -1,9 +1,6 @@
 
 package forms;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import javax.validation.Valid;
 
 import domain.Centro;
@@ -12,17 +9,17 @@ import domain.Horario;
 public class CentroForm {
 
 	@Valid
-	private Centro				centro;
-	private Collection<Horario>	horarios;
+	private Centro	centro;
+	private Horario	horario;
 
 
 	public CentroForm() {
 		super();
 	}
 
-	public CentroForm(final Centro centro) {
+	public CentroForm(final Centro centro, final Horario horario) {
 		this.centro = centro;
-		this.horarios = new ArrayList<>();
+		this.horario = horario;
 	}
 
 	public Centro getCentro() {
@@ -33,11 +30,11 @@ public class CentroForm {
 		this.centro = centro;
 	}
 
-	public Collection<Horario> getHorarios() {
-		return this.horarios;
+	public Horario getHorario() {
+		return this.horario;
 	}
 
-	public void setHorarios(final Collection<Horario> horarios) {
-		this.horarios = horarios;
+	public void setHorario(final Horario horario) {
+		this.horario = horario;
 	}
 }

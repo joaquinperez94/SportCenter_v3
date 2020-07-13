@@ -29,6 +29,7 @@
 	<form:hidden path="centro.valoracion" />
 	<form:hidden path="centro.comentarios" />
 	<form:hidden path="centro.servicios" />
+	<form:hidden path="horario.diaSemana" />
 
 	
 
@@ -43,11 +44,34 @@
 	<br />
 	
 	<!-- CREACIÓPN HORARIO -->
-	<jstl:forEach var="horario" items="${horarios}">
-			<B><acme:textbox code="${horario.diaSemana}" path="horario.diaSemana" /></B>
-			<B><acme:textbox code="centro.horario.horaInicio" path="horario.horarioInicioM" /></B>
-	</jstl:forEach>
+	<jstl:set var="primera" value="${true}"/>
+	<table border=30px;>
+		<jstl:forEach var="horario" items="${horarios}">
+		<jstl:if test="${primera}">
+			<tr>
+    			<th></th>
+    			<th><spring:message code="centro.horario.inicioT" /></th>
+    			<th><spring:message code="centro.horario.finT" /></th>
+    			<th><spring:message code="centro.horario.inicioM" /></th>
+    			<th><spring:message code="centro.horario.finM" /></th>
+  			</tr>
+  			<jstl:set var="primera" value="${false}"/>
+		</jstl:if>
+			<tr>
+    			<th><form:label path="horario.diaSemana">
+				<spring:message code="${horario.diaSemana}" />:
+			</form:label></th>
+    			<th><form:input path="horario.horarioInicioM"/></th>
+    			<th><form:input path="horario.horarioFinM" /></th>
+    			<th><form:input path="horario.horarioInicioT" /></th>
+    			<th><form:input path="horario.horarioFinT" /></th>
+  			</tr>
+		</jstl:forEach>
+		
+
+	</table>
 	
+
 	<!-- BOTONES -->
 	<input type="submit" name="save" value="<spring:message code="centro.guardar"/>" />&nbsp;
 	
