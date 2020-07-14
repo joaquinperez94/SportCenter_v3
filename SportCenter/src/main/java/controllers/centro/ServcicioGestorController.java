@@ -85,12 +85,12 @@ public class ServcicioGestorController extends AbstractController {
 				this.servicioService.save(servicio);
 				result = new ModelAndView("redirect:/centro/gestor/display.do?centroId=" + servicio.getCentro().getId());
 			} catch (final Throwable oops) {
-				//if (oops.getMessage().equals("Summary demasiado pequeo"))
-				//result = this.createEditModelAndView(servicio, "request.servicio.summary.min");
+				if (oops.getMessage().contains("Failed to convert property value of type java.lang.String to required type java.lang.Double for property precio; nested exception is java.lang.NumberFormatException:"))
+					result = this.createEditModelAndView(servicio, "servicio.error.double");
 				//else if (oops.getMessage().equals("Summary demasiado grande"))
 				//result = this.createEditModelAndView(servicio, "request.servicio.summary.max");
-				//else
-				result = this.createEditModelAndView(servicio, "servicio.commit.error");
+				else
+					result = this.createEditModelAndView(servicio, "servicio.commit.error");
 			}
 		return result;
 	}

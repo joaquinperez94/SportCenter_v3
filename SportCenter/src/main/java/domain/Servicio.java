@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,8 +22,8 @@ public class Servicio extends DomainEntity {
 	private String	nombre;
 	private String	imagen;
 	private String	descripcion;
-	private Double	precio;
-	private Double	duración;
+	private double	precio;
+	private double	duración;
 
 
 	@NotNull
@@ -50,20 +52,23 @@ public class Servicio extends DomainEntity {
 	}
 
 	@NotNull
-	public Double getPrecio() {
+	@Min(1)
+	@Digits(fraction = 2, integer = 8)
+	public double getPrecio() {
 		return this.precio;
 	}
 
-	public void setPrecio(final Double precio) {
+	public void setPrecio(final double precio) {
 		this.precio = precio;
 	}
 
 	@NotNull
-	public Double getDuración() {
+	@Min(0)
+	public double getDuración() {
 		return this.duración;
 	}
 
-	public void setDuración(final Double duración) {
+	public void setDuración(final double duración) {
 		this.duración = duración;
 	}
 
