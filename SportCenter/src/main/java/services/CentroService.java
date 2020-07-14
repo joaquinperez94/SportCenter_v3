@@ -117,6 +117,13 @@ public class CentroService {
 		return result;
 	}
 
+	public Centro findCentroByServiceId(final int servicioId) {
+		Centro centro;
+		Assert.notNull(servicioId);
+		centro = this.centroRepository.findCentroByServiceId(servicioId);
+		return centro;
+	}
+
 	/*
 	 * public CentroForm reconstruct(final CentroForm centroForm, final BindingResult bindingResult) {
 	 * CentroForm result = null;

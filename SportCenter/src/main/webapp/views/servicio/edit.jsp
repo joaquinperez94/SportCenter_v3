@@ -22,7 +22,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="${requestURI}" modelAttribute="servicio">
+<form:form action="servicio/gestor/edit.do" modelAttribute="servicio">
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -31,23 +31,21 @@
 	<form:hidden path="horarios" />
 	
 	
-	<B><acme:textbox code="servicio.nombre" path="nombre"/></B>
+	<B><acme:typeserviceselect code="servicio.nombre" path="nombre"/></B>
 	<br />
 	<B><acme:textbox code="servicio.imagen" path="imagen"/></B>
-	<br />
-	<B><acme:typeserviceselect code="servicio.tipo" path="tipoServicio"/></B>
 	<br />
 	<B><acme:textbox code="servicio.descripcion" path="descripcion" /></B>
 	<br />
 	<B><acme:textbox code="servicio.precio" path="precio"/></B>
 	<br />
-	<B><acme:provinceselect code="servicio.duracion" path="duración"/></B>
+	<B><acme:textbox code="servicio.duracion" path="duración"/></B>
 	<br />
 	
 	
 	
 	<acme:submit name="save" code="servicio.guardar"/>
-	<acme:cancel url="centro/display.do?centroId=${centro}}" code="servicio.cancelar"/>
+	<acme:cancel url="centro/gestor/display.do?centroId=${servicio.centro.id}" code="servicio.cancelar"/>
 	<br />
 	<br/>
 	

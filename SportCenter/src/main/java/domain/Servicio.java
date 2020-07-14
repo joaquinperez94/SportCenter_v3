@@ -19,7 +19,6 @@ public class Servicio extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private String	nombre;
 	private String	imagen;
-	private String	tipoServicio;
 	private String	descripcion;
 	private Double	precio;
 	private Double	duración;
@@ -40,15 +39,6 @@ public class Servicio extends DomainEntity {
 
 	public void setImagen(final String imagen) {
 		this.imagen = imagen;
-	}
-
-	@NotNull
-	public String getTipoServicio() {
-		return this.tipoServicio;
-	}
-
-	public void setTipoServicio(final String tipoServicio) {
-		this.tipoServicio = tipoServicio;
 	}
 
 	public String getDescripcion() {

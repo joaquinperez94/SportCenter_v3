@@ -21,28 +21,34 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-<display:table name="gestor" class="displaytag"
+<display:table name="servicio" class="displaytag"
   requestURI="${requestURI}" id="row">
   
   <!-- Attributes -->
 	
 	<display:column>
-	<B><spring:message code="gestor.nombre" /></B>
+	<B><spring:message code="servicio.nombre" /></B>
 	<jstl:out value="${row.nombre}"></jstl:out>
 	
 
 	<p>
-		<B><spring:message code="gestor.apellidos" /></B>
-		<jstl:out value="${row.apellidos}"></jstl:out>
+		<img src="${row.imagen}" width="100" height="100">
 	</p>
 	<p>
-		<B><spring:message code="gestor.telefono" /></B>
-		<jstl:out value="${row.telefono}"></jstl:out>
+		<B><spring:message code="servicio.descripcion" /></B>
+		<jstl:out value="${row.descripcion}"></jstl:out>
 	</p>
 	<p>
-		<B><spring:message code="gestor.email" /></B>
-		<jstl:out value="${row.email}"></jstl:out>
+		<B><spring:message code="servicio.precio" /></B>
+		<jstl:out value="${row.precio}"></jstl:out>
+		
 	</p>
+		<p>
+		<B><spring:message code="servicio.duracion" /></B>
+		<jstl:out value="${row.duración}"></jstl:out>
+		
+	</p>
+	
 
 	
 	
@@ -50,7 +56,13 @@
   
 </display:table>
 
-<spring:url value="perfil/gestor/edit.do" var="editURL">
-				<spring:param name="gestorId" value="${row.id}" />
+<input type="button" name="edit"
+			value="<spring:message code="servicio.volver" />"
+			onclick="javascript: window.location.replace('centro/gestor/display.do?centroId=${servicio.centro.id}');" />
+			
+
+<!-- 
+<spring:url value="perfil/servicio/edit.do" var="editURL">
+				<spring:param name="servicioId" value="${row.id}" />
 			</spring:url>
-			<a href="${editURL}"><spring:message code="gestor.editar" /></a>
+			<a href="${editURL}"><spring:message code="servicio.editar" /></a> -->

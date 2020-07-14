@@ -44,15 +44,13 @@
 		<spring:message code="${code}" />
 	</form:label>	
 	<form:select id="${id}" path="${path}" onchange="${onchange}">
-		<form:option value="Fútbol 7" label="Fútbol 7"/>
-		<form:option value="Fútbol 11" label="Fútbol 11"/> 
-		<form:option value="Fútbol sala" label="Fútbol sala"/> 
-		<form:option value="Pádel" label="Pádel"/> 
-		<form:option value="Tenis" label="Tenis"/> 
-		<form:option value="Voley playa" label="Voley playa"/> 
-		<form:option value="Baloncesto" label="Baloncesto"/> 
-		<form:option value="Gimnasia" label="Gimnasia"/> 
-		<form:option value="Otros" label="Otro"/> 
+		<form:option value="Lúnes" label="Fútbol 7"/>
+		<form:option value="Martes" label="Fútbol 11"/> 
+		<form:option value="Miércoles" label="Fútbol sala"/> 
+		<form:option value="Jueves" label="Pádel"/> 
+		<form:option value="Viernes" label="Tenis"/> 
+		<form:option value="Sábado" label="Voley playa"/> 
+		<form:option value="Domingo" label="Baloncesto"/> 
 
 	</form:select>
 	<form:errors path="${path}" cssClass="error" />

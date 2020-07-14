@@ -103,4 +103,11 @@ public class ServicioService {
 		return result;
 	}
 
+	public Servicio findOne(final int servicioId) {
+		Assert.isTrue(servicioId != 0);
+		Servicio result;
+		result = this.servicioRepository.findOne(servicioId);
+		return result;
+	}
+
 }
