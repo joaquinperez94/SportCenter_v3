@@ -29,6 +29,8 @@
 		<value>/views/centro/messages</value>
 		<value>/views/servicio/messages</value>
 		<value>/views/reserva/messages</value>
+		<value>/views/horario/messages</value>
+		
 		
 	</util:list>
 

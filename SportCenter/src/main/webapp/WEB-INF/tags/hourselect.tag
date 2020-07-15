@@ -39,18 +39,36 @@
 
 <%-- Definition --%>
 
-<div>
+<div class="mia">
 	<form:label path="${path}">
 		<spring:message code="${code}" />
 	</form:label>	
-	<form:select id="${id}" path="${path}" onchange="${onchange}">
-		<form:option value="Lúnes" label="Lúnes"/>
-		<form:option value="Martes" label="Martes"/> 
-		<form:option value="Miércoles" label="Miércoles"/> 
-		<form:option value="Jueves" label="Jueves"/> 
-		<form:option value="Viernes" label="Viernes"/> 
-		<form:option value="Sábado" label="Sábado"/> 
-		<form:option value="Domingo" label="Domingo"/> 
+	<form:select class="hourMinute" id="${id}" path="${path}" onchange="${onchange}">
+		<form:option value="00" label="00"/>
+		<form:option value="01" label="01"/> 
+		<form:option value="02" label="02"/>
+		<form:option value="03" label="03"/> 
+		<form:option value="04" label="04"/> 
+		<form:option value="05" label="05"/> 
+		<form:option value="06" label="06"/> 
+		<form:option value="07" label="07"/> 
+		<form:option value="08" label="08"/> 
+		<form:option value="09" label="09"/> 
+		<form:option value="10" label="10"/> 
+		<form:option value="11" label="11"/> 
+		<form:option value="12" label="12"/> 
+		<form:option value="13" label="13"/> 
+		<form:option value="14" label="14"/> 
+		<form:option value="15" label="15"/> 
+		<form:option value="16" label="16"/> 
+		<form:option value="17" label="17"/> 
+		<form:option value="18" label="18"/> 
+		<form:option value="19" label="19"/> 
+		<form:option value="20" label="20"/> 
+		<form:option value="21" label="21"/> 
+		<form:option value="22" label="22"/> 
+		<form:option value="23" label="23"/>  
+
 
 	</form:select>
 	<form:errors path="${path}" cssClass="error" />

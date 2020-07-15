@@ -13,9 +13,10 @@ public class Horario extends DomainEntity {
 	private String	diaSemana;
 	private String	horarioInicioM;
 	private String	horarioFinM;
-	private String	horarioInicioT;
-	private String	horarioFinT;
 
+
+	//private String	horarioInicioT;
+	//private String	horarioFinT;
 
 	public String getDiaSemana() {
 		return this.diaSemana;
@@ -41,20 +42,22 @@ public class Horario extends DomainEntity {
 		this.horarioFinM = horarioFinM;
 	}
 
-	public String getHorarioInicioT() {
-		return this.horarioInicioT;
-	}
-
-	public void setHorarioInicioT(final String horarioInicioT) {
-		this.horarioInicioT = horarioInicioT;
-	}
-
-	public String getHorarioFinT() {
-		return this.horarioFinT;
-	}
-
-	public void setHorarioFinT(final String horarioFinT) {
-		this.horarioFinT = horarioFinT;
-	}
+	/*
+	 * public String getHorarioInicioT() {
+	 * return this.horarioInicioT;
+	 * }
+	 * 
+	 * public void setHorarioInicioT(final String horarioInicioT) {
+	 * this.horarioInicioT = horarioInicioT;
+	 * }
+	 * 
+	 * public String getHorarioFinT() {
+	 * return this.horarioFinT;
+	 * }
+	 * 
+	 * public void setHorarioFinT(final String horarioFinT) {
+	 * this.horarioFinT = horarioFinT;
+	 * }
+	 */
 
 }
