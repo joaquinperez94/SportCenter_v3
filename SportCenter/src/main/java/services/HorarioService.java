@@ -3,16 +3,18 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.HorarioRepository;
 import domain.Horario;
-import forms.HorarioForm;
+import domain.Servicio;
 
 @Service
 @Transactional
@@ -25,14 +27,21 @@ public class HorarioService {
 	@Autowired
 	private GestorService		gestorService;
 
+	@Autowired
+	private ServicioService		servicioService;
+
+	@Autowired
+	private Validator			validator;
+
 
 	// Simple crud methods
 	// Crear ------------------------------------------------------------------------
 
-	public Horario create() {
+	public Horario create(final Servicio servicio) {
 		Horario horario;
 
 		horario = new Horario();
+		horario.setServicio(servicio);
 
 		return horario;
 	}
@@ -49,72 +58,122 @@ public class HorarioService {
 		return result;
 	}
 
-	public HorarioForm reconstruct(final HorarioForm horarioForm, final BindingResult binding) {
-		HorarioForm result;
-		Collection<Horario> horariosForm;
-		Collection<Horario> horarios;
+	public void delete(final Horario horario) {
+		Assert.notNull(horario);
+		Assert.isTrue(horario.getId() != 0);
+		final Collection<Servicio> serviciosGestor;
+		Servicio servicio;
 
-		result = new HorarioForm();
-		horariosForm = new ArrayList<>();
-		horarios = new ArrayList<>();
-		horariosForm = horarioForm.getHorarios();
+		//serviciosGestor = new ArrayList<>(this.servicioService.findServiciosCreatedByGestor());
 
-		for (final Horario h : horariosForm)
-			if (!(h.getDiaSemana().equals("Lúnes") && h.getHorarioInicioM().equals("00,00") && h.getHorarioFinM().equals("00,00"))) {
-				final Horario nuevo = new Horario();
-				nuevo.setDiaSemana(h.getDiaSemana());
-				nuevo.setHorarioInicioM(h.getHorarioInicioM().replace(",", ":"));
-				nuevo.setHorarioFinM(h.getHorarioFinM().replace(",", ":"));
-				horarios.add(nuevo);
-			}
-		result.setHorarios(horarios);
+		servicio = this.servicioService.findServiceByHorarioId(horario.getId());
+		//TODO:
+		//Comprobamos que el servicio del horario pertenezca a este gestor
+		//Assert.isTrue(serviciosGestor.contains(servicio));
+
+		horario.setServicio(null);
+		this.horarioRepository.delete(horario);
+
+	}
+
+	public Collection<Horario> findHorariosByServicioId(final int servicioId) {
+		Collection<Horario> result;
+
+		result = this.horarioRepository.findHorariosByServicioId(servicioId);
 
 		return result;
+
 	}
-	public boolean checkHorarios(final Collection<Horario> horarios) {
-		Collection<String> diasSemana;
-		Collection<Horario> filtrado;
-		Collection<Horario> horarios2;
-		boolean result;
 
-		result = false;
-		diasSemana = new ArrayList<>();
-		horarios2 = new ArrayList<>();
+	public Horario reconstruct(final Horario horario, final BindingResult bindingResult) {
+		Horario result;
+		final Horario horarioBd;
 
-		diasSemana.add("Lúnes");
-		diasSemana.add("Martes");
-		diasSemana.add("Miércoles");
-		diasSemana.add("Jueves");
-		diasSemana.add("Viernes");
-		diasSemana.add("Sábado");
-		diasSemana.add("Domingo");
-
-		for (final String dia : diasSemana) {
-			filtrado = new ArrayList<>();
-			for (final Horario h : horarios)
-				if (h != null)
-					if (h.getDiaSemana().equals(dia))
-						filtrado.add(h);
-			if (filtrado.size() > 1)
-
-				for (final Horario h2 : filtrado) {
-					final int horaInicio1 = Integer.parseInt(h2.getHorarioInicioM().replace(":", ""));
-					final int horaFin1 = Integer.parseInt(h2.getHorarioFinM().replace(":", ""));
-					horarios2 = new ArrayList<>(filtrado);
-					horarios2.remove(h2);
-					for (final Horario h3 : horarios2) {
-						final int horaInicio2 = Integer.parseInt(h3.getHorarioInicioM().replace(":", ""));
-						final int horaFin2 = Integer.parseInt(h3.getHorarioFinM().replace(":", ""));
-						if ((horaInicio1 == horaInicio2) || (horaInicio2 > horaInicio1 && horaInicio2 < horaFin1) || (horaInicio2 < horaInicio1 && horaFin2 < horaInicio1) || (horaInicio1 < horaInicio2 && horaFin2 < horaFin1)) {
-							result = true;
-							break;
-						}
-					}
-					break;
-				}
-			break;
+		if (horario.getId() == 0)
+			result = horario;
+		else {
+			horarioBd = this.horarioRepository.findOne(horario.getId());
+			horario.setId(horarioBd.getId());
+			horario.setVersion(horarioBd.getVersion());
+			result = horario;
 		}
+		this.validator.validate(result, bindingResult);
 		return result;
 	}
 
+	public HashMap<String, Collection<Horario>> agruparHorarios(final Collection<Horario> horarios) {
+		HashMap<String, Collection<Horario>> result;
+		Collection<Horario> horariosLunes;
+		Collection<Horario> horariosMartes;
+		Collection<Horario> horariosMiercoles;
+		Collection<Horario> horariosJueves;
+		Collection<Horario> horariosViernes;
+		Collection<Horario> horariosSabado;
+		Collection<Horario> horariosDomingo;
+
+		horariosLunes = new ArrayList<>();
+		horariosMartes = new ArrayList<>();
+		horariosMiercoles = new ArrayList<>();
+		horariosJueves = new ArrayList<>();
+		horariosViernes = new ArrayList<>();
+		horariosSabado = new ArrayList<>();
+		horariosDomingo = new ArrayList<>();
+		result = new HashMap<>();
+
+		for (final Horario h : horarios)
+			switch (h.getDiaSemana()) {
+			case "Lúnes":
+				horariosLunes.add(h);
+				break;
+			case "Martes":
+				horariosMartes.add(h);
+				break;
+			case "Miércoles":
+				horariosMiercoles.add(h);
+				break;
+			case "Jueves":
+				horariosJueves.add(h);
+				break;
+			case "Viernes":
+				horariosViernes.add(h);
+				break;
+			case "Sábado":
+				horariosSabado.add(h);
+				break;
+			case "Domingo":
+				horariosDomingo.add(h);
+				break;
+
+			}
+		result.put("Lunes", horariosLunes);
+		result.put("Martes", horariosMartes);
+		result.put("Miércoles", horariosMiercoles);
+		result.put("Jueves", horariosJueves);
+		result.put("Viernes", horariosViernes);
+		result.put("Sábado", horariosSabado);
+		result.put("Domingo", horariosDomingo);
+
+		return result;
+	}
+
+	public Horario findOne(final int horarioId) {
+		Assert.isTrue(horarioId != 0);
+
+		Horario result;
+
+		result = this.horarioRepository.findOne(horarioId);
+		return result;
+	}
+
+	public Collection<Horario> findHorariosByDiaSemanaYServicioId(final Horario horario) {
+		Collection<Horario> result;
+		result = new ArrayList<>();
+
+		result = this.horarioRepository.findHorariosByDiaSemanaYServicioId(horario.getDiaSemana(), horario.getServicio().getId());
+		return result;
+	}
+
+	public boolean checkHoraComienzo(final Horario horario) {
+		final boolean result;
+	}
 }

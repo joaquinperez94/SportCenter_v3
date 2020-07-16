@@ -83,6 +83,13 @@ public class ServicioService {
 		return result;
 	}
 
+	public Servicio findServiceByHorarioId(final int horarioId) {
+		Servicio servicio;
+		Assert.notNull(horarioId);
+		servicio = this.servicioRepository.findServiceByHorarioId(horarioId);
+		return servicio;
+	}
+
 	public Servicio reconstruct(final Servicio servicio, final BindingResult bindingResult) {
 		Servicio result;
 		final Servicio servicioBd;

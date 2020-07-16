@@ -102,7 +102,7 @@ public class Servicio extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@OneToMany(cascade = CascadeType.REMOVE)
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "servicio")
 	public Collection<Horario> getHorarios() {
 		return this.horarios;
 	}

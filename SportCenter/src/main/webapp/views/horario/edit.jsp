@@ -22,85 +22,33 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="horario/gestor/edit.do" modelAttribute="horarioForm">
+<form:form action="horario/gestor/edit.do" modelAttribute="horario">
+
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="servicio" />
 
 
-<jstl:set var="count" value="${0}"/>
+<acme:daysWeekselect code="horario.diaSemana" path="diaSemana"/>
+<br />	
+<acme:hourselect code="horario.inicio" path="horaInicio"/>
+<acme:minutesselect  path="minutosInicio"/>
+<br />	
+<br />	
+<acme:hourselect code="horario.inicio" path="horaFin"/>
+<acme:minutesselect  path="minutosFin"/>
+
+<br />	
+<br />	
+
+	<input type="submit" name="save" value="<spring:message code="horario.guardar"/>" />&nbsp;
 	
+	<jstl:if test="${horario.id !=0 }">
+		<acme:submitirmensaje name="delete" code="horario.eliminar" code2="horario.confirmar.borrado"/>	
+	</jstl:if>
 	
-    <jstl:forEach items="${horarioForm.horarios}" varStatus="i">
-    <jstl:choose>
-    
-    	<jstl:when test="${i.index eq 0}">
-	    	<fieldset class="field fieldHorario">
-	    		<acme:daysWeekselect code="horario.diaSemana" path="horarios[${i.index}].diaSemana"/>
-	    		<br />
-	    		
-	    		
-	    		<acme:hourselect code="horario.inicio" path="horarios[${i.index}].horarioInicioM"/>
-	    		<acme:minutesselect  path="horarios[${i.index}].horarioInicioM"/>
-	    		
-	    		
-	    		<br />
-	    		<br />
-	    		<acme:hourselect code="horario.fin" path="horarios[${i.index}].horarioFinM"/>
-	    		<acme:minutesselect path="horarios[${i.index}].horarioFinM"/>
-
-	           <br />
-	         </fieldset>
-         </jstl:when>
-         
-         <jstl:otherwise>
-         	<fieldset class="field fieldHorario" style="display:none;">
-	    		<acme:daysWeekselect code="horario.diaSemana" path="horarios[${i.index}].diaSemana"/>
-	    		<br />
-	    		
-	    		
-	    		<acme:hourselect  code="horario.inicio" path="horarios[${i.index}].horarioInicioM"/>
-	    		<acme:minutesselect  path="horarios[${i.index}].horarioInicioM"/>
-	    		
-	    		
-	    		<br />
-	    		<br />
-	    		<acme:hourselect code="horario.fin" path="horarios[${i.index}].horarioFinM"/>
-	    		<acme:minutesselect path="horarios[${i.index}].horarioFinM"/>
-	    		<br />
-	    		<input type="button" name="deleteHorario" class="deleteHorario"
-					value="Eliminar"/>
-	       </fieldset> 
-         
-         
-         </jstl:otherwise>
-         </jstl:choose>
-         <br />   
-    </jstl:forEach>
-
-       
-       <input type="button" name="addMore" class="addMore"
-			value="Añadir"/>
-			
-		<script>
-			$(".addMore").click(function(){
-				var showHorario = $("fieldset:hidden")[0];
-				$(showHorario).show();
-				
-				if($(showHorario) == undefined){
-					$(showHorario).hide();
-				}
-				
-			}
-			);
-			
-			$(".deleteHorario").click(function(){
-				$(this).parent().hide();
-				$(this).parent().find("select.hourMinute").val("");
-			}
-			);
-			
-			
-		</script>
-
-		<input type="submit" name="save" value="save"/>
+     <acme:cancel url="course/buyer/list.do?d-16544-p=1" code="horario.cancelar" />
+      
 	</form:form>
 
 

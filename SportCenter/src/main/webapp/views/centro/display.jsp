@@ -74,6 +74,12 @@
 			onclick="javascript: window.location.replace('servicio/gestor/edit.do?servicioId=${row.id}');" />
 		</display:column>
 		
+		<display:column sortable="false">
+			<input type="button" name="list"
+			value="<spring:message code="servicio.horario.ver" />"
+			onclick="javascript: window.location.replace('horario/gestor/list.do?servicioId=${row.id}');" />
+		</display:column>
+		
 	</display:table>
 	</jstl:if>
 	

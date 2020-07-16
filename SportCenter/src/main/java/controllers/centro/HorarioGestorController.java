@@ -3,6 +3,7 @@ package controllers.centro;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,12 +12,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.GestorService;
 import services.HorarioService;
+import services.ServicioService;
 import controllers.AbstractController;
 import domain.Horario;
-import forms.HorarioForm;
+import domain.Servicio;
 
 @Controller
 @RequestMapping("/horario/gestor")
@@ -27,70 +31,142 @@ public class HorarioGestorController extends AbstractController {
 	@Autowired
 	private HorarioService	horarioService;
 
+	@Autowired
+	private GestorService	gestorService;
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView crearHorario() {
+	@Autowired
+	private ServicioService	servicioService;
+
+
+	// List ---------------------------------------------------------
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam final int servicioId) {
 		ModelAndView result;
-		Collection<Horario> horarios;
-		horarios = new ArrayList<>();
+		final Collection<Horario> horarios;
+		Collection<Horario> horariosLunes;
+		Collection<Horario> horariosMartes;
+		Collection<Horario> horariosMiercoles;
+		Collection<Horario> horariosJueves;
+		Collection<Horario> horariosViernes;
+		Collection<Horario> horariosSabado;
+		Collection<Horario> horariosDomingo;
+		HashMap<String, Collection<Horario>> horarios_agrupados;
+		horarios = this.horarioService.findHorariosByServicioId(servicioId);
+		horarios_agrupados = new HashMap<>(this.horarioService.agruparHorarios(horarios));
+		horariosLunes = new ArrayList<>(horarios_agrupados.get("Lunes"));
+		horariosMartes = new ArrayList<>(horarios_agrupados.get("Martes"));
+		horariosMiercoles = new ArrayList<>(horarios_agrupados.get("Miércoles"));
+		horariosJueves = new ArrayList<>(horarios_agrupados.get("Jueves"));
+		horariosViernes = new ArrayList<>(horarios_agrupados.get("Viernes"));
+		horariosSabado = new ArrayList<>(horarios_agrupados.get("Sábado"));
+		horariosDomingo = new ArrayList<>(horarios_agrupados.get("Domingo"));
 
-		for (int i = 0; i < 20; i++) {
-			Horario horario;
-			horario = this.horarioService.create();
-			horarios.add(horario);
-		}
+		result = new ModelAndView("horario/list");
+		result.addObject("horariosLunes", horariosLunes);
+		result.addObject("horariosMartes", horariosMartes);
+		result.addObject("horariosMiercoles", horariosMiercoles);
+		result.addObject("horariosJueves", horariosJueves);
+		result.addObject("horariosViernes", horariosViernes);
+		result.addObject("horariosSabado", horariosSabado);
+		result.addObject("horariosDomingo", horariosDomingo);
+		result.addObject("servicioId", servicioId);
+		result.addObject("requestURI", "/horario/gestor/list.do");
 
-		HorarioForm horarioForm;
-		horarioForm = new HorarioForm();
-		horarioForm.setHorarios(horarios);
+		return result;
+	}
+	//Crear	------------------------------------------------------------
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView crearHorario(@RequestParam final int servicioId) {
+		ModelAndView result;
+		Horario horario;
+		final Servicio servicio;
 
-		result = new ModelAndView("horario/edit");
-		result.addObject("horarioForm", horarioForm);
-		//result.addObject("horarios", horarios);
-		//result.addObject("requestURI", "horario/gestor/edit.do");
+		servicio = this.servicioService.findOne(servicioId);
+		horario = this.horarioService.create(servicio);
 
+		result = this.createEditModelAndView(horario);
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int horarioId) {
+		ModelAndView result;
+		final Horario horario;
+		Servicio servicio;
+		Assert.notNull(horarioId);
+
+		//Collection<Servicio> coursesOfBuyer;
+
+		servicio = new Servicio();
+
+		//coursesOfBuyer = new ArrayList<>(this.courseService.findCoursesCreatedByBuyer());
+		horario = this.horarioService.findOne(horarioId);
+		servicio = this.servicioService.findServiceByHorarioId(horarioId);
+
+		//TODO: RESTRICCIONES
+
+		result = this.createEditModelAndView(horario);
 		return result;
 	}
 
 	//Guardar	------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView guardarGestor(@ModelAttribute("horarioForm") final HorarioForm horarioForm, final BindingResult binding) {
+	public ModelAndView save(Horario horario, final BindingResult binding) {
 		ModelAndView result;
 
-		final HorarioForm horarioForm2 = this.horarioService.reconstruct(horarioForm, binding);
+		horario = this.horarioService.reconstruct(horario, binding);
 
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(horarioForm2);
+			result = this.createEditModelAndView(horario);
 		else
 			try {
 
-				for (final Horario horario : horarioForm.getHorarios()) {
-
-					Assert.isTrue(!this.horarioService.checkHorarios(horarioForm2.getHorarios()), "horario.inicio.error");
-					this.horarioService.save(horario);
-				}
-
-				result = new ModelAndView("redirect:/welcome/index.do");
+				this.horarioService.save(horario);
+				//TODO: Redireccionar
+				result = new ModelAndView("redirect:/horario/gestor/list.do?servicioId=" + horario.getServicio().getId());
 			} catch (final Throwable oops) {
-
-				result = this.createEditModelAndView(horarioForm, "gestor.commit.error");
+				//TODO: Restricciones
+				//if (oops.getMessage().equals("Summary demasiado pequeo"))
+				//result = this.createEditModelAndView(lesson, "request.lesson.summary.min");
+				//else if (oops.getMessage().equals("Summary demasiado grande"))
+				//result = this.createEditModelAndView(lesson, "request.lesson.summary.max");
+				//else
+				result = this.createEditModelAndView(horario, "horario.commit.error");
 			}
 		return result;
 	}
-	// Ancillary methods ------------------------------------------------------
-	protected ModelAndView createEditModelAndView(final HorarioForm horarioForm) {
+
+	//Delete -----------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@ModelAttribute final Horario horario, final BindingResult bindingResult) {
 		ModelAndView result;
-		result = this.createEditModelAndView(horarioForm, null);
+		try {
+			//Solo un buyer podr eliminar un curso
+			Assert.isTrue(this.gestorService.checkPrincipalBoolean());
+			final int serviceId = horario.getServicio().getId();
+			this.horarioService.delete(horario);
+			result = new ModelAndView("redirect:/horario/gestor/list.do?servicioId=" + serviceId);
+		} catch (final Throwable oops) {
+			//TODO: Restrcciones
+			result = this.createEditModelAndView(horario, "lesson.commit.error");
+		}
+		return result;
+	}
+
+	// Ancillary methods ------------------------------------------------------
+	protected ModelAndView createEditModelAndView(final Horario horario) {
+		ModelAndView result;
+		result = this.createEditModelAndView(horario, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final HorarioForm horarioForm, final String message) {
+	protected ModelAndView createEditModelAndView(final Horario horario, final String message) {
 		ModelAndView result;
 		result = new ModelAndView("horario/edit");
-		result.addObject("horarioForm", horarioForm);
+		result.addObject("horario", horario);
 		result.addObject("message", message);
-		result.addObject("requestURI", "horario/edit.do");
+		//result.addObject("requestURI", "horario/edit.do");
 
 		return result;
 	}

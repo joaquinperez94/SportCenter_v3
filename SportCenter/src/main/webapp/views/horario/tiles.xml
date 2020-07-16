@@ -18,13 +18,18 @@
 <tiles-definitions>
 	
 		<definition name="horario/edit" extends="master.page">
-		<put-attribute name="title" value="Edit horario" />
+		<put-attribute name="title" value="Edit Schedule" />
 		<put-attribute name="body" value="/views/horario/edit.jsp" />
 	</definition>
 
 	<definition name="horario/display" extends="master.page">
-		<put-attribute name="title" value="Display horario" />
+		<put-attribute name="title" value="Display Schedule" />
 		<put-attribute name="body" value="/views/horario/display.jsp" />
+	</definition>
+	
+	<definition name="horario/list" extends="master.page">
+		<put-attribute name="title" value="List Schedule" />
+		<put-attribute name="body" value="/views/horario/list.jsp" />
 	</definition>
 		
 </tiles-definitions>
