@@ -58,11 +58,13 @@
  </display:table>
 
 <security:authorize access="hasRole('GESTOR')">
+<jstl:if test="${mostrarBotonGestor}">
 	<div>
 		<input type="button" name="edit"
 			value="<spring:message code="centro.crear" />"
 			onclick="javascript: window.location.replace('centro/gestor/create.do?centroId=${row.id}');" />
 	</div>
+	</jstl:if>
 </security:authorize>
 
 

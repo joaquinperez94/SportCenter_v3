@@ -53,7 +53,8 @@ public class HorarioService {
 		Assert.notNull(horario);
 
 		this.gestorService.checkPrincipal();
-
+		Assert.isTrue(this.checkHoras(horario), "horas inicio final error");
+		Assert.isTrue(this.checkHorarioSolapado(horario), "horario solapado");
 		result = this.horarioRepository.save(horario);
 		return result;
 	}
@@ -173,7 +174,46 @@ public class HorarioService {
 		return result;
 	}
 
-	public boolean checkHoraComienzo(final Horario horario) {
-		final boolean result;
+	public boolean checkHorarioSolapado(final Horario horario) {
+		Collection<Horario> horariosBD;
+		boolean result;
+
+		result = true;
+		horariosBD = this.findHorariosByDiaSemanaYServicioId(horario);
+		final String horaInicio_s = horario.getHoraInicio() + "." + horario.getMinutosInicio();
+		final String horaFin_s = horario.getHoraFin() + "." + horario.getMinutosFin();
+
+		final double horaInicio = Double.parseDouble(horaInicio_s);
+		final double horaFin = Double.parseDouble(horaFin_s);
+
+		for (final Horario hBD : horariosBD) {
+			final String horaInicioBD_s = hBD.getHoraInicio() + "." + hBD.getMinutosInicio();
+			final String horaFinBD_s = hBD.getHoraFin() + "." + hBD.getMinutosFin();
+
+			final double horaInicioBD = Double.parseDouble(horaInicioBD_s);
+			final double horaFinBD = Double.parseDouble(horaFinBD_s);
+
+			if ((horaInicio == horaInicioBD) || (horaInicio < horaInicioBD && horaFin > horaInicioBD) || (horaInicio > horaInicioBD && horaFin <= horaFinBD) || (horaInicio > horaInicioBD && horaInicio < horaFinBD)) {
+				result = false;
+				break;
+			}
+		}
+
+		return result;
 	}
+
+	public boolean checkHoras(final Horario horario) {
+		boolean result;
+		final String horaInicio_s = horario.getHoraInicio() + "." + horario.getMinutosInicio();
+		final String horaFin_s = horario.getHoraFin() + "." + horario.getMinutosFin();
+
+		final double horaInicio = Double.parseDouble(horaInicio_s);
+		final double horaFin = Double.parseDouble(horaFin_s);
+		result = true;
+
+		if (horaInicio == horaFin || horaInicio > horaFin)
+			result = false;
+		return result;
+	}
+
 }

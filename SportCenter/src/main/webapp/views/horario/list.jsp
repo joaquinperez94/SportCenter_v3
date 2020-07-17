@@ -27,7 +27,7 @@
 			onclick="javascript: window.location.replace('horario/gestor/create.do?servicioId=${servicioId}');" />
 			
 <br/>
- <br/>
+<br/>
 <h2><spring:message code="horario.titulo.lunes" /></h2>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="horariosLunes" requestURI="${requestURI}" id="row">
@@ -47,21 +47,17 @@
 			onclick="javascript: window.location.replace('horario/gestor/edit.do?horarioId=${row.id}');" />
 			
 	</display:column>
-	</security:authorize>
-	
-		
+	</security:authorize>	
  </display:table>
  
- <br/>
-  <br/>
+<br/>
  
- <h2><spring:message code="horario.titulo.martes" /></h2>
+<h2><spring:message code="horario.titulo.martes" /></h2>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="horariosMartes" requestURI="${requestURI}" id="row">
 
 	<!-- ATRIBUTOS -->
 	<spring:message code="horario.inicio" var="horaInicioHeader" />
-
 	<display:column value="${row.horaInicio}:${row.minutosInicio}"  title="${horaInicioHeader}" sortable="true"/>
 
 	<spring:message code="horario.fin" var="horaFinHeader" />
@@ -71,13 +67,120 @@
 		<display:column sortable="false">
 			<input type="button" name="edit"
 			value="<spring:message code="horario.editar" />"
-			onclick="javascript: window.location.replace('horario/gestor/edit.do?horarioId=${row.id}');" />
-			
-	</display:column>
+			onclick="javascript: window.location.replace('horario/gestor/edit.do?horarioId=${row.id}');" />	
+		</display:column>
 	</security:authorize>
-	
-		
  </display:table>
+ 
+ 
+ <h2><spring:message code="horario.titulo.miercoles" /></h2>
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="horariosMiércoles" requestURI="${requestURI}" id="row">
+
+	<!-- ATRIBUTOS -->
+	<spring:message code="horario.inicio" var="horaInicioHeader" />
+	<display:column value="${row.horaInicio}:${row.minutosInicio}"  title="${horaInicioHeader}" sortable="true"/>
+
+	<spring:message code="horario.fin" var="horaFinHeader" />
+	<display:column value="${row.horaFin}:${row.minutosFin}"  title="${horaFinHeader}" sortable="false"/>
+	
+	<security:authorize access="hasRole('GESTOR')">
+		<display:column sortable="false">
+			<input type="button" name="edit"
+			value="<spring:message code="horario.editar" />"
+			onclick="javascript: window.location.replace('horario/gestor/edit.do?horarioId=${row.id}');" />	
+		</display:column>
+	</security:authorize>
+ </display:table>
+ 
+ <br/>
+ 
+ <h2><spring:message code="horario.titulo.jueves" /></h2>
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="horariosJueves" requestURI="${requestURI}" id="row">
+
+	<!-- ATRIBUTOS -->
+	<spring:message code="horario.inicio" var="horaInicioHeader" />
+	<display:column value="${row.horaInicio}:${row.minutosInicio}"  title="${horaInicioHeader}" sortable="true"/>
+
+	<spring:message code="horario.fin" var="horaFinHeader" />
+	<display:column value="${row.horaFin}:${row.minutosFin}"  title="${horaFinHeader}" sortable="false"/>
+	
+	<security:authorize access="hasRole('GESTOR')">
+		<display:column sortable="false">
+			<input type="button" name="edit"
+			value="<spring:message code="horario.editar" />"
+			onclick="javascript: window.location.replace('horario/gestor/edit.do?horarioId=${row.id}');" />	
+		</display:column>
+	</security:authorize>
+ </display:table>
+ 
+ <br/>
+ 
+ <h2><spring:message code="horario.titulo.viernes" /></h2>
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="horariosViernes" requestURI="${requestURI}" id="row">
+
+	<!-- ATRIBUTOS -->
+	<spring:message code="horario.inicio" var="horaInicioHeader" />
+	<display:column value="${row.horaInicio}:${row.minutosInicio}"  title="${horaInicioHeader}" sortable="true"/>
+
+	<spring:message code="horario.fin" var="horaFinHeader" />
+	<display:column value="${row.horaFin}:${row.minutosFin}"  title="${horaFinHeader}" sortable="false"/>
+	
+	<security:authorize access="hasRole('GESTOR')">
+		<display:column sortable="false">
+			<input type="button" name="edit"
+			value="<spring:message code="horario.editar" />"
+			onclick="javascript: window.location.replace('horario/gestor/edit.do?horarioId=${row.id}');" />	
+		</display:column>
+	</security:authorize>
+ </display:table>
+ 
+ <br/>
+ 
+ <h2><spring:message code="horario.titulo.sabado" /></h2>
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="horariosSábado" requestURI="${requestURI}" id="row">
+
+	<!-- ATRIBUTOS -->
+	<spring:message code="horario.inicio" var="horaInicioHeader" />
+	<display:column value="${row.horaInicio}:${row.minutosInicio}"  title="${horaInicioHeader}" sortable="true"/>
+
+	<spring:message code="horario.fin" var="horaFinHeader" />
+	<display:column value="${row.horaFin}:${row.minutosFin}"  title="${horaFinHeader}" sortable="false"/>
+	
+	<security:authorize access="hasRole('GESTOR')">
+		<display:column sortable="false">
+			<input type="button" name="edit"
+			value="<spring:message code="horario.editar" />"
+			onclick="javascript: window.location.replace('horario/gestor/edit.do?horarioId=${row.id}');" />	
+		</display:column>
+	</security:authorize>
+ </display:table>
+ 
+<br/>
+
+<h2><spring:message code="horario.titulo.domingo" /></h2>
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="horariosDomingo" requestURI="${requestURI}" id="row">
+
+	<!-- ATRIBUTOS -->
+	<spring:message code="horario.inicio" var="horaInicioHeader" />
+	<display:column value="${row.horaInicio}:${row.minutosInicio}"  title="${horaInicioHeader}" sortable="true"/>
+
+	<spring:message code="horario.fin" var="horaFinHeader" />
+	<display:column value="${row.horaFin}:${row.minutosFin}"  title="${horaFinHeader}" sortable="false"/>
+	
+	<security:authorize access="hasRole('GESTOR')">
+		<display:column sortable="false">
+			<input type="button" name="edit"
+			value="<spring:message code="horario.editar" />"
+			onclick="javascript: window.location.replace('horario/gestor/edit.do?horarioId=${row.id}');" />	
+		</display:column>
+	</security:authorize>
+ </display:table>
+ 
  
 
 

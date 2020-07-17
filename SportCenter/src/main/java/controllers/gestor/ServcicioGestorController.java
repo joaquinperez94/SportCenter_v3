@@ -1,5 +1,5 @@
 
-package controllers.centro;
+package controllers.gestor;
 
 import java.util.ArrayList;
 import java.util.Collection;

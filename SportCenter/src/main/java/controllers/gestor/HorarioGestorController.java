@@ -1,5 +1,5 @@
 
-package controllers.centro;
+package controllers.gestor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -120,18 +120,15 @@ public class HorarioGestorController extends AbstractController {
 			result = this.createEditModelAndView(horario);
 		else
 			try {
-
 				this.horarioService.save(horario);
-				//TODO: Redireccionar
 				result = new ModelAndView("redirect:/horario/gestor/list.do?servicioId=" + horario.getServicio().getId());
 			} catch (final Throwable oops) {
-				//TODO: Restricciones
-				//if (oops.getMessage().equals("Summary demasiado pequeo"))
-				//result = this.createEditModelAndView(lesson, "request.lesson.summary.min");
-				//else if (oops.getMessage().equals("Summary demasiado grande"))
-				//result = this.createEditModelAndView(lesson, "request.lesson.summary.max");
-				//else
-				result = this.createEditModelAndView(horario, "horario.commit.error");
+				if (oops.getMessage().equals("horario solapado"))
+					result = this.createEditModelAndView(horario, "request.horario.solapado");
+				else if (oops.getMessage().equals("horas inicio final error"))
+					result = this.createEditModelAndView(horario, "request.horario.inicio.final.error");
+				else
+					result = this.createEditModelAndView(horario, "horario.commit.error");
 			}
 		return result;
 	}

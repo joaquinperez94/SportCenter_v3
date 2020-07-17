@@ -47,7 +47,7 @@
 		<acme:submitirmensaje name="delete" code="horario.eliminar" code2="horario.confirmar.borrado"/>	
 	</jstl:if>
 	
-     <acme:cancel url="course/buyer/list.do?d-16544-p=1" code="horario.cancelar" />
+     <acme:cancel url="horario/gestor/list.do?servicioId=${horario.servicio.id}" code="horario.cancelar" />
       
 	</form:form>
 
