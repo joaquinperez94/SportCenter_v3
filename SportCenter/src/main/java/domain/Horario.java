@@ -4,6 +4,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -11,10 +13,10 @@ public class Horario extends DomainEntity {
 
 	// Attributes ---------------------------------------------------------
 	private String	diaSemana;
-	private String	horarioInicioM;
-	private String	horarioFinM;
-	private String	horarioInicioT;
-	private String	horarioFinT;
+	private String	horaInicio;
+	private String	minutosInicio;
+	private String	horaFin;
+	private String	minutosFin;
 
 
 	public String getDiaSemana() {
@@ -25,36 +27,51 @@ public class Horario extends DomainEntity {
 		this.diaSemana = diaSemana;
 	}
 
-	public String getHorarioInicioM() {
-		return this.horarioInicioM;
+
+	// Relationships--------------------------------------------------------------
+	private Servicio	servicio;
+
+
+	@Valid
+	@ManyToOne(optional = false)
+	public Servicio getServicio() {
+		return this.servicio;
 	}
 
-	public void setHorarioInicioM(final String horarioInicioM) {
-		this.horarioInicioM = horarioInicioM;
+	public void setServicio(final Servicio servicio) {
+		this.servicio = servicio;
 	}
 
-	public String getHorarioFinM() {
-		return this.horarioFinM;
+	public String getHoraInicio() {
+		return this.horaInicio;
 	}
 
-	public void setHorarioFinM(final String horarioFinM) {
-		this.horarioFinM = horarioFinM;
+	public void setHoraInicio(final String horaInicio) {
+		this.horaInicio = horaInicio;
 	}
 
-	public String getHorarioInicioT() {
-		return this.horarioInicioT;
+	public String getMinutosInicio() {
+		return this.minutosInicio;
 	}
 
-	public void setHorarioInicioT(final String horarioInicioT) {
-		this.horarioInicioT = horarioInicioT;
+	public void setMinutosInicio(final String minutosInicio) {
+		this.minutosInicio = minutosInicio;
 	}
 
-	public String getHorarioFinT() {
-		return this.horarioFinT;
+	public String getHoraFin() {
+		return this.horaFin;
 	}
 
-	public void setHorarioFinT(final String horarioFinT) {
-		this.horarioFinT = horarioFinT;
+	public void setHoraFin(final String horaFin) {
+		this.horaFin = horaFin;
+	}
+
+	public String getMinutosFin() {
+		return this.minutosFin;
+	}
+
+	public void setMinutosFin(final String minutosFin) {
+		this.minutosFin = minutosFin;
 	}
 
 }

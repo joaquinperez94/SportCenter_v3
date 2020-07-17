@@ -40,6 +40,10 @@
 			<li><a class="fNiv" href="centro/gestor/my-center.do"><spring:message code="pagina.principal.gestor.miCentro" /></a></li>
 		</security:authorize>
 		
+		<security:authorize access="hasRole('USUARIO')">
+			<li><a class="fNiv" href="centro/usuario/list.do"><spring:message code="pagina.principal.gestor.centros" /></a></li>
+			<li><a class="fNiv" href="centro/gestor/my-center.do"><spring:message code="pagina.principal.gestor.miCentro" /></a></li>
+		</security:authorize>
 		
 		
 		

@@ -21,55 +21,29 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="centro/gestor/edit.do" modelAttribute="centroForm">
+<form:form action="centro/gestor/edit.do" modelAttribute="centro">
 
-	<form:hidden path="centro.id" />
-	<form:hidden path="centro.version" />
-	<form:hidden path="centro.gestor" />
-	<form:hidden path="centro.valoracion" />
-	<form:hidden path="centro.comentarios" />
-	<form:hidden path="centro.servicios" />
-	<form:hidden path="horario.diaSemana" />
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="gestor" />
+	<form:hidden path="valoracion" />
+	<form:hidden path="comentarios" />
+	<form:hidden path="servicios" />
 
 	
 
 	<!-- ATRIBUTOS -->
-	<B><acme:textbox code="centro.nombre" path="centro.nombre" /></B>
+	<B><acme:textbox code="centro.nombre" path="nombre" /></B>
 	<br />	
-	<acme:textarea code="centro.descripcion" path="centro.descripcion" />
+	<acme:textarea code="centro.descripcion" path="descripcion" />
 	<br />
-	<B><acme:textbox code="centro.direccion" path="centro.direccion" /></B>
+	<B><acme:textbox code="centro.direccion" path="direccion" /></B>
 	<br />
-	<B><acme:typecenterselect code="centro.tipo" path="centro.tipo"/></B>
+	<B><acme:typecenterselect code="centro.tipo" path="tipo"/></B>
 	<br />
 	
 	<!-- CREACIÓPN HORARIO -->
-	<jstl:set var="primera" value="${true}"/>
-	<table border=30px;>
-		<jstl:forEach var="horario" items="${horarios}">
-		<jstl:if test="${primera}">
-			<tr>
-    			<th></th>
-    			<th><spring:message code="centro.horario.inicioT" /></th>
-    			<th><spring:message code="centro.horario.finT" /></th>
-    			<th><spring:message code="centro.horario.inicioM" /></th>
-    			<th><spring:message code="centro.horario.finM" /></th>
-  			</tr>
-  			<jstl:set var="primera" value="${false}"/>
-		</jstl:if>
-			<tr>
-    			<th><form:label path="horario.diaSemana">
-				<spring:message code="${horario.diaSemana}" />:
-			</form:label></th>
-    			<th><form:input path="horario.horarioInicioM"/></th>
-    			<th><form:input path="horario.horarioFinM" /></th>
-    			<th><form:input path="horario.horarioInicioT" /></th>
-    			<th><form:input path="horario.horarioFinT" /></th>
-  			</tr>
-		</jstl:forEach>
-		
-
-	</table>
+	
 	
 
 	<!-- BOTONES -->

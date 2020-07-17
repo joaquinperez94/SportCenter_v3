@@ -61,9 +61,32 @@
 		<display:column property="nombre" title="${tituloCabecera}" sortable="false" >
 			<jstl:out value="${row.nombre}"></jstl:out>
 		</display:column>
-		<spring:message code="centros.servicios.tipoServicio" var="tituloCabecera2" />
-		<display:column property="tipo" title="${tituloCabecera2}" sortable="false" >
-			<jstl:out value="${row.tipo}"></jstl:out>
+		
+		<display:column sortable="false">
+			<input type="button" name="display"
+			value="<spring:message code="servicio.ver" />"
+			onclick="javascript: window.location.replace('servicio/gestor/display.do?servicioId=${row.id}');" />
 		</display:column>
+		
+		<display:column sortable="false">
+			<input type="button" name="edit"
+			value="<spring:message code="servicio.editar" />"
+			onclick="javascript: window.location.replace('servicio/gestor/edit.do?servicioId=${row.id}');" />
+		</display:column>
+		
+		<display:column sortable="false">
+			<input type="button" name="list"
+			value="<spring:message code="servicio.horario.ver" />"
+			onclick="javascript: window.location.replace('horario/gestor/list.do?servicioId=${row.id}');" />
+		</display:column>
+		
 	</display:table>
 	</jstl:if>
+	
+<security:authorize access="hasRole('GESTOR')">
+	<div>
+		<input type="button" name="edit"
+			value="<spring:message code="centro.servicio.crear" />"
+			onclick="javascript: window.location.replace('servicio/gestor/create.do?centroId=${centro.id}');" />
+	</div>
+</security:authorize>

@@ -5,10 +5,13 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,11 +20,10 @@ public class Servicio extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private String	nombre;
-	private byte[]	imagen;
-	private String	tipoServicio;
+	private String	imagen;
 	private String	descripcion;
-	private Double	precio;
-	private Double	duración;
+	private double	precio;
+	private double	duración;
 
 
 	@NotNull
@@ -33,21 +35,12 @@ public class Servicio extends DomainEntity {
 		this.nombre = nombre;
 	}
 
-	public byte[] getImagen() {
+	public String getImagen() {
 		return this.imagen;
 	}
 
-	public void setImagen(final byte[] imagen) {
+	public void setImagen(final String imagen) {
 		this.imagen = imagen;
-	}
-
-	@NotNull
-	public String getTipoServicio() {
-		return this.tipoServicio;
-	}
-
-	public void setTipoServicio(final String tipoServicio) {
-		this.tipoServicio = tipoServicio;
 	}
 
 	public String getDescripcion() {
@@ -59,6 +52,8 @@ public class Servicio extends DomainEntity {
 	}
 
 	@NotNull
+	@Min(1)
+	@Digits(fraction = 2, integer = 8)
 	public double getPrecio() {
 		return this.precio;
 	}
@@ -68,6 +63,7 @@ public class Servicio extends DomainEntity {
 	}
 
 	@NotNull
+	@Min(0)
 	public double getDuración() {
 		return this.duración;
 	}
@@ -80,6 +76,7 @@ public class Servicio extends DomainEntity {
 	// Relationships--------------------------------------------------------------
 	private Centro				centro;
 	private Collection<Reserva>	reservas;
+	private Collection<Horario>	horarios;
 
 
 	@Valid
@@ -101,6 +98,17 @@ public class Servicio extends DomainEntity {
 
 	public void setReservas(final Collection<Reserva> reservas) {
 		this.reservas = reservas;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "servicio")
+	public Collection<Horario> getHorarios() {
+		return this.horarios;
+	}
+
+	public void setHorarios(final Collection<Horario> horarios) {
+		this.horarios = horarios;
 	}
 
 }

@@ -1,20 +1,19 @@
 
-package controllers.centro;
+package controllers.usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import services.ServicioService;
-import controllers.AbstractController;
+import services.ReservaService;
 
 @Controller
-@RequestMapping("/servicio/gestor")
-public class ServcicioGestorController extends AbstractController {
+@RequestMapping("/reserva/usuario")
+public class ReservaUsuarioController {
 
 	//	Services --------------------------------------------------------
 
 	@Autowired
-	private ServicioService	servicioService;
+	private ReservaService	reservaService;
 
 }

@@ -17,3 +17,19 @@
 	color: red;
 	font-weight: bolder;
 }
+
+.mia{
+	text-align:center;
+	float:left;
+	vertical-align:top;
+	 
+}
+
+.field {
+    height: 50%;
+    width: 50%;
+    background: #ffffff;
+    text-align:center;
+    margin:auto;
+}
+

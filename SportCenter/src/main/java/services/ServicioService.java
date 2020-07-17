@@ -3,15 +3,17 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ServicioRepository;
 import domain.Centro;
+import domain.Horario;
 import domain.Reserva;
 import domain.Servicio;
 
@@ -26,19 +28,25 @@ public class ServicioService {
 	@Autowired
 	private GestorService		gestorService;
 
+	@Autowired
+	private Validator			validator;
+
 
 	// Simple crud methods
 	// Crear ------------------------------------------------------------------------
 
 	public Servicio create(final Centro centro) {
 		Servicio servicio;
+		Collection<Reserva> reservas;
+		Collection<Horario> horarios;
 
 		servicio = new Servicio();
-
-		final List<Reserva> reservas = new ArrayList<>();
+		reservas = new ArrayList<>();
+		horarios = new ArrayList<>();
 
 		servicio.setReservas(reservas);
 		servicio.setCentro(centro);
+		servicio.setHorarios(horarios);
 
 		return servicio;
 	}
@@ -72,6 +80,40 @@ public class ServicioService {
 		Collection<Servicio> result;
 		result = new ArrayList<Servicio>();
 		result = this.servicioRepository.findServiciosByCentroId(centroId);
+		return result;
+	}
+
+	public Servicio findServiceByHorarioId(final int horarioId) {
+		Servicio servicio;
+		Assert.notNull(horarioId);
+		servicio = this.servicioRepository.findServiceByHorarioId(horarioId);
+		return servicio;
+	}
+
+	public Servicio reconstruct(final Servicio servicio, final BindingResult bindingResult) {
+		Servicio result;
+		final Servicio servicioBd;
+
+		if (servicio.getId() == 0)
+			result = servicio;
+		else {
+			servicioBd = this.servicioRepository.findOne(servicio.getId());
+			servicio.setId(servicioBd.getId());
+			servicio.setVersion(servicioBd.getVersion());
+			servicio.setCentro(servicioBd.getCentro());
+			servicio.setReservas(servicioBd.getReservas());
+			servicio.setHorarios(servicioBd.getHorarios());
+
+			result = servicio;
+		}
+		this.validator.validate(result, bindingResult);
+		return result;
+	}
+
+	public Servicio findOne(final int servicioId) {
+		Assert.isTrue(servicioId != 0);
+		Servicio result;
+		result = this.servicioRepository.findOne(servicioId);
 		return result;
 	}
 

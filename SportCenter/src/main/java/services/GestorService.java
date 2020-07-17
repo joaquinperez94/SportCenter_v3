@@ -169,4 +169,17 @@ public class GestorService {
 
 	}
 
+	public boolean checkPrincipalBoolean() {
+		final UserAccount userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+
+		final Collection<Authority> authorities = userAccount.getAuthorities();
+		Assert.notNull(authorities);
+
+		final Authority auth = new Authority();
+		auth.setAuthority(Authority.GESTOR);
+
+		return (authorities.contains(auth));
+	}
+
 }
