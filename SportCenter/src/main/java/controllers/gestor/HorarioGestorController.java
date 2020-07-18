@@ -127,6 +127,8 @@ public class HorarioGestorController extends AbstractController {
 					result = this.createEditModelAndView(horario, "request.horario.solapado");
 				else if (oops.getMessage().equals("horas inicio final error"))
 					result = this.createEditModelAndView(horario, "request.horario.inicio.final.error");
+				else if (oops.getMessage().equals("horario duración errónea"))
+					result = this.createEditModelAndView(horario, "request.horario.duracion.novalida");
 				else
 					result = this.createEditModelAndView(horario, "horario.commit.error");
 			}
