@@ -24,7 +24,7 @@ import domain.Servicio;
 
 @Controller
 @RequestMapping("/servicio/gestor")
-public class ServicioGestorController extends AbstractController {
+public class ServcicioGestorController extends AbstractController {
 
 	//	Services --------------------------------------------------------
 
@@ -87,10 +87,8 @@ public class ServicioGestorController extends AbstractController {
 			} catch (final Throwable oops) {
 				if (oops.getMessage().contains("Failed to convert property value of type java.lang.String to required type java.lang.Double for property precio; nested exception is java.lang.NumberFormatException:"))
 					result = this.createEditModelAndView(servicio, "servicio.error.double");
-				else if (oops.getMessage().equals("duracion no valida"))
-					result = this.createEditModelAndView(servicio, "request.servicio.duracion.error");
-				else if (oops.getMessage().equals("duracion no cumple patron"))
-					result = this.createEditModelAndView(servicio, "request.servicio.duracion.patron");
+				//else if (oops.getMessage().equals("Summary demasiado grande"))
+				//result = this.createEditModelAndView(servicio, "request.servicio.summary.max");
 				else
 					result = this.createEditModelAndView(servicio, "servicio.commit.error");
 			}

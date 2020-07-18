@@ -63,6 +63,7 @@ public class Servicio extends DomainEntity {
 	}
 
 	@NotNull
+	@Min(0)
 	public double getDuración() {
 		return this.duración;
 	}

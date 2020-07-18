@@ -27,7 +27,7 @@
   <!-- Attributes -->
 	
 	<display:column>
-	<B><spring:message code="servicio.nombre" />:</B>
+	<B><spring:message code="servicio.nombre" /></B>
 	<jstl:out value="${row.nombre}"></jstl:out>
 	
 
@@ -35,19 +35,16 @@
 		<img src="${row.imagen}" width="100" height="100">
 	</p>
 	<p>
-		<B><spring:message code="servicio.descripcion" />:</B>
-		<jstl:if test="${empty row.descripcion}">
-    	-
-		</jstl:if>
+		<B><spring:message code="servicio.descripcion" /></B>
 		<jstl:out value="${row.descripcion}"></jstl:out>
 	</p>
 	<p>
-		<B><spring:message code="servicio.precio" />:</B>
+		<B><spring:message code="servicio.precio" /></B>
 		<jstl:out value="${row.precio}"></jstl:out>
 		
 	</p>
 		<p>
-		<B><spring:message code="servicio.duracion" />:</B>
+		<B><spring:message code="servicio.duracion" /></B>
 		<jstl:out value="${row.duración}"></jstl:out>
 		
 	</p>

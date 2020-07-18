@@ -20,7 +20,4 @@ public interface CentroRepository extends JpaRepository<Centro, Integer> {
 
 	@Query("select c from Centro c join c.servicios s where s.id=?1")
 	Centro findCentroByServiceId(int servicioId);
-
-	@Query("select c from Centro c join c.usuarios u where u.id = ?1")
-	Collection<Centro> findCentrosByUsuario(int usuarioId);
 }

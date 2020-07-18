@@ -7,7 +7,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -77,7 +76,6 @@ public class Centro extends DomainEntity {
 	private Gestor					gestor;
 	private Collection<Servicio>	servicios;
 	private Collection<Comentario>	comentarios;
-	private Collection<Usuario>		usuarios;
 
 
 	@Valid
@@ -110,17 +108,6 @@ public class Centro extends DomainEntity {
 
 	public void setComentarios(final Collection<Comentario> comentarios) {
 		this.comentarios = comentarios;
-	}
-
-	@NotNull
-	@Valid
-	@ManyToMany
-	public Collection<Usuario> getUsuarios() {
-		return this.usuarios;
-	}
-
-	public void setUsuarios(final Collection<Usuario> usuarios) {
-		this.usuarios = usuarios;
 	}
 
 }
