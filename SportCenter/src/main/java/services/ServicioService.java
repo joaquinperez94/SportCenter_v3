@@ -56,7 +56,8 @@ public class ServicioService {
 		Servicio result;
 
 		Assert.notNull(servicio);
-
+		Assert.isTrue(servicio.getDuración() > 0.15, "duracion no valida");
+		Assert.isTrue(this.checkDuracion(servicio.getDuración()), "duracion no cumple patron");
 		this.gestorService.checkPrincipal();
 
 		result = this.servicioRepository.save(servicio);
@@ -114,6 +115,21 @@ public class ServicioService {
 		Assert.isTrue(servicioId != 0);
 		Servicio result;
 		result = this.servicioRepository.findOne(servicioId);
+		return result;
+	}
+
+	public boolean checkDuracion(final double duracion) {
+		boolean result;
+		result = false;
+
+		final String duracionS = String.valueOf(duracion);
+		final int indexOfDecimal = duracionS.indexOf(".");
+		//String hora = duracionS.substring(0, indexOfDecimal);
+		final String minutos = duracionS.substring(indexOfDecimal).replace(".", "");
+		final double minutosD = Double.parseDouble(minutos);
+
+		if (minutosD == 15. || minutosD == 30. || minutosD == 45. || minutosD == 0.)
+			result = true;
 		return result;
 	}
 

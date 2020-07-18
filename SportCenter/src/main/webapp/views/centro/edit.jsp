@@ -29,6 +29,7 @@
 	<form:hidden path="valoracion" />
 	<form:hidden path="comentarios" />
 	<form:hidden path="servicios" />
+	<form:hidden path="usuarios" />
 
 	
 
