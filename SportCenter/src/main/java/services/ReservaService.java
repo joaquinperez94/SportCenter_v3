@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import repositories.ReservaRepository;
 import domain.Reserva;
 import domain.Servicio;
+import domain.Usuario;
 
 @Service
 @Transactional
@@ -23,13 +24,20 @@ public class ReservaService {
 	@Autowired
 	private GestorService		gestorService;
 
+	@Autowired
+	private UsuarioService		usuarioService;
+
 
 	// Crear ------------------------------------------------------------------------
 	public Reserva create(final Servicio servicio) {
 		Reserva reserva;
+		Usuario usuarioPrincipal;
 
 		reserva = new Reserva();
+		usuarioPrincipal = this.usuarioService.findByPrincipal();
+
 		reserva.setServicio(servicio);
+		reserva.setUsuario(usuarioPrincipal);
 
 		return reserva;
 	}
@@ -40,7 +48,7 @@ public class ReservaService {
 
 		Assert.notNull(reserva);
 
-		this.gestorService.checkPrincipal();
+		this.usuarioService.checkPrincipal();
 		result = this.reservaRepository.save(reserva);
 		return result;
 	}

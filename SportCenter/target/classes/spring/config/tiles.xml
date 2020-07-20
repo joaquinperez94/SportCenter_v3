@@ -29,9 +29,9 @@
 		<value>/views/centro/tiles.xml</value>
 		<value>/views/servicio/tiles.xml</value>
 		<value>/views/horario/tiles.xml</value>
-		
-		<!-- 
 		<value>/views/reserva/tiles.xml</value>
+		<!-- 
+		
 		<value>/views/comentario/tiles.xml</value>
 		<value>/views/administrador/tiles.xml</value>	
 		<value>/views/reserva/tiles.xml</value>

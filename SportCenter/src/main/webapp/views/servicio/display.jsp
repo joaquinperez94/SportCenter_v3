@@ -54,14 +54,26 @@
 	
 
 	
-	
 </display:column>
-  
 </display:table>
 
+
+<security:authorize access="hasRole('GESTOR')">
 <input type="button" name="edit"
 			value="<spring:message code="servicio.volver" />"
 			onclick="javascript: window.location.replace('centro/gestor/display.do?centroId=${servicio.centro.id}');" />
+</security:authorize>
+
+<security:authorize access="hasRole('USUARIO')">
+<input type="button" name="edit"
+			value="<spring:message code="servicio.crear" />"
+			onclick="javascript: window.location.replace('reserva/usuario/create.do?servicioId=${servicio.id}');" />
+			
+<input type="button" name="edit"
+			value="<spring:message code="servicio.volver" />"
+			onclick="javascript: window.location.replace('centro/usuario/display.do?centroId=${servicio.centro.id}');" />
+</security:authorize>
+
 			
 
 <!-- 

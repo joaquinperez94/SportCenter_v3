@@ -56,7 +56,7 @@ public class CentroUsuarioController extends AbstractController {
 		result.addObject("servicios", servicios);
 		result.addObject("comentarios", comentarios);
 		result.addObject("serviciosEmpty", servicios.size() == 0);
-		result.addObject("requestURI", "centro/gestor/display.do");
+		result.addObject("requestURI", "centro/usuario/display.do");
 
 		return result;
 	}

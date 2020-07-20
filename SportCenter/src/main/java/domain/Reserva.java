@@ -40,7 +40,8 @@ public class Reserva extends DomainEntity {
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	//@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "dd-MM-yy")
 	public Date getFechaReserva() {
 		return this.fechaReserva;
 	}
