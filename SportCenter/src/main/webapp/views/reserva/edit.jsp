@@ -42,23 +42,21 @@
   $( function() {
     $( "#datepicker" ).datepicker({ 
     	dateFormat: "dd-mm-yy",
-    	onClose:  function() {
-    		var date = {};
-    		date = $('#datepicker').val();
-    		
+    	onClose:  function() {  		
     		  $.ajax({
     			type : "POST",
     			contentType : "application/json",
     			url : "reserva/usuario/obtenerReservasDisponibles.do",
-    			data : $('#datepicker').val(),
+    			data : {date:$('#datepicker').val(),serviceId:"${servicioId}"},
     			dataType : 'json',				
     			success : function(data) {
     				$('#result').html(data);
     			},
-    			error: function(xhr, desc, err) {
-                     console.log(xhr);
-                     console.log("Details0: " + desc + "\nError:" + err);
-                 },
+    			error: function(response) {
+                    for (var i in response){
+                    	console.log("dwdw");
+                       }   
+                     },
     		});
 			}   
     	});
@@ -72,7 +70,7 @@
 <form:input path="fechaReserva" type="text" id="datepicker"
 		value="${fechaReserva}" />
 		
-		
+		<B><acme:select items="${reservas}" itemLabel="title" code="reserva.horaInicio" path="horaInicio"/></B>
  
  
 </body>

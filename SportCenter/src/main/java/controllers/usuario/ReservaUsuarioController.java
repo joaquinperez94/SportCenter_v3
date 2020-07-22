@@ -1,10 +1,8 @@
 
 package controllers.usuario;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.HorarioService;
 import services.ReservaService;
 import services.ServicioService;
 import domain.Reserva;
@@ -33,6 +32,9 @@ public class ReservaUsuarioController {
 	@Autowired
 	private ServicioService	servicioService;
 
+	@Autowired
+	private HorarioService	horarioService;
+
 
 	//Crear	------------------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -45,6 +47,7 @@ public class ReservaUsuarioController {
 		reserva = this.reservaService.create(servicio);
 
 		result = this.createEditModelAndView(reserva);
+		result.addObject("servicioId", servicioId);
 		return result;
 	}
 
@@ -76,66 +79,13 @@ public class ReservaUsuarioController {
 
 	@RequestMapping(value = "/obtenerReservasDisponibles", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody
-	String obtenerReservasDisponibles(@RequestBody final String date) {
-		if (date != null) {
-			final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-			try {
-				final Date date1 = formatter.parse(date);
-				final Calendar c = Calendar.getInstance();
-				c.setTime(date1);
-				final int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-				final String diaSemana = this.getDayOfWeek(dayOfWeek);
-				//Voy a base de datos con ese dia y para ese servicio.
+	Collection<String> obtenerReservasDisponibles(@RequestBody final String date, @RequestBody final String serviceId) {
+		//if (date != null) {
+		Collection<String> reservasDisponibles;
+		reservasDisponibles = new ArrayList<>(this.reservaService.obtenerReservas(date));
 
-				//Obtengo una lista de horarios.
+		return reservasDisponibles;
 
-				//Los recorro y voy sumandole la duracion del servicio.
-
-				//Obtengo una lista de horas para reservar y las devuelvo en el desplegable.
-
-			} catch (final ParseException e) {
-				return "fdfddf";
-			}
-		} else
-			return "login <strong>no</strong> disponible";
-
-	}
-
-	public String getDayOfWeek(final int numberDay) {
-		String dia = "";
-		switch (numberDay) {
-		case 1:
-			// domingo
-			dia = "Domingo";
-			break;
-		case 2:
-			// lunes
-			dia = "Lúnes";
-			break;
-		case 3:
-			dia = "Martes";
-			// martes
-			break;
-		case 4:
-			// miercoles
-			dia = "Miércoles";
-			break;
-		case 5:
-			// jueves
-			dia = "Jueves";
-			break;
-		case 6:
-			// viernes
-			dia = "Viernes";
-			break;
-		case 7:
-			// domingo
-			dia = "Sábado";
-			break;
-		default:
-			// code block
-		}
-		return dia;
 	}
 
 	// Ancillary methods ------------------------------------------------------

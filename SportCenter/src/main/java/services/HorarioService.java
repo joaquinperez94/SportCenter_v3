@@ -168,11 +168,11 @@ public class HorarioService {
 		return result;
 	}
 
-	public Collection<Horario> findHorariosByDiaSemanaYServicioId(final Horario horario) {
+	public Collection<Horario> findHorariosByDiaSemanaYServicioId(final String diaSemana, final int servicioId) {
 		Collection<Horario> result;
 		result = new ArrayList<>();
 
-		result = this.horarioRepository.findHorariosByDiaSemanaYServicioId(horario.getDiaSemana(), horario.getServicio().getId());
+		result = this.horarioRepository.findHorariosByDiaSemanaYServicioId(diaSemana, servicioId);
 		return result;
 	}
 
@@ -181,7 +181,7 @@ public class HorarioService {
 		boolean result;
 
 		result = true;
-		horariosBD = this.findHorariosByDiaSemanaYServicioId(horario);
+		horariosBD = this.findHorariosByDiaSemanaYServicioId(horario.getDiaSemana(), horario.getServicio().getId());
 		final String horaInicio_s = horario.getHoraInicio() + "." + horario.getMinutosInicio();
 		final String horaFin_s = horario.getHoraFin() + "." + horario.getMinutosFin();
 
@@ -243,7 +243,7 @@ public class HorarioService {
 		else
 			duracionD = minutosD;
 
-		final double modulo = (fin - inicio) % minutosD;
+		final double modulo = (fin - inicio) % duracionD;
 		//final double duracionModulo = Math.round(modulo * 100.0) / 100.0;
 
 		if (modulo != 0)

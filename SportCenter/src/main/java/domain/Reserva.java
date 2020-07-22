@@ -22,7 +22,8 @@ public class Reserva extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private Date	fechaRealizacion;
 	private Date	fechaReserva;
-	private String	hora;
+	private String	horaInicio;
+	private String	horaFin;
 	private String	comentario;
 	private String	estado;
 
@@ -51,12 +52,21 @@ public class Reserva extends DomainEntity {
 	}
 
 	@NotNull
-	public String getHora() {
-		return this.hora;
+	public String getHoraInicio() {
+		return this.horaInicio;
 	}
 
-	public void setHora(final String hora) {
-		this.hora = hora;
+	public void setHoraInicio(final String horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	@NotNull
+	public String getHoraFin() {
+		return this.horaFin;
+	}
+
+	public void setHoraFin(final String horaFin) {
+		this.horaFin = horaFin;
 	}
 
 	public String getComentario() {
