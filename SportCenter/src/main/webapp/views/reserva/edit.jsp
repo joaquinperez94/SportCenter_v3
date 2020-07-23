@@ -40,6 +40,8 @@
 
   <script>
   $( function() {
+	$("#showSelect").hide();
+	var primera = true;
     $( "#datepicker" ).datepicker({ 
     	dateFormat: "dd-mm-yy",
     	onClose:  function() {  		
@@ -50,14 +52,26 @@
     			data : {date:$('#datepicker').val(),serviceId:"${servicioId}"},
     			dataType : 'json',				
     			success : function(data) {
-    				$('#result').html(data);
-    			},
-    			error: function(response) {
-                    for (var i in response){
-                    	console.log("dwdw");
-                       }   
-                     },
-    		});
+
+    				$("#mySelect option").each(function() {
+    				    $(this).remove();
+    				});
+
+    				$(".showSelect").show();  
+    				$.each(data, function(key, value) {   
+    				     $('#mySelect')
+    				         .append($("<option></option>")
+    				                    .attr("value", value)
+    				                    .text(value)); 
+    				     console.log("Key:"+ data[0]);
+    				     console.log("Valor:"+ value);
+    				});
+    		    },
+    			error: function(e) {
+    		        console.log("ERROR: ", e);
+    		        $("#message").html(e.responseText);
+    		    }
+    			});
 			}   
     	});
   } );
@@ -70,8 +84,9 @@
 <form:input path="fechaReserva" type="text" id="datepicker"
 		value="${fechaReserva}" />
 		
-		<B><acme:select items="${reservas}" itemLabel="title" code="reserva.horaInicio" path="horaInicio"/></B>
- 
+<div class="showSelect" style="display:none;">
+<B><acme:select items="${reservas}" id="mySelect" itemLabel="title" code="reserva.horaInicio" path="horaInicio"/></B>
+</div>
  
 </body>
 </html>
