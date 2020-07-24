@@ -56,7 +56,43 @@ public class ReservaService {
 	//Guardar -----------------------------------------------------------
 	public Reserva save(final Reserva reserva) {
 		Reserva result;
+		Date fechaReserva;
 
+		fechaReserva = new Date(System.currentTimeMillis() - 1000);
+		reserva.setFechaRealizacion(fechaReserva);
+
+		final String duracionS = String.valueOf(reserva.getServicio().getDuración());
+		final int indexOfDecimal = duracionS.indexOf(".");
+		final String hora = duracionS.substring(0, indexOfDecimal);
+		final String minutos = duracionS.substring(indexOfDecimal).replace(".", "");
+		double duracionD;
+		final double horaD = Double.parseDouble(hora) * 60.;
+		final double minutosD = Double.parseDouble(minutos);
+
+		if (horaD != 0)
+			duracionD = horaD + minutosD;
+		else
+			duracionD = minutosD;
+
+		final double horaReserva = Double.parseDouble(reserva.getHoraInicio().split(":")[0]) * 60;
+		final double minutosReserva = Double.parseDouble(reserva.getHoraInicio().split(":")[1]);
+		final double reservaInicial = horaReserva + minutosReserva;
+		final long totalReserva = (long) (reservaInicial + duracionD);
+
+		final long horasReales = TimeUnit.MINUTES.toHours(totalReserva);
+		final long minutosReales = TimeUnit.MINUTES.toMinutes(totalReserva) - TimeUnit.HOURS.toMinutes(TimeUnit.MINUTES.toHours(totalReserva));
+
+		String horaReservaFinal = "";
+		if (String.valueOf(horasReales).length() == 1 && String.valueOf(minutosReales).length() == 1)
+			horaReservaFinal = "0" + horasReales + ":" + "0" + minutosReales;
+		else if (String.valueOf(horasReales).length() == 1)
+			horaReservaFinal = "0" + horasReales + ":" + minutosReales;
+		else if (String.valueOf(minutosReales).length() == 1)
+			horaReservaFinal = horasReales + ":" + "0" + minutosReales;
+		else
+			horaReservaFinal = horasReales + ":" + minutosReales;
+
+		reserva.setHoraFin(horaReservaFinal);
 		Assert.notNull(reserva);
 
 		this.usuarioService.checkPrincipal();
@@ -88,10 +124,11 @@ public class ReservaService {
 		result = new ArrayList<>();
 		Assert.notNull(fecha);
 		Assert.notNull(serviceId);
-		final Calendar cal = Calendar.getInstance();
-		cal.setTime(fecha);
+		//final Calendar cal = Calendar.getInstance();
+		//cal.setTime(fecha);
 		try {
-			result = this.reservaRepository.findReservasByFechaReservaAndServiceId(cal.getTime(), serviceId);
+			result = this.reservaRepository.findReservasByFechaReservaAndServiceId(fecha, serviceId);
+			//result = this.reservaRepository.findReservasByFechaReservaAndServiceId(cal.getTime(), serviceId);
 		} catch (final Exception e) {
 			// TODO: handle exception
 		}

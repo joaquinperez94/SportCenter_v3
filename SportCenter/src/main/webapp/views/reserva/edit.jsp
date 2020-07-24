@@ -63,8 +63,6 @@
     				         .append($("<option></option>")
     				                    .attr("value", value)
     				                    .text(value)); 
-    				     console.log("Key:"+ data[0]);
-    				     console.log("Valor:"+ value);
     				});
     		    },
     			error: function(e) {
@@ -80,17 +78,25 @@
 <body>
  
 
-
+<B><spring:message code="reserva.fechaReserva"></spring:message>:</B>
 <form:input path="fechaReserva" type="text" id="datepicker"
 		value="${fechaReserva}" />
-		
+		<br />
+		<br />
 <div class="showSelect" style="display:none;">
 <B><acme:select items="${reservas}" id="mySelect" itemLabel="title" code="reserva.horaInicio" path="horaInicio"/></B>
+
+<br />
+		
+<B><spring:message code="reserva.duracion"/>:</B>
+<jstl:out value="${reserva.servicio.duración}h."></jstl:out>
+
 </div>
  
 </body>
 </html>
-	
-	<input type="submit" name="save"
+	<br />
+	<br />
+	<input class="showSelect" style="display:none;" type="submit" name="save"
 		value="<spring:message code="reserva.guardar"/>" />
 	</form:form>
