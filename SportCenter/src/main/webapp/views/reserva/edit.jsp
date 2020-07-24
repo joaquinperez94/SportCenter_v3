@@ -76,6 +76,8 @@
   </script>
 </head>
 <body>
+
+
  
 
 <B><spring:message code="reserva.fechaReserva"></spring:message>:</B>
@@ -87,7 +89,9 @@
 <B><acme:select items="${reservas}" id="mySelect" itemLabel="title" code="reserva.horaInicio" path="horaInicio"/></B>
 
 <br />
-		
+<B><acme:textarea code="reserva.comentario2" path="comentario" /></B>
+		<br />
+		<br />
 <B><spring:message code="reserva.duracion"/>:</B>
 <jstl:out value="${reserva.servicio.duración}h."></jstl:out>
 

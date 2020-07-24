@@ -106,14 +106,11 @@ public class ReservaService {
 		Assert.isTrue(reserva.getId() != 0);
 		final Collection<Servicio> serviciosGestor;
 		final Servicio servicio;
-
-		//serviciosGestor = new ArrayList<>(this.servicioService.findServiciosCreatedByGestor());
-
-		//servicio = this.servicioService.findServiceByHorarioId(horario.getId());
-		//TODO:
-		//Comprobamos que el servicio del horario pertenezca a este gestor
-		//Assert.isTrue(serviciosGestor.contains(servicio));
-
+		Date date;
+		date = new Date(System.currentTimeMillis() - 1000);
+		final long diff = reserva.getFechaReserva().getTime() - date.getTime();
+		final long dias = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+		Assert.isTrue(dias >= 2, "error fecha cercana");
 		reserva.setServicio(null);
 		this.reservaRepository.delete(reserva);
 
@@ -135,6 +132,23 @@ public class ReservaService {
 
 		return result;
 	}
+
+	public Collection<Reserva> findReservasByUsuarioId(final int usuarioId) {
+		Collection<Reserva> result;
+		result = new ArrayList<>();
+		Assert.notNull(usuarioId);
+		result = this.reservaRepository.findReservasByUsuarioId(usuarioId);
+
+		return result;
+	}
+
+	public Reserva findOne(final int reservaId) {
+		Assert.isTrue(reservaId != 0);
+		Reserva result;
+		result = this.reservaRepository.findOne(reservaId);
+		return result;
+	}
+
 	public Collection<String> obtenerReservas(final String body) {
 		Collection<String> result;
 		result = new ArrayList<>();
