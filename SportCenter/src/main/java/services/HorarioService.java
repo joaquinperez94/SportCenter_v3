@@ -55,6 +55,8 @@ public class HorarioService {
 		this.gestorService.checkPrincipal();
 		Assert.isTrue(this.checkHoras(horario), "horas inicio final error");
 		Assert.isTrue(this.checkHorarioSolapado(horario), "horario solapado");
+		Assert.isTrue(this.checkHorarioDuracion(horario), "horario duración errónea");
+
 		result = this.horarioRepository.save(horario);
 		return result;
 	}
@@ -166,11 +168,11 @@ public class HorarioService {
 		return result;
 	}
 
-	public Collection<Horario> findHorariosByDiaSemanaYServicioId(final Horario horario) {
+	public Collection<Horario> findHorariosByDiaSemanaYServicioId(final String diaSemana, final int servicioId) {
 		Collection<Horario> result;
 		result = new ArrayList<>();
 
-		result = this.horarioRepository.findHorariosByDiaSemanaYServicioId(horario.getDiaSemana(), horario.getServicio().getId());
+		result = this.horarioRepository.findHorariosByDiaSemanaYServicioId(diaSemana, servicioId);
 		return result;
 	}
 
@@ -179,7 +181,7 @@ public class HorarioService {
 		boolean result;
 
 		result = true;
-		horariosBD = this.findHorariosByDiaSemanaYServicioId(horario);
+		horariosBD = this.findHorariosByDiaSemanaYServicioId(horario.getDiaSemana(), horario.getServicio().getId());
 		final String horaInicio_s = horario.getHoraInicio() + "." + horario.getMinutosInicio();
 		final String horaFin_s = horario.getHoraFin() + "." + horario.getMinutosFin();
 
@@ -212,6 +214,39 @@ public class HorarioService {
 		result = true;
 
 		if (horaInicio == horaFin || horaInicio > horaFin)
+			result = false;
+		return result;
+	}
+
+	public boolean checkHorarioDuracion(final Horario horario) {
+		boolean result;
+		result = true;
+		double duracionD;
+		final double horaInicio = Double.parseDouble(horario.getHoraInicio()) * 60.;
+		final double horaFin = Double.parseDouble(horario.getHoraFin()) * 60.;
+		final double minutosInicio = Double.parseDouble(horario.getMinutosInicio());
+		final double minutosFin = Double.parseDouble(horario.getMinutosFin());
+
+		final double inicio = horaInicio + minutosInicio;
+		final double fin = horaFin + minutosFin;
+
+		final String duracionS = String.valueOf(horario.getServicio().getDuración());
+		final int indexOfDecimal = duracionS.indexOf(".");
+		final String hora = duracionS.substring(0, indexOfDecimal);
+		final String minutos = duracionS.substring(indexOfDecimal).replace(".", "");
+
+		final double horaD = Double.parseDouble(hora) * 60.;
+		final double minutosD = Double.parseDouble(minutos);
+
+		if (horaD != 0)
+			duracionD = horaD + minutosD;
+		else
+			duracionD = minutosD;
+
+		final double modulo = (fin - inicio) % duracionD;
+		//final double duracionModulo = Math.round(modulo * 100.0) / 100.0;
+
+		if (modulo != 0)
 			result = false;
 		return result;
 	}

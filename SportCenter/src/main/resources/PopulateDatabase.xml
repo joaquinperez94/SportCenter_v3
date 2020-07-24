@@ -263,6 +263,11 @@
 
 			</list>
 		</property>
+		<property name="usuarios">
+			<list>
+
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="centro2" class="domain.Centro">
@@ -278,6 +283,11 @@
 			</list>
 		</property>
 		<property name="servicios">
+			<list>
+
+			</list>
+		</property>
+		<property name="usuarios">
 			<list>
 
 			</list>
@@ -301,6 +311,11 @@
 
 			</list>
 		</property>
+		<property name="usuarios">
+			<list>
+
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="centro4" class="domain.Centro">
@@ -316,6 +331,11 @@
 			</list>
 		</property>
 		<property name="comentarios">
+			<list>
+
+			</list>
+		</property>
+		<property name="usuarios">
 			<list>
 
 			</list>

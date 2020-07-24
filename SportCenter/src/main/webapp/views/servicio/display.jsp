@@ -27,7 +27,7 @@
   <!-- Attributes -->
 	
 	<display:column>
-	<B><spring:message code="servicio.nombre" /></B>
+	<B><spring:message code="servicio.nombre" />:</B>
 	<jstl:out value="${row.nombre}"></jstl:out>
 	
 
@@ -35,30 +35,45 @@
 		<img src="${row.imagen}" width="100" height="100">
 	</p>
 	<p>
-		<B><spring:message code="servicio.descripcion" /></B>
+		<B><spring:message code="servicio.descripcion" />:</B>
+		<jstl:if test="${empty row.descripcion}">
+    	-
+		</jstl:if>
 		<jstl:out value="${row.descripcion}"></jstl:out>
 	</p>
 	<p>
-		<B><spring:message code="servicio.precio" /></B>
+		<B><spring:message code="servicio.precio" />:</B>
 		<jstl:out value="${row.precio}"></jstl:out>
 		
 	</p>
 		<p>
-		<B><spring:message code="servicio.duracion" /></B>
+		<B><spring:message code="servicio.duracion" />:</B>
 		<jstl:out value="${row.duración}"></jstl:out>
 		
 	</p>
 	
 
 	
-	
 </display:column>
-  
 </display:table>
 
+
+<security:authorize access="hasRole('GESTOR')">
 <input type="button" name="edit"
 			value="<spring:message code="servicio.volver" />"
 			onclick="javascript: window.location.replace('centro/gestor/display.do?centroId=${servicio.centro.id}');" />
+</security:authorize>
+
+<security:authorize access="hasRole('USUARIO')">
+<input type="button" name="edit"
+			value="<spring:message code="servicio.crear" />"
+			onclick="javascript: window.location.replace('reserva/usuario/create.do?servicioId=${servicio.id}');" />
+			
+<input type="button" name="edit"
+			value="<spring:message code="servicio.volver" />"
+			onclick="javascript: window.location.replace('centro/usuario/display.do?centroId=${servicio.centro.id}');" />
+</security:authorize>
+
 			
 
 <!-- 

@@ -61,7 +61,8 @@
 		<display:column property="nombre" title="${tituloCabecera}" sortable="false" >
 			<jstl:out value="${row.nombre}"></jstl:out>
 		</display:column>
-		
+				
+		<security:authorize access="hasRole('GESTOR')">
 		<display:column sortable="false">
 			<input type="button" name="display"
 			value="<spring:message code="servicio.ver" />"
@@ -78,7 +79,23 @@
 			<input type="button" name="list"
 			value="<spring:message code="servicio.horario.ver" />"
 			onclick="javascript: window.location.replace('horario/gestor/list.do?servicioId=${row.id}');" />
+		</display:column>		
+		</security:authorize>
+		
+		
+		<security:authorize access="hasRole('USUARIO')">
+		<display:column sortable="false">
+			<input type="button" name="display"
+			value="<spring:message code="servicio.ver" />"
+			onclick="javascript: window.location.replace('servicio/usuario/display.do?servicioId=${row.id}');" />
+		</display:column>		
+		<display:column sortable="false">
+			<input type="button" name="list"
+			value="<spring:message code="servicio.horario.ver" />"
+			onclick="javascript: window.location.replace('horario/usuario/list.do?servicioId=${row.id}');" />
 		</display:column>
+		</security:authorize>
+		
 		
 	</display:table>
 	</jstl:if>

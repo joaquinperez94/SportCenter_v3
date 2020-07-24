@@ -35,7 +35,19 @@
 
 	<spring:message code="centro.tipo" var="tipoHeader" />
 	<display:column property="tipo" title="${tipoHeader}" sortable="true"/>
-	
+
+
+	<security:authorize access="hasRole('USUARIO')">	
+	<spring:message code="centro.ver" var="verHeader"></spring:message>
+		<display:column title="${verHeader}" sortable="true">
+		<spring:url value="centro/usuario/display.do" var="verURL">
+		<spring:param name="centroId" value="${row.id}"/>
+		</spring:url>
+		<a href="${verURL}"><spring:message code="centro.ver"/></a>
+	</display:column>
+	</security:authorize>
+
+	<security:authorize access="hasRole('GESTOR')">	
 	<spring:message code="centro.ver" var="verHeader"></spring:message>
 		<display:column title="${verHeader}" sortable="true">
 		<spring:url value="centro/gestor/display.do" var="verURL">
@@ -44,7 +56,7 @@
 		<a href="${verURL}"><spring:message code="centro.ver"/></a>
 	</display:column>
 	
-	<security:authorize access="hasRole('GESTOR')">
+
 		<jstl:if test="${mostrarBotonGestor}">
 		
 		<display:column sortable="false">
