@@ -8,6 +8,7 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.Validator;
 
 import repositories.AdministradorRepository;
 import security.Authority;
@@ -22,6 +23,8 @@ public class AdministradorService {
 	// Managed repository -----------------------------------------------------
 	@Autowired
 	private AdministradorRepository	administradorRepository;
+	@Autowired
+	private Validator				validator;
 
 
 	// Constructors-------------------------------------------------------

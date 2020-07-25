@@ -127,7 +127,7 @@ public class ReservaUsuarioController {
 		else
 			try {
 				this.reservaService.save(reserva);
-				result = new ModelAndView("redirect:/horario/gestor/list.do?servicioId=" + reserva.getServicio().getId());
+				result = new ModelAndView("redirect:/reserva/usuario/list.do?");
 			} catch (final Throwable oops) {
 				//if (oops.getMessage().equals("horario solapado"))
 				//result = this.createEditModelAndView(horario, "request.horario.solapado");

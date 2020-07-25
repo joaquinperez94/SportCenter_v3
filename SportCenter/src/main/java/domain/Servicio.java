@@ -14,6 +14,8 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Servicio extends DomainEntity {
@@ -26,7 +28,7 @@ public class Servicio extends DomainEntity {
 	private double	duración;
 
 
-	@NotNull
+	@NotBlank
 	public String getNombre() {
 		return this.nombre;
 	}

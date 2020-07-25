@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Horario extends DomainEntity {
@@ -19,6 +21,7 @@ public class Horario extends DomainEntity {
 	private String	minutosFin;
 
 
+	@NotBlank
 	public String getDiaSemana() {
 		return this.diaSemana;
 	}
@@ -27,21 +30,7 @@ public class Horario extends DomainEntity {
 		this.diaSemana = diaSemana;
 	}
 
-
-	// Relationships--------------------------------------------------------------
-	private Servicio	servicio;
-
-
-	@Valid
-	@ManyToOne(optional = false)
-	public Servicio getServicio() {
-		return this.servicio;
-	}
-
-	public void setServicio(final Servicio servicio) {
-		this.servicio = servicio;
-	}
-
+	@NotBlank
 	public String getHoraInicio() {
 		return this.horaInicio;
 	}
@@ -50,6 +39,7 @@ public class Horario extends DomainEntity {
 		this.horaInicio = horaInicio;
 	}
 
+	@NotBlank
 	public String getMinutosInicio() {
 		return this.minutosInicio;
 	}
@@ -72,6 +62,21 @@ public class Horario extends DomainEntity {
 
 	public void setMinutosFin(final String minutosFin) {
 		this.minutosFin = minutosFin;
+	}
+
+
+	// Relationships--------------------------------------------------------------
+	private Servicio	servicio;
+
+
+	@Valid
+	@ManyToOne(optional = false)
+	public Servicio getServicio() {
+		return this.servicio;
+	}
+
+	public void setServicio(final Servicio servicio) {
+		this.servicio = servicio;
 	}
 
 }
