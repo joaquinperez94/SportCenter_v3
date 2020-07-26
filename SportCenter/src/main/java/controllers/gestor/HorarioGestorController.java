@@ -94,12 +94,7 @@ public class HorarioGestorController extends AbstractController {
 		final Horario horario;
 		Servicio servicio;
 		Assert.notNull(horarioId);
-
-		//Collection<Servicio> coursesOfBuyer;
-
 		servicio = new Servicio();
-
-		//coursesOfBuyer = new ArrayList<>(this.courseService.findCoursesCreatedByBuyer());
 		horario = this.horarioService.findOne(horarioId);
 		servicio = this.servicioService.findServiceByHorarioId(horarioId);
 

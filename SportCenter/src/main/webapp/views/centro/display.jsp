@@ -50,6 +50,22 @@
 </display:table>
 
 
+<script type="text/javascript">
+	function confirmAnadir(centroId) {
+		confirm=confirm('<spring:message code="centro.usuario.anadir"/>');
+		if (confirm)
+		  window.location.href ="centro/usuario/anadir.do?centroId=" + centroId;
+		  else
+			  window.location.href ="centro/usuario/display.do?centroId=" + centroId;
+	}
+</script>
+<security:authorize access="hasRole('USUARIO')">
+<jstl:if test="${!YaAnadido}">
+<input type="button" name="anadir"
+				value="<spring:message code="centro.anadir" />"
+				onclick="confirmAnadir(${row.id});" />
+</jstl:if>
+</security:authorize>
 
 <h2><spring:message code="centro.servicios.nombre.tabla" /></h2>
 	<jstl:if test="${serviciosEmpty}">

@@ -17,11 +17,11 @@ public class Usuario extends Actor {
 
 	// Relationships--------------------------------------------------------------
 
-	private Collection<Centro>	centros;
+	//private Collection<Centro>	centros;
 	private Collection<Reserva>	reservas;
 
 
-	@NotNull
+	/*@NotNull
 	@Valid
 	@ManyToMany
 	public Collection<Centro> getCentros() {
@@ -30,7 +30,7 @@ public class Usuario extends Actor {
 
 	public void setCentros(final Collection<Centro> centros) {
 		this.centros = centros;
-	}
+	}*/
 
 	@NotNull
 	@Valid

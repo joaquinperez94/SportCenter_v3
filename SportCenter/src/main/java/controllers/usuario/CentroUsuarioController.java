@@ -44,7 +44,9 @@ public class CentroUsuarioController extends AbstractController {
 		Centro centro = new Centro();
 		final Collection<Servicio> servicios;
 		final Collection<Comentario> comentarios;
+		Usuario usuario;
 
+		usuario = this.usuarioService.findByPrincipal();
 		centro = this.centroService.findOne(centroId);
 
 		//TODOS LOS ARTCULOS DE UN PERIDICO
@@ -57,6 +59,7 @@ public class CentroUsuarioController extends AbstractController {
 		result.addObject("comentarios", comentarios);
 		result.addObject("serviciosEmpty", servicios.size() == 0);
 		result.addObject("requestURI", "centro/usuario/display.do");
+		result.addObject("YaAnadido", centro.getUsuarios().contains(usuario));
 
 		return result;
 	}
@@ -95,5 +98,30 @@ public class CentroUsuarioController extends AbstractController {
 
 		return result;
 
+	}
+
+	//Añadir favoritos	------------------------------------------------------------
+	@RequestMapping(value = "/anadir", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int centroId) {
+		ModelAndView result;
+		final Centro centro;
+		Usuario usuario;
+
+		centro = this.centroService.findOne(centroId);
+		usuario = this.usuarioService.findByPrincipal();
+
+		this.centroService.anadirCentroFavorito(centro, usuario);
+
+		try {
+			//this.reservaService.delete(reserva);
+			result = new ModelAndView("redirect:my-center.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("centro/display");
+			//if (oops.getMessage().equals("error fecha cercana"))
+			//result = this.lista("reserva.commit.error.cercana");
+			//else
+			//result = this.lista("reserva.commit.error");
+		}
+		return result;
 	}
 }

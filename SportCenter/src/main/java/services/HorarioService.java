@@ -54,6 +54,7 @@ public class HorarioService {
 
 		this.gestorService.checkPrincipal();
 		Assert.isTrue(this.checkHoras(horario), "horas inicio final error");
+		//if (horario.getId() == 0)
 		Assert.isTrue(this.checkHorarioSolapado(horario), "horario solapado");
 		Assert.isTrue(this.checkHorarioDuracion(horario), "horario duración errónea");
 
@@ -182,6 +183,7 @@ public class HorarioService {
 
 		result = true;
 		horariosBD = this.findHorariosByDiaSemanaYServicioId(horario.getDiaSemana(), horario.getServicio().getId());
+		horariosBD.remove(horario);
 		final String horaInicio_s = horario.getHoraInicio() + "." + horario.getMinutosInicio();
 		final String horaFin_s = horario.getHoraFin() + "." + horario.getMinutosFin();
 

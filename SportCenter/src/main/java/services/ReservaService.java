@@ -96,6 +96,7 @@ public class ReservaService {
 		Assert.notNull(reserva);
 
 		this.usuarioService.checkPrincipal();
+		Assert.isTrue(this.checkFechaReserva(reserva), "fecha reserva pasado");
 		result = this.reservaRepository.save(reserva);
 		return result;
 	}
@@ -267,6 +268,47 @@ public class ReservaService {
 			// code block
 		}
 		return dia;
+	}
+
+	public boolean checkFechaReserva(final Reserva reserva) {
+		boolean result;
+		result = true;
+		Date dateReserva;
+		Date dateNow;
+		dateNow = new Date();
+		dateReserva = reserva.getFechaReserva();
+
+		final Calendar calNow = Calendar.getInstance();
+		final Calendar calReserva = Calendar.getInstance();
+		calNow.setTime(dateNow);
+		calReserva.setTime(dateReserva);
+
+		calNow.set(Calendar.HOUR_OF_DAY, 0);
+		calNow.set(Calendar.MINUTE, 0);
+		calNow.set(Calendar.SECOND, 0);
+		calNow.set(Calendar.MILLISECOND, 0);
+		dateNow = calNow.getTime();
+
+		if (dateReserva.before(dateNow))
+			result = false;
+		else if ((calNow.get(Calendar.DAY_OF_WEEK_IN_MONTH) == calReserva.get(Calendar.DAY_OF_WEEK_IN_MONTH)) && (calNow.get(Calendar.MONTH) == calReserva.get(Calendar.MONTH)) && (calNow.get(Calendar.YEAR) == calReserva.get(Calendar.YEAR))) {
+
+			final String horarioInicio = reserva.getHoraInicio();
+
+			final int horaInicio = Integer.parseInt(horarioInicio.split(":")[0]);
+			final int minutosInicio = Integer.parseInt(horarioInicio.split(":")[1]);
+			final int horaActual = calNow.get(Calendar.HOUR_OF_DAY);
+			final int minutosActual = calNow.get(Calendar.MINUTE);
+
+			if (horaInicio < horaActual)
+				result = false;
+			else if (horaInicio == horaActual)
+				if (minutosInicio < minutosActual)
+					result = false;
+
+		}
+
+		return result;
 	}
 
 }

@@ -196,11 +196,6 @@
 		<property name="direccion" value="Calle Pedrera 38" />
 		<property name="provincia" value="SEVILLA" />
 		<property name="email" value="joaquin@gmail.com" />
-		<property name="centros">
-			<list>
-
-			</list>
-		</property>
 		<property name="reservas">
 			<list>
 			</list>
@@ -215,11 +210,6 @@
 		<property name="direccion" value="Calle Horno 70" />
 		<property name="provincia" value="SEVILLA" />
 		<property name="email" value="paula@gmail.com" />
-		<property name="centros">
-			<list>
-
-			</list>
-		</property>
 		<property name="reservas">
 			<list>
 			</list>
@@ -234,11 +224,6 @@
 		<property name="direccion" value="Calle Velazquez 21" />
 		<property name="provincia" value="SEVILLA" />
 		<property name="email" value="enrique212@gmail.com" />
-		<property name="centros">
-			<list>
-
-			</list>
-		</property>
 		<property name="reservas">
 			<list>
 			</list>

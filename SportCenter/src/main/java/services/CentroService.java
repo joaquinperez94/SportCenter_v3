@@ -29,6 +29,8 @@ public class CentroService {
 	GestorService				gestorService;
 	@Autowired
 	HorarioService				horarioService;
+	@Autowired
+	UsuarioService				usuarioService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -126,9 +128,22 @@ public class CentroService {
 
 	public Collection<Centro> findCentrosByUsuario(final int usuarioId) {
 		Collection<Centro> result;
-
-		result = this.centroRepository.findCentrosByGestor(usuarioId);
+		result = new ArrayList<>(this.centroRepository.findCentrosByUsuario(usuarioId));
 		return result;
+	}
+
+	public void anadirCentroFavorito(final Centro centro, final Usuario usuario) {
+		Collection<Centro> centrosUsuarios;
+		Collection<Usuario> usuariosCentro;
+		usuariosCentro = new ArrayList<>(this.usuarioService.findUsuariosByCentroId(centro.getId()));
+		centrosUsuarios = new ArrayList<>(this.centroRepository.findCentrosByUsuario(usuario.getId()));
+		Assert.isTrue(!centrosUsuarios.contains(centro), "Ya lo contiene");
+		usuariosCentro.add(usuario);
+		centrosUsuarios.add(centro);
+		//usuario.setCentros(centrosUsuarios);
+		centro.setUsuarios(usuariosCentro);
+		this.usuarioService.save(usuario);
+		this.centroRepository.save(centro);
 	}
 
 }

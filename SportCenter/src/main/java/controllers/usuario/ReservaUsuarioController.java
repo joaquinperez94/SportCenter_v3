@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.HorarioService;
 import services.ReservaService;
 import services.ServicioService;
 import services.UsuarioService;
@@ -37,9 +36,6 @@ public class ReservaUsuarioController {
 
 	@Autowired
 	private UsuarioService	usuarioService;
-
-	@Autowired
-	private HorarioService	horarioService;
 
 
 	// Display ----------------------------------------------------------------
@@ -129,14 +125,10 @@ public class ReservaUsuarioController {
 				this.reservaService.save(reserva);
 				result = new ModelAndView("redirect:/reserva/usuario/list.do?");
 			} catch (final Throwable oops) {
-				//if (oops.getMessage().equals("horario solapado"))
-				//result = this.createEditModelAndView(horario, "request.horario.solapado");
-				//else if (oops.getMessage().equals("horas inicio final error"))
-				//result = this.createEditModelAndView(horario, "request.horario.inicio.final.error");
-				//else if (oops.getMessage().equals("horario duración errónea"))
-				//result = this.createEditModelAndView(horario, "request.horario.duracion.novalida");
-				//else
-				result = this.createEditModelAndView(reserva, "horario.commit.error");
+				if (oops.getMessage().equals("fecha reserva pasado"))
+					result = this.createEditModelAndView(reserva, "request.reserva.pasado");
+				else
+					result = this.createEditModelAndView(reserva, "horario.commit.error");
 			}
 		return result;
 	}
@@ -184,6 +176,7 @@ public class ReservaUsuarioController {
 		result = new ModelAndView("reserva/edit");
 		result.addObject("reserva", reserva);
 		result.addObject("message", message);
+		result.addObject("servicioId", reserva.getServicio().getId());
 		//result.addObject("requestURI", "horario/edit.do");
 
 		return result;
