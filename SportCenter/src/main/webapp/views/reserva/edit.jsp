@@ -28,6 +28,7 @@
 	<form:hidden path="version" />
 	<form:hidden path="servicio" />
 	<form:hidden path="usuario" />
+	<form:hidden path="activa" />
 	
 	
 	<html lang="en">

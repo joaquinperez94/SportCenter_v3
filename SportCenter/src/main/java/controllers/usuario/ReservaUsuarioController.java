@@ -122,11 +122,14 @@ public class ReservaUsuarioController {
 			result = this.createEditModelAndView(reserva);
 		else
 			try {
+				Assert.isTrue(reserva.getFechaReserva() != null, "fecha reserva vacia");
 				this.reservaService.save(reserva);
 				result = new ModelAndView("redirect:/reserva/usuario/list.do?");
 			} catch (final Throwable oops) {
 				if (oops.getMessage().equals("fecha reserva pasado"))
 					result = this.createEditModelAndView(reserva, "request.reserva.pasado");
+				else if (oops.getMessage().equals("fecha reserva vacia"))
+					result = this.createEditModelAndView(reserva, "request.reserva.vaciafecha");
 				else
 					result = this.createEditModelAndView(reserva, "horario.commit.error");
 			}

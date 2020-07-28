@@ -38,6 +38,7 @@
 		<security:authorize access="hasRole('GESTOR')">
 			<li><a class="fNiv" href="centro/gestor/list.do"><spring:message code="pagina.principal.gestor.centros" /></a></li>
 			<li><a class="fNiv" href="centro/gestor/my-center.do"><spring:message code="pagina.principal.gestor.miCentro" /></a></li>
+			<li><a class="fNiv" href="reserva/gestor/list.do"><spring:message code="pagina.principal.gestor.reservas" /></a></li>
 		</security:authorize>
 		
 		

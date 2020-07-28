@@ -21,13 +21,14 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
+<security:authorize access="hasRole('GESTOR')">
 <input type="button" name="create"
 			value="<spring:message code="horario.crear" />"
 			onclick="javascript: window.location.replace('horario/gestor/create.do?servicioId=${servicioId}');" />
-			
+
 <br/>
 <br/>
+</security:authorize>		
 <h2><spring:message code="horario.titulo.lunes" /></h2>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="horariosLunes" requestURI="${requestURI}" id="row">

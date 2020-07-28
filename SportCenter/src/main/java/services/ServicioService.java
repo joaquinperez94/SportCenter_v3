@@ -91,6 +91,14 @@ public class ServicioService {
 		return servicio;
 	}
 
+	public Collection<Servicio> findServiciosByGestorId(final int gestorId) {
+		Assert.isTrue(gestorId != 0);
+		Collection<Servicio> result;
+		result = new ArrayList<Servicio>();
+		result = this.servicioRepository.findServiciosByGestorId(gestorId);
+		return result;
+	}
+
 	public Servicio reconstruct(final Servicio servicio, final BindingResult bindingResult) {
 		Servicio result;
 		final Servicio servicioBd;

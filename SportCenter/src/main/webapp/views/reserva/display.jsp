@@ -57,6 +57,7 @@
 </display:table>
 
 
+<security:authorize access="hasRole('USUARIO')">
 <script type="text/javascript">
 	function confirmDelete(reservaId) {
 		confirm=confirm('<spring:message code="reserva.confirmar.cancelación"/>');
@@ -71,3 +72,23 @@
 <input type="button" name="delete"
 				value="<spring:message code="reserva.cancelar" />"
 				onclick="confirmDelete(${row.id});" />
+				
+</security:authorize>
+
+<security:authorize access="hasRole('GESTOR')">
+<script type="text/javascript">
+	function confirmDelete(reservaId) {
+		confirm=confirm('<spring:message code="reserva.confirmar.cancelación"/>');
+		if (confirm)
+		  window.location.href ="reserva/gestor/cancelar.do?reservaId=" + reservaId;
+		  else
+			  window.location.href ="reserva/gestor/list.do?d-16544-p=1";
+	}
+</script>
+
+	
+<input type="button" name="cancelar"
+				value="<spring:message code="reserva.cancelar" />"
+				onclick="confirmDelete(${row.id});" />
+				
+</security:authorize>

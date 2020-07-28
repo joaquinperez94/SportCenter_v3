@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ReservaRepository;
+import domain.Gestor;
 import domain.Horario;
 import domain.Reserva;
 import domain.Servicio;
@@ -49,6 +51,7 @@ public class ReservaService {
 
 		reserva.setServicio(servicio);
 		reserva.setUsuario(usuarioPrincipal);
+		reserva.setActiva(true);
 
 		return reserva;
 	}
@@ -307,6 +310,50 @@ public class ReservaService {
 					result = false;
 
 		}
+
+		return result;
+	}
+
+	public void cancelarReservaGestor(final int reservaId) {
+		final Reserva reserva;
+		Gestor gestor;
+		Collection<Servicio> serviciosGestor;
+		serviciosGestor = new ArrayList<>();
+
+		reserva = this.reservaRepository.findOne(reservaId);
+		gestor = this.gestorService.findByPrincipal();
+		serviciosGestor = new ArrayList<>(this.servicioService.findServiciosByGestorId(gestor.getId()));
+		Assert.isTrue(serviciosGestor.contains(reserva.getServicio()));
+		reserva.setActiva(false);
+		this.reservaRepository.save(reserva);
+	}
+
+	public HashMap<String, Collection<Reserva>> reservasDeServiciosGestor(final int gestorId) {
+		HashMap<String, Collection<Reserva>> result;
+		Collection<Reserva> reservasHoy;
+		Collection<Reserva> reservasOtrosDias;
+		Collection<Servicio> serviciosGestor;
+		final Calendar calNow = Calendar.getInstance();
+		calNow.set(Calendar.HOUR_OF_DAY, 0);
+		calNow.set(Calendar.MINUTE, 0);
+		calNow.set(Calendar.SECOND, 0);
+		calNow.set(Calendar.MILLISECOND, 0);
+
+		result = new HashMap<>();
+		reservasHoy = new ArrayList<>();
+		reservasOtrosDias = new ArrayList<>();
+		serviciosGestor = new ArrayList<>(this.servicioService.findServiciosByGestorId(gestorId));
+		for (final Servicio s : serviciosGestor)
+			for (final Reserva r : s.getReservas()) {
+				final Calendar calReserva = Calendar.getInstance();
+				calReserva.setTime(r.getFechaReserva());
+				if (calNow == calReserva)
+					reservasHoy.add(r);
+				else
+					reservasOtrosDias.add(r);
+			}
+		result.put("hoy", reservasHoy);
+		result.put("otros", reservasOtrosDias);
 
 		return result;
 	}

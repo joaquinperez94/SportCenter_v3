@@ -49,11 +49,13 @@
 		<security:intercept-url pattern="/centro/gestor/**" access="hasRole('GESTOR')"/>	
 		<security:intercept-url pattern="/servicio/gestor/**" access="hasRole('GESTOR')"/>	
 		<security:intercept-url pattern="/horario/gestor/**" access="hasRole('GESTOR')"/>	
+		<security:intercept-url pattern="/reserva/gestor/**" access="hasRole('GESTOR')"/>	
 		
 		<security:intercept-url pattern="/centro/usuario/**" access="hasRole('USUARIO')"/>
 		<security:intercept-url pattern="/perfil/usuario/**" access="hasRole('USUARIO')"/>	
 		<security:intercept-url pattern="/servicio/usuario/**" access="hasRole('USUARIO')"/>	
-		<security:intercept-url pattern="/reserva/usuario/**" access="hasRole('USUARIO')"/>	
+		<security:intercept-url pattern="/reserva/usuario/**" access="hasRole('USUARIO')"/>
+		<security:intercept-url pattern="/horario/usuario/**" access="hasRole('USUARIO')"/>		
 			
 		
 		

@@ -11,7 +11,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-//import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,7 +24,7 @@ public class Reserva extends DomainEntity {
 	private String	horaInicio;
 	private String	horaFin;
 	private String	comentario;
-	//private String	estado;
+	private boolean	activa;
 
 
 	@NotNull
@@ -77,14 +76,13 @@ public class Reserva extends DomainEntity {
 		this.comentario = comentario;
 	}
 
-	/*@Pattern(regexp = "(Activa)|(Cancelada)")
-	public String getEstado() {
-		return this.estado;
+	public boolean isActiva() {
+		return this.activa;
 	}
 
-	public void setEstado(final String estado) {
-		this.estado = estado;
-	}*/
+	public void setActiva(final boolean activa) {
+		this.activa = activa;
+	}
 
 
 	// Relationships--------------------------------------------------------------
