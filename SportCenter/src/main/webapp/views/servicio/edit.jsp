@@ -29,6 +29,7 @@
 	<form:hidden path="centro" />
 	<form:hidden path="reservas" />
 	<form:hidden path="horarios" />
+	<form:hidden path="imagen" />
 	
 	
 	<B><acme:typeserviceselect code="servicio.nombre" path="nombre"/></B>

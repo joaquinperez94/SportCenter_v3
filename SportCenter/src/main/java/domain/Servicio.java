@@ -22,7 +22,7 @@ public class Servicio extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private String	nombre;
-	private String	imagen;
+	private byte[]	imagen;
 	private String	descripcion;
 	private double	precio;
 	private double	duración;
@@ -37,11 +37,11 @@ public class Servicio extends DomainEntity {
 		this.nombre = nombre;
 	}
 
-	public String getImagen() {
+	public byte[] getImagen() {
 		return this.imagen;
 	}
 
-	public void setImagen(final String imagen) {
+	public void setImagen(final byte[] imagen) {
 		this.imagen = imagen;
 	}
 

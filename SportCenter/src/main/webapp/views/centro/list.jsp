@@ -21,6 +21,41 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
+
+<div id="pagination">
+
+    <jstl:url value="centro/gestor/my-center.do" var="prev">
+        <jstl:param name="page" value="${page-1}"/>
+    </jstl:url>
+    <jstl:if test="${page > 1}">
+        <a href="<jstl:out value="${prev}" />" class="pn prev">Prev</a>
+    </jstl:if>
+
+    <jstl:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
+        <jstl:choose>
+            <jstl:when test="${page == i.index}">
+                <span>${i.index}</span>
+            </jstl:when>
+            <jstl:otherwise>
+                <jstl:url value="centro/gestor/my-center.do" var="url">
+                    <jstl:param name="page" value="${i.index}"/>
+                </jstl:url>
+                <a href='<jstl:out value="${url}" />'>${i.index}</a>
+            </jstl:otherwise>
+        </jstl:choose>
+    </jstl:forEach>
+    <jstl:url value="/centro/gestor/my-center.do" var="next">
+        <jstl:param name="page" value="${page + 1}"/>
+    </jstl:url>
+    <jstl:if test="${page + 1 <= maxPages}">
+        <a href='<jstl:out value="${next}" />' class="pn next">Next</a>
+    </jstl:if>
+</div>
+
+<jstl:forEach var="x" items="${centros}">
+				<jstl:out value="${x.nombre}" />
+			</jstl:forEach>
+
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="centros" requestURI="${requestURI}" id="row">
 

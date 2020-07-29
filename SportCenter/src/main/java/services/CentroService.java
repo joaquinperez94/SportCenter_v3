@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -112,10 +115,19 @@ public class CentroService {
 		return result;
 	}
 
-	public Collection<Centro> findCentrosByGestor(final int gestorId) {
+	public Collection<Centro> findCentrosByGestorSinPage(final int gestorId) {
 		Collection<Centro> result;
 
-		result = this.centroRepository.findCentrosByGestor(gestorId);
+		result = this.centroRepository.findCentrosByGestorSinPage(gestorId);
+		return result;
+	}
+
+	public Page<Centro> findCentrosByGestor(final int gestorId, final int numPagina, final int totalPorPagina) {
+
+		Page<Centro> result;
+		final Pageable pageable = new PageRequest(numPagina, totalPorPagina);
+		result = this.centroRepository.findCentrosByGestor(gestorId, pageable);
+		//result = resPage.getContent();
 		return result;
 	}
 
