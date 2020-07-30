@@ -1,7 +1,6 @@
 
 package controllers.gestor;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,17 +109,17 @@ public class ServicioGestorController extends AbstractController {
 		final Servicio servicio;
 		Centro centro;
 		Assert.notNull(servicioId);
-		Collection<Centro> centrosOfGestor;
+		final Collection<Centro> centrosOfGestor;
 		Gestor gestor;
 
 		gestor = this.gestorService.findByPrincipal();
 		centro = new Centro();
 
-		centrosOfGestor = new ArrayList<>(this.centroService.findCentrosByGestor(gestor.getId()));
+		//centrosOfGestor = new ArrayList<>(this.centroService.findCentrosByGestor(gestor.getId()));
 		servicio = this.servicioService.findOne(servicioId);
 		centro = this.centroService.findCentroByServiceId(servicioId);
 
-		Assert.isTrue(centrosOfGestor.contains(centro));
+		//Assert.isTrue(centrosOfGestor.contains(centro));
 
 		result = this.createEditModelAndView(servicio);
 		return result;

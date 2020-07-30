@@ -52,9 +52,16 @@
     </jstl:if>
 </div>
 
-<jstl:forEach var="x" items="${centros}">
-				<jstl:out value="${x.nombre}" />
-			</jstl:forEach>
+<div class="row my-5">
+	<jstl:forEach var="x" items="${centros}">	
+		<div class="col-md-4">
+			<h3><jstl:out value="${x.nombre}" /></h3>
+			<hr>
+			<img src="images/logo2.jpg" alt="..." class="rounded img-fluid">
+			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis dicta aliquam optio placeat amet. Incidunt, tempora pariatur, corporis ut, voluptatum sequi ullam ratione error nam delectus magni accusantium voluptatem consequuntur.</p>
+		</div>		
+	</jstl:forEach>
+</div>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="centros" requestURI="${requestURI}" id="row">
@@ -95,9 +102,11 @@
 		<jstl:if test="${mostrarBotonGestor}">
 		
 		<display:column sortable="false">
-			<input type="button" name="edit"
+			<!--  <input type="button" name="edit"
 			value="<spring:message code="centro.editar" />"
-			onclick="javascript: window.location.replace('centro/gestor/edit.do?centroId=${row.id}');" />
+			onclick="javascript: window.location.replace('centro/gestor/edit.do?centroId=${row.id}');" />-->
+			
+			<button type="button" class="btn btn-primary">Primary</button>
 		</display:column>
 		</jstl:if>
 	</security:authorize>	
@@ -107,6 +116,8 @@
 <security:authorize access="hasRole('GESTOR')">
 <jstl:if test="${mostrarBotonGestor}">
 	<div>
+	
+	
 		<input type="button" name="edit"
 			value="<spring:message code="centro.crear" />"
 			onclick="javascript: window.location.replace('centro/gestor/create.do?centroId=${row.id}');" />
