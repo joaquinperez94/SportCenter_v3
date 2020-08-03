@@ -22,25 +22,101 @@
 
 
 
-<div id="pagination">
+
+
+
+<div class="container">
+<security:authorize access="hasRole('GESTOR')">
+<jstl:if test="${mostrarBotonGestor}">
+	<div>
+			<input type="button" class="btn btn-primary mt-auto" name="edit"
+			value="<spring:message code="centro.crear" />"
+			onclick="javascript: window.location.replace('centro/gestor/create.do?centroId=${row.id}');" />
+	</div>
+	</jstl:if>
+</security:authorize>
+
+<div class="row py-5">
+	<jstl:forEach var="x" items="${centros}">
+		<div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch mt-5">
+			<div class="card" style="width: 28rem;">
+  				<img class="card-img-top"  src="data:image/jpeg;base64,${x.imagen64}">
+  				<div class="card-body d-flex flex-column">
+    				<h5 class="card-title">${x.nombre}</h5>
+    				<p class="card-text">${x.descripcion}</p>
+    				<security:authorize access="hasRole('GESTOR')">
+    				
+					<jstl:if test="${mostrarBotonGestor}">
+    				<div class="row mt-auto form-row text-center">
+    				<div class="col-6">
+    				<input type="button" class="btn btn-primary mt-auto btn-md btn-block font-weight-bold" name="edit"
+						value="<spring:message code="centro.editar" />"
+						onclick="location.href='centro/gestor/edit.do?centroId=${x.id}'" />
+						
+						</div>
+						<div class="col-6">
+						<input type="button" class="btn btn-primary mt-auto btn-md btn-block font-weight-bold" name="display"
+						value="<spring:message code="centro.ver" />"
+						onclick="location.href='centro/gestor/display.do?centroId=${x.id}'" />
+    				</div>
+    				</div>
+    				</jstl:if>
+    				<jstl:if test="${!mostrarBotonGestor}">
+    				<div class="row mt-auto form-row text-center">
+    				<div class="col-12">
+						<input type="button" class="btn btn-primary mt-auto btn-md btn-block font-weight-bold" name="display"
+						value="<spring:message code="centro.ver" />"
+						onclick="location.href='centro/gestor/display.do?centroId=${x.id}'" />
+    				</div>
+    				</div>
+    				</jstl:if>
+
+    				</security:authorize>
+    				<security:authorize access="hasRole('USUARIO')">
+						    				<div class="row mt-auto form-row text-center">
+    				<div class="col-12">
+						<input type="button" class="btn btn-primary mt-auto btn-md btn-block font-weight-bold" name="display"
+						value="<spring:message code="centro.ver" />"
+						onclick="location.href='centro/USUARIO/display.do?centroId=${x.id}'" />
+    				</div>
+    				</div>
+    				</security:authorize>
+    				
+
+  				</div>
+			</div>
+		</div>
+	</jstl:forEach>
+</div>
+
+<ul class="pagination justify-content-center">
 
     <jstl:url value="centro/gestor/my-center.do" var="prev">
         <jstl:param name="page" value="${page-1}"/>
     </jstl:url>
     <jstl:if test="${page > 1}">
-        <a href="<jstl:out value="${prev}" />" class="pn prev">Prev</a>
+        <!-- <a href="<jstl:out value="${prev}" />" class="pn prev">Prev</a> -->
+        <li class="page-item disabled"><a class="page-link" href="${prev}">Previous</a></li>
     </jstl:if>
 
     <jstl:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
         <jstl:choose>
             <jstl:when test="${page == i.index}">
-                <span>${i.index}</span>
+                <!-- <span>${i.index}</span> -->
+                <li class="page-item active">
+                <span class="page-link">
+        ${i.index}
+        <span class="sr-only">(current)</span>
+      </span>
+      </li>
+ 
             </jstl:when>
             <jstl:otherwise>
                 <jstl:url value="centro/gestor/my-center.do" var="url">
                     <jstl:param name="page" value="${i.index}"/>
                 </jstl:url>
-                <a href='<jstl:out value="${url}" />'>${i.index}</a>
+                <!-- <a href='<jstl:out value="${url}" />'>${i.index}</a> -->
+                 <li class="page-item"><a class="page-link" href="${url}">${i.index}</a></li>
             </jstl:otherwise>
         </jstl:choose>
     </jstl:forEach>
@@ -48,84 +124,20 @@
         <jstl:param name="page" value="${page + 1}"/>
     </jstl:url>
     <jstl:if test="${page + 1 <= maxPages}">
-        <a href='<jstl:out value="${next}" />' class="pn next">Next</a>
+        <!-- <a href='<jstl:out value="${next}" />' class="pn next">Next</a> -->
+        <li class="page-item"><a class="page-link" href="${next}">Next</a></li>
     </jstl:if>
+</ul>
+
+
 </div>
 
-<div class="row my-5">
-	<jstl:forEach var="x" items="${centros}">	
-		<div class="col-md-4">
-			<h3><jstl:out value="${x.nombre}" /></h3>
-			<hr>
-			<img src="images/centros/RQSsJL2yQ.JPG" alt="..." class="rounded img-fluid">
-			<!--   <img src="https://storage.googleapis.com/imagenes_sport/logo.JPG" alt="..." class="rounded img-fluid">-->
-			<!--  <img src="images/logo2.jpg" alt="..." class="rounded img-fluid">-->
-			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis dicta aliquam optio placeat amet. Incidunt, tempora pariatur, corporis ut, voluptatum sequi ullam ratione error nam delectus magni accusantium voluptatem consequuntur.</p>
-		</div>		
-	</jstl:forEach>
-</div>
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="centros" requestURI="${requestURI}" id="row">
-
-	<!-- ATRIBUTOS -->
-
-
-	<spring:message code="centro.nombre" var="nombreHeader" />
-	<display:column property="nombre" title="${nombreHeader}" sortable="true"/>
-	
-	<spring:message code="centro.direccion" var="direccionHeader" />
-	<display:column property="direccion" title="${direccionHeader}" sortable="true" />
-
-	<spring:message code="centro.tipo" var="tipoHeader" />
-	<display:column property="tipo" title="${tipoHeader}" sortable="true"/>
-
-
-	<security:authorize access="hasRole('USUARIO')">	
-	<spring:message code="centro.ver" var="verHeader"></spring:message>
-		<display:column title="${verHeader}" sortable="true">
-		<spring:url value="centro/usuario/display.do" var="verURL">
-		<spring:param name="centroId" value="${row.id}"/>
-		</spring:url>
-		<a href="${verURL}"><spring:message code="centro.ver"/></a>
-	</display:column>
-	</security:authorize>
-
-	<security:authorize access="hasRole('GESTOR')">	
-	<spring:message code="centro.ver" var="verHeader"></spring:message>
-		<display:column title="${verHeader}" sortable="true">
-		<spring:url value="centro/gestor/display.do" var="verURL">
-		<spring:param name="centroId" value="${row.id}"/>
-		</spring:url>
-		<a href="${verURL}"><spring:message code="centro.ver"/></a>
-	</display:column>
 	
 
-		<jstl:if test="${mostrarBotonGestor}">
-		
-		<display:column sortable="false">
-			  <input type="button" name="edit"
-			value="<spring:message code="centro.editar" />"
-			onclick="javascript: window.location.replace('centro/gestor/edit.do?centroId=${row.id}');" />
-			
-			<button type="button" class="btn btn-primary">Primary</button>
-		</display:column>
-		</jstl:if>
-	</security:authorize>	
-		
- </display:table>
 
-<security:authorize access="hasRole('GESTOR')">
-<jstl:if test="${mostrarBotonGestor}">
-	<div>
-	
-	
-		<input type="button" name="edit"
-			value="<spring:message code="centro.crear" />"
-			onclick="javascript: window.location.replace('centro/gestor/create.do?centroId=${row.id}');" />
-	</div>
-	</jstl:if>
-</security:authorize>
+
+
 
 
 

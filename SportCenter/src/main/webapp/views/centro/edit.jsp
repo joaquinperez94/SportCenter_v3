@@ -32,6 +32,8 @@
 	<form:hidden path="usuarios" />
 	<form:hidden path="imagen" />
 	
+	
+	
 
 	<!-- ATRIBUTOS -->
 	<B><acme:textbox code="centro.nombre" path="nombre" /></B>

@@ -18,6 +18,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -86,6 +87,15 @@ public class CentroService {
 		//final Path path = Paths.get(this.context.getRealPath("/"));
 		//final String absolutePath = this.context.getRealPath("resources/uploads");
 
+		final byte[] img = file.getBytes();
+		centro.setImagen(img);
+		//final byte[] img64 = Base64.encode(img);
+		//final String photo64 = new String(img64);
+
+		final byte[] encodeBase64 = Base64.encode(img);
+		final String base64DataString = new String(encodeBase64, "UTF-8");
+		centro.setImagen64(base64DataString);
+
 		final String idImagen = this.getSaltString();
 		final String extension = FilenameUtils.getExtension(file.getOriginalFilename());
 		//final String relativeFolder = File.separator + "images" + File.separator + "centros" + File.separator;
@@ -94,24 +104,25 @@ public class CentroService {
 		final File folder = new File(relativeFolder);
 		final String filename = relativeFolder + idImagen + "." + extension;
 		final BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
-
-		if (!file.isEmpty()) {
-			final boolean creada = folder.mkdirs();
-			//CREACION
-			if (centro.getId() == 0 || centro.getImagen().equals("https://www.csqusa.com/wp-content/themes/dante/images/default-thumb.png")) {
-				final File destination = new File(filename);
-				ImageIO.write(src, extension, destination);
-				centro.setImagen(filename);
-			} else {
-				//eliminamos fichero
-				final File file2 = new File(centro.getImagen());
-				file2.delete();
-				final File destination = new File(filename);
-				ImageIO.write(src, extension, destination);
-				centro.setImagen(filename);
-			}
-		} else if (centro.getId() == 0)
-			centro.setImagen("https://www.csqusa.com/wp-content/themes/dante/images/default-thumb.png");
+		/*
+		 * if (!file.isEmpty()) {
+		 * final boolean creada = folder.mkdirs();
+		 * //CREACION
+		 * if (centro.getId() == 0 || centro.getImagen().equals("https://www.csqusa.com/wp-content/themes/dante/images/default-thumb.png")) {
+		 * final File destination = new File(filename);
+		 * ImageIO.write(src, extension, destination);
+		 * centro.setImagen(filename);
+		 * } else {
+		 * //eliminamos fichero
+		 * final File file2 = new File(centro.getImagen());
+		 * file2.delete();
+		 * final File destination = new File(filename);
+		 * ImageIO.write(src, extension, destination);
+		 * centro.setImagen(filename);
+		 * }
+		 * } else if (centro.getId() == 0)
+		 * centro.setImagen("https://www.csqusa.com/wp-content/themes/dante/images/default-thumb.png");
+		 */
 
 		Assert.notNull(centro);
 
