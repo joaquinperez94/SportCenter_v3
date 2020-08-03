@@ -129,7 +129,7 @@ public class CentroGestorController extends AbstractController {
 				result = new ModelAndView("redirect:my-center.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(centro, "centro.commit.error");
-				result = this.listPorGestor();
+				//result = this.listPorGestor();
 			}
 		}
 

@@ -14,10 +14,10 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -200,7 +200,8 @@ public class CentroService {
 		centro.setUsuarios(usuariosCentro);
 		this.usuarioService.save(usuario);
 		this.centroRepository.save(centro);
-		
+	}
+
 	public String getSaltString() {
 		final String SALTCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		final StringBuilder salt = new StringBuilder();
