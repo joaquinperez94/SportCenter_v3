@@ -315,14 +315,14 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<version>2.11.1</version>
-			<systemPath>E:\proyecto_workspace\jackson-core-2.11.1.jar</systemPath>
+			<systemPath>${project.basedir}/extra\jackson-core-2.11.1.jar</systemPath>
 			<scope>system</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<scope>system</scope>
-			<systemPath>E:\proyecto_workspace\jackson-databind-2.11.1.jar</systemPath>
+			<systemPath>${project.basedir}/extra\jackson-databind-2.11.1.jar</systemPath>
 			<version>2.11.1</version>
 		</dependency>
 		<dependency>
@@ -330,7 +330,20 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.11.1</version>
 			<scope>system</scope>
-			<systemPath>E:\proyecto_workspace\jackson-annotations-2.11.1.jar</systemPath>
+			<systemPath>${project.basedir}/extra\jackson-annotations-2.11.1.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/extra/commons-fileupload-1.4.jar</systemPath>
 		</dependency>
 	</dependencies>
 

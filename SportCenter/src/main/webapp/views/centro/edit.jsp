@@ -21,7 +21,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="centro/gestor/edit.do" modelAttribute="centro">
+<form:form action="centro/gestor/edit.do" enctype="multipart/form-data" modelAttribute="centro">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -30,7 +30,7 @@
 	<form:hidden path="comentarios" />
 	<form:hidden path="servicios" />
 	<form:hidden path="usuarios" />
-
+	<form:hidden path="imagen" />
 	
 
 	<!-- ATRIBUTOS -->
@@ -43,7 +43,10 @@
 	<B><acme:typecenterselect code="centro.tipo" path="tipo"/></B>
 	<br />
 	
-	<!-- CREACIÓPN HORARIO -->
+	Please select a file to upload : <input type="file" name="file" />
+
+	
+	
 	
 	
 

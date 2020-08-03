@@ -22,6 +22,7 @@ public class Centro extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private String	nombre;
+	private String	imagen;
 	private String	descripcion;
 	private String	tipo;
 	private String	direccion;
@@ -121,6 +122,14 @@ public class Centro extends DomainEntity {
 
 	public void setUsuarios(final Collection<Usuario> usuarios) {
 		this.usuarios = usuarios;
+	}
+
+	public String getImagen() {
+		return this.imagen;
+	}
+
+	public void setImagen(final String imagen) {
+		this.imagen = imagen;
 	}
 
 }

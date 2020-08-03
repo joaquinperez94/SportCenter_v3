@@ -57,7 +57,9 @@
 		<div class="col-md-4">
 			<h3><jstl:out value="${x.nombre}" /></h3>
 			<hr>
-			<img src="images/logo2.jpg" alt="..." class="rounded img-fluid">
+			<img src="images/centros/RQSsJL2yQ.JPG" alt="..." class="rounded img-fluid">
+			<!--   <img src="https://storage.googleapis.com/imagenes_sport/logo.JPG" alt="..." class="rounded img-fluid">-->
+			<!--  <img src="images/logo2.jpg" alt="..." class="rounded img-fluid">-->
 			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis dicta aliquam optio placeat amet. Incidunt, tempora pariatur, corporis ut, voluptatum sequi ullam ratione error nam delectus magni accusantium voluptatem consequuntur.</p>
 		</div>		
 	</jstl:forEach>
@@ -102,9 +104,9 @@
 		<jstl:if test="${mostrarBotonGestor}">
 		
 		<display:column sortable="false">
-			<!--  <input type="button" name="edit"
+			  <input type="button" name="edit"
 			value="<spring:message code="centro.editar" />"
-			onclick="javascript: window.location.replace('centro/gestor/edit.do?centroId=${row.id}');" />-->
+			onclick="javascript: window.location.replace('centro/gestor/edit.do?centroId=${row.id}');" />
 			
 			<button type="button" class="btn btn-primary">Primary</button>
 		</display:column>
