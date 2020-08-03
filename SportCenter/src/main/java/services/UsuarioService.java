@@ -58,7 +58,7 @@ public class UsuarioService {
 		authority.setAuthority("USUARIO");
 		userAccount.addAuthority(authority);
 		result.setUserAccount(userAccount);
-		result.setCentros(centros);
+		//result.setCentros(centros);
 		result.setReservas(reservas);
 
 		return result;
@@ -134,6 +134,14 @@ public class UsuarioService {
 		Assert.isTrue(authorities.contains(auth));
 	}
 
+	public Collection<Usuario> findUsuariosByCentroId(final int centroId) {
+		Collection<Usuario> result;
+		result = new ArrayList<>();
+		Assert.notNull(centroId);
+		result = this.usuarioRepository.findUsuariosByCentroId(centroId);
+		return result;
+	}
+
 	public UsuarioForm reconstruct(final UsuarioForm usuarioForm, final BindingResult binding) {
 
 		UsuarioForm result = null;
@@ -154,7 +162,7 @@ public class UsuarioService {
 			centros = new ArrayList<>();
 			reservas = new ArrayList<>();
 
-			usuarioForm.getUsuario().setCentros(centros);
+			//usuarioForm.getUsuario().setCentros(centros);
 			usuarioForm.getUsuario().setReservas(reservas);
 
 			result = usuarioForm;
@@ -165,7 +173,7 @@ public class UsuarioService {
 			usuarioForm.getUsuario().setId(usuarioBD.getId());
 			usuarioForm.getUsuario().setVersion(usuarioBD.getVersion());
 			usuarioForm.getUsuario().setUserAccount(usuarioBD.getUserAccount());
-			usuarioForm.getUsuario().setCentros(usuarioBD.getCentros());
+			//usuarioForm.getUsuario().setCentros(usuarioBD.getCentros());
 			usuarioForm.getUsuario().setReservas(usuarioBD.getReservas());
 
 			result = usuarioForm;

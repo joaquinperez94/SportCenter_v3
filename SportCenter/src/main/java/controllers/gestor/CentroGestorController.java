@@ -3,6 +3,8 @@ package controllers.gestor;
 
 import java.util.Collection;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -10,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CentroService;
@@ -90,14 +93,18 @@ public class CentroGestorController extends AbstractController {
 
 	// Save -----------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final Centro centro, final BindingResult binding) {
+	public ModelAndView save(final Centro centro, @RequestParam(required = false, defaultValue = "None") final MultipartFile file, final BindingResult binding, final HttpServletRequest request) {
 		ModelAndView result;
+		final String path = request.getContextPath();
+
+		final String fileName2 = request.getSession().getServletContext().getRealPath("/");
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(centro, "centro.mio");
 		else
 			try {
-				this.centroService.save(centro);
+
+				this.centroService.save(centro, file, path);
 				result = new ModelAndView("redirect:my-center.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(centro, "centro.commit.error");

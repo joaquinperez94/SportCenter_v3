@@ -196,11 +196,6 @@
 		<property name="direccion" value="Calle Pedrera 38" />
 		<property name="provincia" value="SEVILLA" />
 		<property name="email" value="joaquin@gmail.com" />
-		<property name="centros">
-			<list>
-
-			</list>
-		</property>
 		<property name="reservas">
 			<list>
 			</list>
@@ -215,11 +210,6 @@
 		<property name="direccion" value="Calle Horno 70" />
 		<property name="provincia" value="SEVILLA" />
 		<property name="email" value="paula@gmail.com" />
-		<property name="centros">
-			<list>
-
-			</list>
-		</property>
 		<property name="reservas">
 			<list>
 			</list>
@@ -234,11 +224,6 @@
 		<property name="direccion" value="Calle Velazquez 21" />
 		<property name="provincia" value="SEVILLA" />
 		<property name="email" value="enrique212@gmail.com" />
-		<property name="centros">
-			<list>
-
-			</list>
-		</property>
 		<property name="reservas">
 			<list>
 			</list>
@@ -248,6 +233,7 @@
 	<!--************************** Centro **********************************-->
 	<bean id="centro1" class="domain.Centro">
 		<property name="nombre" value="Polideportivo Municipal Paradas" />
+		<property name="imagen" value="" />
 		<property name="descripcion" value="El complejo polideportivo se ubica en un solar situado entre las calles Pablo Neruda y Pedro Salinas, al Noroeste de la población, junto al recinto ferial. " />
 		<property name="tipo" value="Polideportivo" />
 		<property name="direccion" value="Calle Pablo Neruda 32" />
@@ -272,6 +258,7 @@
 	
 	<bean id="centro2" class="domain.Centro">
 		<property name="nombre" value="Polideportivo Municipal Mairena" />
+		<property name="imagen" value="" />
 		<property name="descripcion" value="El complejo polideportivo se ubica en un solar situado entre las calles Pablo Neruda y Pedro Salinas, al Noroeste de la población, junto al recinto ferial. " />
 		<property name="tipo" value="Polideportivo" />
 		<property name="direccion" value="Calle Palacios 42" />
@@ -296,6 +283,7 @@
 	
 	<bean id="centro3" class="domain.Centro">
 		<property name="nombre" value="Gimnasio Fitness" />
+		<property name="imagen" value="" />
 		<property name="descripcion" value="Si estás buscando un gimnasio en Sevilla cerca de ti para que te ayude en tu preparación física, enhorabuena porque lo acabas de encontrar. Century Fitness es tu gimnasio; todo un referente en el mundo del Fitness." />
 		<property name="tipo" value="Gimnasio" />
 		<property name="direccion" value="Calle Terraplen 42" />
@@ -320,6 +308,7 @@
 	
 	<bean id="centro4" class="domain.Centro">
 		<property name="nombre" value="Gimnasio La Cartuja" />
+		<property name="imagen" value="" />
 		<property name="descripcion" value="Si estás buscando un gimnasio en Sevilla cerca de ti para que te ayude en tu preparación física, enhorabuena porque lo acabas de encontrar. Century Fitness es tu gimnasio; todo un referente en el mundo del Fitness." />
 		<property name="tipo" value="Gimnasio" />
 		<property name="direccion" value="Calle Cartuja 42" />
