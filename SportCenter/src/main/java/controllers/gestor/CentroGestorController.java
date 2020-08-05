@@ -192,7 +192,7 @@ public class CentroGestorController extends AbstractController {
 		gestorConectado = this.gestorService.findByPrincipal();
 		centros = new ArrayList<>(this.centroService.findCentrosByGestorSinPage(gestorConectado.getId()));
 		final PagedListHolder<Centro> pagedListHolder = new PagedListHolder<>(centros);
-		pagedListHolder.setPageSize(5);
+		pagedListHolder.setPageSize(6);
 		result = new ModelAndView("centro/list");
 
 		if (page == null || page < 1 || page > pagedListHolder.getPageCount())
