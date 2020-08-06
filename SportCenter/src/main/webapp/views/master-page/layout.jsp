@@ -15,15 +15,16 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 
 <base
 	href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+ <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -43,8 +44,10 @@
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
 <link rel="stylesheet" href="styles/primario.css" type="text/css">
 <link rel="stylesheet" href="styles/imagen.css" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Thasadith:ital@1&display=swap" rel="stylesheet">
 
-<title><tiles:insertAttribute name="title" ignore="true" /></title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap" rel="stylesheet">
+
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -68,25 +71,26 @@
 </script>
 
 </head>
-
-<body>
-
-	<div>
+	<div class="ml-5 mr-5">
 		<tiles:insertAttribute name="header" />
 	</div>
-	<div>
-		<h1>
+	
+
+<body class="bg">
+	<div class="ml-5 mr-5">
+		<!--<h1>
 			<tiles:insertAttribute name="title" />
-		</h1>
+		</h1>-->
 		<tiles:insertAttribute name="body" />	
 		<jstl:if test="${message != null}">
 			<br />
 			<span class="message"><spring:message code="${message}" /></span>
 		</jstl:if>	
 	</div>
-	<div>
+	<div class="container">
 		<tiles:insertAttribute name="footer" />
 	</div>
 
 </body>
+
 </html>

@@ -16,6 +16,8 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+
+
 <form:form action="j_spring_security_check" modelAttribute="credentials">
 
 	<form:label path="username">
@@ -41,3 +43,12 @@
 	<input type="submit" value="<spring:message code="security.login" />" />
 	
 </form:form>
+
+
+
+
+
+
+
+
+    

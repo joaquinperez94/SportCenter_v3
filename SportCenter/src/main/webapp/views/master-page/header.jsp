@@ -13,9 +13,16 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
-<div>
-	<img src="images/logo.png" alt="SportCenter., Inc." />
-</div>
+
+	<div class="bg-dark py-4 text-center header-logo">
+	<img src="images/logov3.png" width="80" height="50" alt="SportCenter., Inc." /><strong>SportCenter</strong>
+	</br>
+	<div class="bg-dark text-center header-sublogo">
+	<spring:message code="pagina.principal.subtitulo" />
+	</div>
+	</div>
+	
+
 
     <style>
     .dropdown-item:hover{
@@ -23,7 +30,7 @@
     }
     </style>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -106,25 +113,17 @@
 			</ul>
 			
 			<!-- IDIOMA -->
-			<ul class="navbar-nav ml-auto text-center">
-            <li class="nav-item dropdown">
-              <a class="fNiv nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <spring:message code="pagina.principal.idiomas" />
-              </a>
-              <div class="dropdown-menu bg-primary border border-dark" aria-labelledby="navbarDropdown">
-                <a class="fNiv dropdown-item text-white" href="?language=es"><img src="images/spain.svg" width="50" height="30" class="d-inline-block align-top" alt=""><spring:message code="pagina.principal.idiomaES" /></a>
-                                <div class="dropdown-divider"></div>
-                <a class="fNiv dropdown-item text-white" href="?language=eN"><img src="images/en.svg" width="50" height="30" class="d-inline-block align-top" alt=""><spring:message code="pagina.principal.idiomaEN" /></a>
-              </div>
-            </li>
-            
-			</ul>
-			
+			 <a href="?language=eN" title=""><img src="images/en.svg" width="50" height="30" class="img-responsive rounded"></a>
+			 <a href="?language=es" title=""><img src="images/spain.svg" width="50" height="30" class="img-responsive rounded-sm"></a>
          
         </div>
         
+        
+        
 
     </nav>
+    
+    
     
     
     

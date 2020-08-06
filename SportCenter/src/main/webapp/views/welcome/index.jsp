@@ -16,7 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<div class="container">
+<div>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -25,13 +25,28 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="images/deport1.PNG" alt="First slide">
+      <img class="d-block w-100 image-carrusel" src="images/deport1.jpg" alt="First slide">
+              <div class="carousel-caption d-none d-md-block">
+    		<h5 class="bg-primary dark-font px-3"><spring:message code="welcome.greeting.title1" /></h5>
+    		</br>
+   			 <p class="bg-primary dark-font px-3"><spring:message code="welcome.greeting.subtitle1" /></p>
+ 		</div>
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="images/deporte2.PNG" alt="Second slide">
+      <img class="d-block w-100 image-carrusel" src="images/deporte2.jpg" alt="Second slide">
+              <div class="carousel-caption d-none d-md-block">
+    		<h5 class="bg-primary dark-font px-3"><spring:message code="welcome.greeting.title2" /></h5>
+    		</br>
+   			 <p class="bg-primary dark-font px-3"><spring:message code="welcome.greeting.subtitle2" /></p>
+ 		</div>
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="images/deporte3.PNG" alt="Third slide">
+      <img class="d-block w-100 image-carrusel" src="images/deporte3.jpg" alt="Third slide">
+              <div class="carousel-caption d-none d-md-block">
+    		<h5 class="bg-primary dark-font px-3"><spring:message code="welcome.greeting.title3" /></h5>
+    		</br>
+   			 <p class="bg-primary dark-font px-3"><spring:message code="welcome.greeting.subtitle3" /></p>
+ 		</div>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

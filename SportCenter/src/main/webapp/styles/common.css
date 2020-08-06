@@ -8,6 +8,7 @@
  * 
  */
 
+
 .error {
 	color: red;
 	font-weight: bolder;
@@ -32,4 +33,55 @@
     text-align:center;
     margin:auto;
 }
+
+body, html {
+  height: 100%;
+}
+
+
+.bg { 
+  /* The image used */
+background-color: #FFFFFF;
+  /* Full height */
+  height: 100%; 
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+}
+
+
+.header-logo { 
+  color: white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 40px;
+}
+
+.header-sublogo { 
+  color: white;
+font-family: 'Thasadith', sans-serif;
+
+	font-size: 20px;
+
+}
+
+.dark-font{
+	color: #FFFFFF;
+	 display: inline-block;
+}
+
+.carousel-item{
+    height: 500px;
+} 
+.carousel-item img{
+    height: 500px;
+}
+
+color2: #343A40;
+
+
+
+
+
+
 
