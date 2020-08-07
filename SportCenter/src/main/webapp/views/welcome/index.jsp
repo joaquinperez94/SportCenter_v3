@@ -58,4 +58,31 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
 </div>
+
+</br>
+
+<div class="row my-5 text-center">
+            <div class="col-md-4">
+                <div class="text-info h1">
+                    <img src="images/lupa.png" width="60" height="60" class="img-responsive rounded">
+                </div>
+                <h4 class="text-uppercase mb-4"><spring:message code="welcome.greeting.text.title1" /></h4>
+                <p class="font-weight-light"><spring:message code="welcome.greeting.text.subtitle1" /></p>
+            </div>
+            <div class="col-md-4">
+                <div class="text-info h1">
+                    <img src="images/hockey.png" width="60" height="60" class="img-responsive rounded">
+                </div>
+                <h4 class="text-uppercase mb-4"><spring:message code="welcome.greeting.text.title2" /></h4>
+                <p class="font-weight-light"><spring:message code="welcome.greeting.text.subtitle2" /></p>
+            </div>
+            <div class="col-md-4">
+                <div class="text-info h1">
+                    <img src="images/reserva.png" width="60" height="60" class="img-responsive rounded">
+                </div>
+                <h4 class="text-uppercase mb-4"><spring:message code="welcome.greeting.text.title3" /></h4>
+                <p class="font-weight-light"><spring:message code="welcome.greeting.text.subtitle3" /></p>
+            </div>
+        </div>

@@ -111,10 +111,12 @@
 			</security:authorize>
 			
 			</ul>
-			
 			<!-- IDIOMA -->
-			 <a href="?language=eN" title=""><img src="images/en.svg" width="50" height="30" class="img-responsive rounded"></a>
-			 <a href="?language=es" title=""><img src="images/spain.svg" width="50" height="30" class="img-responsive rounded-sm"></a>
+			<div class="text-center">
+			 	 <a href="?language=eN" title=""><img src="images/en.svg" width="50" height="30" class="img-responsive rounded"></a>
+			 	<a href="?language=es" title=""><img src="images/spain.svg" width="50" height="30" class="img-responsive rounded-sm"></a>
+			</div>
+         			
          
         </div>
         
@@ -123,6 +125,7 @@
 
     </nav>
     
+
     
     
     

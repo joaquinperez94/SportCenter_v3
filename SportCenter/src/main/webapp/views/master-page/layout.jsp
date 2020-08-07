@@ -38,7 +38,11 @@
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
 <script type="text/javascript" src="scripts/jmenu.js"></script>
+<script type="text/javascript" src="scripts/fontawesome.min.js"></script>
+<script src="https://kit.fontawesome.com/0616878f81.js" crossorigin="anonymous"></script>
 
+<link rel="stylesheet" href="styles/font-awesome.min.css" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Thasadith:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles/common.css" type="text/css">
 <link rel="stylesheet" href="styles/jmenu.css" media="screen" type="text/css" />
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
@@ -76,8 +80,8 @@
 	</div>
 	
 
-<body class="bg">
-	<div class="ml-5 mr-5">
+<body class="bg d-flex flex-column min-vh-100">
+	<div class="ml-5 mr-5 bg-light otra">
 		<!--<h1>
 			<tiles:insertAttribute name="title" />
 		</h1>-->
@@ -87,7 +91,7 @@
 			<span class="message"><spring:message code="${message}" /></span>
 		</jstl:if>	
 	</div>
-	<div class="container">
+	<div class="ml-5 mr-5 mt-auto bg-light">
 		<tiles:insertAttribute name="footer" />
 	</div>
 
