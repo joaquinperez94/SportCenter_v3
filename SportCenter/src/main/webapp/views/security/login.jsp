@@ -16,16 +16,13 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<div class="container">
-<div class="mt-5">
- 
-<div class="row mx-auto mt-5">
-	<div class="col col-8 col-sm-8  col-lg-4 col-xl-4 col-md-6 bg-dark mx-auto mt-5">
-		<div>
 
-	
-		<img src="images/login.png" width="30%" height="30%" class="img-fluid rounded  pt-4 mx-auto d-block">
-		
+
+ 
+<div class="extender mx-auto mt-5 pb-5">
+	<div class="col col-8 col-sm-8  col-lg-4 col-xl-4 col-md-6 bg-dark mx-auto mt-5 pb-3">
+		<div>	
+		<img src="images/login.png" width="30%" height="30%" class="img-fluid rounded  pt-4 mx-auto d-block">		
 			<h4 class="pt-4 pb-3 d-flex justify-content-center" style="color:#6ac27f;">Login</h4>
 		</div>
 
@@ -63,8 +60,8 @@
 
 	</div>
 </div>
-</div>
-</div>
+
+
 
 
 

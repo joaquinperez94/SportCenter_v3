@@ -34,13 +34,14 @@
     margin:auto;
 }
 
-html,body { height:100%; !important}
+html,body { height:auto !important;}
+
 
 section {
   height: 100%;
 }
 .otra{
-	 height: 100%;
+	 overflow-x: hidden !important;
 }
 
 .bg { 
@@ -48,13 +49,16 @@ section {
   /* The image used */
 background-color: #FFFFFF;
   /* Full height */
-  height: 100%; 
+  height: auto !important; 
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: repeat;
   background-size: cover;
 }
 
+.extender{
+	height: 700px !important;
+}
 
 .header-logo { 
   color: white;

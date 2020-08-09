@@ -6,7 +6,6 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
@@ -24,8 +23,7 @@ public class Centro extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private String	nombre;
-	private String	imagen64;
-	private byte[]	imagen;
+	private String	imagen;
 	private String	descripcion;
 	private String	tipo;
 	private String	direccion;
@@ -136,24 +134,13 @@ public class Centro extends DomainEntity {
 	 * }
 	 */
 
-	//Anotacion para mapear objetos pesados
 	@Lob
-	@Column(name = "BLOB_COLUMN", nullable = true)
-	public byte[] getImagen() {
+	public String getImagen() {
 		return this.imagen;
 	}
 
-	public void setImagen(final byte[] imagen) {
+	public void setImagen(final String imagen) {
 		this.imagen = imagen;
-	}
-
-	@Lob
-	public String getImagen64() {
-		return this.imagen64;
-	}
-
-	public void setImagen64(final String imagen64) {
-		this.imagen64 = imagen64;
 	}
 
 }
