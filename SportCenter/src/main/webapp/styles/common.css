@@ -82,7 +82,14 @@ font-family: 'Thasadith', sans-serif;
     height: 500px;
 }
 
+.form-control:valid {
+   background-color:  #ffffff!important;
+}
 
+.form-control{
+	background-color:  #ffffff!important;
+	color:  #ffffff!important;
+}
 color2: #343A40;
 
 

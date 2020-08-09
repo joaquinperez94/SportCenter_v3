@@ -16,34 +16,60 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<div class="container">
+<div class="mt-5">
+ 
+<div class="row mx-auto mt-5">
+	<div class="col col-8 col-sm-8  col-lg-4 col-xl-4 col-md-6 bg-dark mx-auto mt-5">
+		<div>
 
-<section class="bg-ligh">
-<form:form action="j_spring_security_check" modelAttribute="credentials">
+	
+		<img src="images/login.png" width="30%" height="30%" class="img-fluid rounded  pt-4 mx-auto d-block">
+		
+			<h4 class="pt-4 pb-3 d-flex justify-content-center" style="color:#6ac27f;">Login</h4>
+		</div>
 
-	<form:label path="username">
+		<form:form action="j_spring_security_check" modelAttribute="credentials">
+  <div class="form-group">
+  	<form:label path="username" style="color:#ffffff;">
 		<spring:message code="security.username" />
 	</form:label>
-	<form:input path="username" />	
-	<form:errors class="error" path="username" />
-	<br />
-
-	<form:label path="password">
+	<spring:message code="security.username.input" var="placeholder1" />
+	<form:input path="username" class="form-control" required="required" placeholder='${placeholder1}'/>
+	<form:errors class="error" path="username" />  
+  </div>
+  <div class="form-group">
+  	<form:label path="username" style="color:#ffffff;">
 		<spring:message code="security.password" />
 	</form:label>
-	<form:password path="password" />	
-	<form:errors class="error" path="password" />
-	<br />
-	
-	<jstl:if test="${showError == true}">
+	<spring:message code="security.password.input" var="placeholder2" />
+	<form:password style="color:#ffffff;" path="password" class="form-control" placeholder='${placeholder2}'/>
+	<form:errors class="error" path="password" />  
+  </div>
+  
+  
+  	<jstl:if test="${showError == true}">
 		<div class="error">
 			<spring:message code="security.login.failed" />
 		</div>
 	</jstl:if>
-	
-	<input type="submit" value="<spring:message code="security.login" />" />
-	
+	<div class="d-flex justify-content-center mt-5 mb-3">
+	<input class="btn btn-primary " type="submit" value="<spring:message code="security.login" />" />
+  </div>
+  
+  
+
 </form:form>
-</section>
+
+	</div>
+</div>
+</div>
+</div>
+
+
+
+
+
 
 
 
