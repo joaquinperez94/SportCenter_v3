@@ -57,7 +57,13 @@ background-color: #FFFFFF;
 }
 
 .extender{
-	height: 700px !important;
+	height: 550px !important;
+}
+
+.extender2{
+	min-height: 630px;
+	height: auto !important;
+	height: 630px;
 }
 
 .header-logo { 
@@ -90,10 +96,8 @@ font-family: 'Thasadith', sans-serif;
    background-color:  #ffffff!important;
 }
 
-.form-control{
-	background-color:  #ffffff!important;
-	color:  #ffffff!important;
-}
+
+
 color2: #343A40;
 
 

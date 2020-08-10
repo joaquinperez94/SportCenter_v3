@@ -33,15 +33,15 @@
 	</form:label>
 	<spring:message code="security.username.input" var="placeholder1" />
 	<form:input path="username" class="form-control" required="required" placeholder='${placeholder1}'/>
-	<form:errors class="error" path="username" />  
+	<form:errors class="danger" path="username" />  
   </div>
   <div class="form-group">
   	<form:label path="username" style="color:#ffffff;">
 		<spring:message code="security.password" />
 	</form:label>
 	<spring:message code="security.password.input" var="placeholder2" />
-	<form:password style="color:#ffffff;" path="password" class="form-control" placeholder='${placeholder2}'/>
-	<form:errors class="error" path="password" />  
+	<form:password path="password" class="form-control" placeholder='${placeholder2}'/>
+	<form:errors class="danger" path="password" />  
   </div>
   
   
