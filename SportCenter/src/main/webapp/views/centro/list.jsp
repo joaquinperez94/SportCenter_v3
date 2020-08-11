@@ -28,19 +28,21 @@
 <div class="container">
 <security:authorize access="hasRole('GESTOR')">
 <jstl:if test="${mostrarBotonGestor}">
-	<div>
-			<input type="button" class="btn btn-primary mt-auto" name="edit"
+	<div class="row mx-auto">
+	<div class="col-md-4 col-lg-2 mt-5">
+			<input type="button" class="btn btn-primary btn-block" name="edit"
 			value="<spring:message code="centro.crear" />"
 			onclick="javascript: window.location.replace('centro/gestor/create.do?centroId=${row.id}');" />
+			</div>
 	</div>
 	</jstl:if>
 </security:authorize>
 
-<div class="row py-5">
+<div class="row py-5 mx-auto">
 	<jstl:forEach var="x" items="${centros}">
-		<div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch mt-5">
-			<div class="card bg-light " style="width: 28rem;">
-  				<img class="card-img-top"  src="data:image/jpeg;base64,${x.imagen}">
+		<div class="py-3 col-12 col-sm-6 col-md-4 d-flex align-items-stretch w-50 mx-auto">
+			<div class="card bg-light shadow " style="width: 28rem;">
+  				<img class="card-img-top" style="height:400rem!important;" src="data:image/jpeg;base64,${x.imagen}">
   				<div class="card-body d-flex flex-column">
     				<h5 class="card-title">${x.nombre}</h5>
     				<p class="card-text">${x.descripcion}</p>

@@ -92,7 +92,12 @@
     					</div>
   					</div>
 				</div>
-
+				<script>
+					$(".custom-file-input").on("change", function() {
+					  var fileName = $(this).val().split("\\").pop();
+					  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+					});
+				</script>
 				
 				<!-- BOTONES -->
 				<button type="submit" name="save" class="btn btn-primary"><spring:message code="centro.guardar"/></button>

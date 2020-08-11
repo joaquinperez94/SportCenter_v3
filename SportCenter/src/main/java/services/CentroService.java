@@ -2,12 +2,15 @@
 package services;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -76,11 +79,20 @@ public class CentroService {
 	//Guardar -----------------------------------------------------------
 	public Centro save(final Centro centro, final MultipartFile file, final String path2) throws IOException {
 		Centro result;
-		final byte[] img = file.getBytes();
-		final byte[] encodeBase64 = Base64.encode(img);
-		final String base64DataString = new String(encodeBase64, "UTF-8");
-		centro.setImagen(base64DataString);
 
+		if (!file.isEmpty()) {
+			final byte[] img = file.getBytes();
+			final byte[] encodeBase64 = Base64.encode(img);
+			final String base64DataString = new String(encodeBase64, "UTF-8");
+			centro.setImagen(base64DataString);
+		} else if (centro.getId() == 0) {
+			final URL url = new URL("https://storage.googleapis.com/imagenes_sport/logo.JPG");
+			final InputStream is = url.openStream();
+			final byte[] fileContent = IOUtils.toByteArray(is);
+			final byte[] encodeBase64 = Base64.encode(fileContent);
+			final String base64DataString = new String(encodeBase64, "UTF-8");
+			centro.setImagen(base64DataString);
+		}
 		/*
 		 * if (!file.isEmpty()) {
 		 * final boolean creada = folder.mkdirs();
