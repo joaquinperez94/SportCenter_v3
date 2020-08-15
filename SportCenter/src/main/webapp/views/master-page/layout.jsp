@@ -75,13 +75,13 @@
 </script>
 
 </head>
-	<div class="ml-5 mr-5">
+	<div class="ml-sm-0 mr-sm-0 ml-md-3 mr-md-3 ml-lg-5 mr-lg-5">
 		<tiles:insertAttribute name="header" />
 	</div>
 	
 
 <body class="bg d-flex flex-column min-vh-100">
-	<div class="ml-5 mr-5 bg-light otra">
+	<div class="ml-sm-0 mr-sm-0 ml-md-3 mr-md-3 ml-lg-5 mr-lg-5 bg-light otra">
 		<!--<h1>
 			<tiles:insertAttribute name="title" />
 		</h1>-->
@@ -91,7 +91,7 @@
 			<span class="message"><spring:message code="${message}" /></span>
 		</jstl:if>	
 	</div>
-	<div class="ml-5 mr-5 mt-auto bg-light">
+	<div class="ml-sm-0 mr-sm-0 ml-md-3 mr-md-3 ml-lg-5 mr-lg-5 mt-auto bg-light">
 		<tiles:insertAttribute name="footer" />
 	</div>
 

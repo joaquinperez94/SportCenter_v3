@@ -34,6 +34,7 @@
     margin:auto;
 }
 
+
 html,body { height:auto !important;}
 
 
@@ -57,7 +58,7 @@ background-color: #FFFFFF;
 }
 
 .extender{
-	height: 550px !important;
+	height: 600px !important;
 }
 
 .extender2{
@@ -96,7 +97,9 @@ font-family: 'Thasadith', sans-serif;
    background-color:  #ffffff!important;
 }
 
-
+#confirm{
+	display:none;
+}
 
 color2: #343A40;
 

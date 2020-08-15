@@ -77,7 +77,7 @@ public class CentroService {
 	}
 
 	//Guardar -----------------------------------------------------------
-	public Centro save(final Centro centro, final MultipartFile file, final String path2) throws IOException {
+	public Centro save(final Centro centro, final MultipartFile file) throws IOException {
 		Centro result;
 
 		if (!file.isEmpty()) {
@@ -86,32 +86,13 @@ public class CentroService {
 			final String base64DataString = new String(encodeBase64, "UTF-8");
 			centro.setImagen(base64DataString);
 		} else if (centro.getId() == 0) {
-			final URL url = new URL("https://storage.googleapis.com/imagenes_sport/logo.JPG");
+			final URL url = new URL("https://storage.googleapis.com/imagenes_sport/default.png");
 			final InputStream is = url.openStream();
 			final byte[] fileContent = IOUtils.toByteArray(is);
 			final byte[] encodeBase64 = Base64.encode(fileContent);
 			final String base64DataString = new String(encodeBase64, "UTF-8");
 			centro.setImagen(base64DataString);
 		}
-		/*
-		 * if (!file.isEmpty()) {
-		 * final boolean creada = folder.mkdirs();
-		 * //CREACION
-		 * if (centro.getId() == 0 || centro.getImagen().equals("https://www.csqusa.com/wp-content/themes/dante/images/default-thumb.png")) {
-		 * final File destination = new File(filename);
-		 * ImageIO.write(src, extension, destination);
-		 * centro.setImagen(filename);
-		 * } else {
-		 * //eliminamos fichero
-		 * final File file2 = new File(centro.getImagen());
-		 * file2.delete();
-		 * final File destination = new File(filename);
-		 * ImageIO.write(src, extension, destination);
-		 * centro.setImagen(filename);
-		 * }
-		 * } else if (centro.getId() == 0)
-		 * centro.setImagen("https://www.csqusa.com/wp-content/themes/dante/images/default-thumb.png");
-		 */
 
 		Assert.notNull(centro);
 

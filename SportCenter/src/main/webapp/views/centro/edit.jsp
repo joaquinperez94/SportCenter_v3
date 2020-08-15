@@ -26,11 +26,17 @@
 
 <div class="extender2 container bg-light">
 	<div class="row">
-		<div class="col-md-7 mx-auto mt-5">
-			<h1>Formulario</h1>
+		<div class="col-md-7 mx-auto mt-5">			
+			<jstl:if test="${centro.id ==0 }">
+				<h1><spring:message code="gestor.gestor.tittle1" /></h1>
+			</jstl:if>
+			<jstl:if test="${centro.id !=0 }">
+				<h1><spring:message code="gestor.gestor.tittle2" /></h1>
+			</jstl:if>
 			<hr class="bg-primary mt-0 pt-0">
 			<form:form action="centro/gestor/edit.do" enctype="multipart/form-data" modelAttribute="centro">
-			
+				
+				<form:hidden path="id" />
 				<form:hidden path="version" />
 				<form:hidden path="gestor" />
 				<form:hidden path="valoracion" />
@@ -40,28 +46,31 @@
 				<form:hidden path="imagen" />
 				
 				<div class="row form-group">
-					  	<form:label path="nombre" class="col-form-label col-md-4">
-							<spring:message code="centro.nombre" />:
+					  	<form:label path="nombre" class="col-form-label col-md-4 d-flex ">
+							<spring:message code="centro.nombre" />:<p class="text-danger">*</p>
 						</form:label>
 						<div class="col-md-8">
-							<form:input type="text" path="nombre" class="form-control" required="required"/>
+							<form:input type="text" path="nombre" class="form-control"/>
+							<form:errors path="nombre" class="text-danger" />
 						</div>
 				</div>
 				<div class="row form-group">	
-						<form:label path="descripcion" class="col-form-label col-md-4">
-							<spring:message code="centro.descripcion" />:
+						<form:label path="descripcion" class="col-form-label col-md-4 d-flex ">
+							<spring:message code="centro.descripcion" />:<p class="text-danger">*</p>
 						</form:label>
 						<div class="col-md-8">
-							<form:textarea rows="3" type="text" path="descripcion" class="form-control" required="required"/>
+							<form:textarea rows="3" type="text" path="descripcion" class="form-control"/>
+							<form:errors path="descripcion" class="text-danger" />
 						</div>
 				
 				</div>
 				<div class="row form-group">	
-						<form:label path="direccion" class="col-form-label col-md-4">
-							<spring:message code="centro.direccion" />:
+						<form:label path="direccion" class="col-form-label col-md-4 d-flex ">
+							<spring:message code="centro.direccion" />:<p class="text-danger">*</p>
 						</form:label>
 						<div class="col-md-8">
-							<form:input type="text" path="direccion" class="form-control" required="required"/>
+							<form:input type="text" path="direccion" class="form-control"/>
+							<form:errors path="direccion" class="text-danger" />
 						</div>
 				</div>
 				<div class="row form-group">	
@@ -69,7 +78,8 @@
 							<spring:message code="centro.tipo" />:
 						</form:label>
 						<div class="col-md-8">
-							<form:select type="select" path="tipo" class="form-control" required="required">
+							<form:select type="select" path="tipo" class="form-control">
+								<form:option selected="true" value="-----" />
 								<form:option value="Polideportivo" label="Polideportivo"/>
 								<form:option value="Pabellón" label="Pabellón"/> 
 								<form:option value="Gimnasio" label="Gimnasio"/> 
@@ -98,6 +108,13 @@
 					  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 					});
 				</script>
+				
+				
+				<jstl:if test="${not empty message}">
+	 				<p class="text-danger mt-0 mb-2"><spring:message code="${message}"/></p>
+				</jstl:if>
+				
+				<br>
 				
 				<!-- BOTONES -->
 				<button type="submit" name="save" class="btn btn-primary"><spring:message code="centro.guardar"/></button>

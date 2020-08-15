@@ -39,6 +39,15 @@ public class Centro extends DomainEntity {
 		this.nombre = nombre;
 	}
 
+	@Lob
+	public String getImagen() {
+		return this.imagen;
+	}
+
+	public void setImagen(final String imagen) {
+		this.imagen = imagen;
+	}
+
 	@NotBlank
 	public String getDescripcion() {
 		return this.descripcion;
@@ -133,14 +142,5 @@ public class Centro extends DomainEntity {
 	 * this.imagen = imagen;
 	 * }
 	 */
-
-	@Lob
-	public String getImagen() {
-		return this.imagen;
-	}
-
-	public void setImagen(final String imagen) {
-		this.imagen = imagen;
-	}
 
 }

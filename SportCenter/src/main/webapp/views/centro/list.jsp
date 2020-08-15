@@ -40,7 +40,7 @@
 
 <div class="row py-5 mx-auto">
 	<jstl:forEach var="x" items="${centros}">
-		<div class="py-3 col-12 col-sm-6 col-md-4 d-flex align-items-stretch w-50 mx-auto">
+		<div class="py-3 col-12 col-sm-6 col-md-4 d-flex align-items-stretch w-50 ">
 			<div class="card bg-light shadow " style="width: 28rem;">
   				<img class="card-img-top" style="height:400rem!important;" src="data:image/jpeg;base64,${x.imagen}">
   				<div class="card-body d-flex flex-column">
@@ -49,7 +49,7 @@
     				<security:authorize access="hasRole('GESTOR')">
     				
 					<jstl:if test="${mostrarBotonGestor}">
-    				<div class="row mt-auto form-row text-center">
+    				<div class="row mt-auto form-row">
     				<div class="col-6">
     				<input type="button" class="btn btn-primary mt-auto btn-md btn-block font-weight-bold" name="edit"
 						value="<spring:message code="centro.editar" />"

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -97,18 +97,15 @@ public class CentroGestorController extends AbstractController {
 
 	// Save -----------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final Centro centro, @RequestParam(required = false, defaultValue = "None") final MultipartFile file, final BindingResult binding, final HttpServletRequest request) {
+	public ModelAndView save(@Valid final Centro centro, final BindingResult binding, @RequestParam(required = false, defaultValue = "None") final MultipartFile file) {
 		ModelAndView result;
-		final String path = request.getContextPath();
-
-		final String fileName2 = request.getSession().getServletContext().getRealPath("/");
 
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(centro, "centro.mio");
+			result = this.createEditModelAndView(centro);
 		else
 			try {
 
-				this.centroService.save(centro, file, path);
+				this.centroService.save(centro, file);
 				result = new ModelAndView("redirect:my-center.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(centro, "centro.commit.error");
@@ -144,7 +141,9 @@ public class CentroGestorController extends AbstractController {
 		Centro centro = new Centro();
 		final Collection<Servicio> servicios;
 		final Collection<Comentario> comentarios;
+		Gestor gestor;
 
+		gestor = this.gestorService.findByPrincipal();
 		centro = this.centroService.findOne(centroId);
 
 		//TODOS LOS ARTCULOS DE UN PERIDICO
@@ -153,6 +152,7 @@ public class CentroGestorController extends AbstractController {
 
 		result = new ModelAndView("centro/display");
 		result.addObject("centro", centro);
+		result.addObject("mostrarAnadir", gestor.getCentros().contains(centro));
 		result.addObject("servicios", servicios);
 		result.addObject("comentarios", comentarios);
 		result.addObject("serviciosEmpty", servicios.size() == 0);
@@ -229,14 +229,14 @@ public class CentroGestorController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Centro centro, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final Centro centro, final String message) {
 		assert centro != null;
 
 		ModelAndView result;
 
 		result = new ModelAndView("centro/edit");
 		result.addObject("centro", centro);
-		result.addObject("message", messageCode);
+		result.addObject("message", message);
 
 		return result;
 
