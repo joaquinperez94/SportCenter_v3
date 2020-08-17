@@ -1,15 +1,21 @@
 
 package services;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.web.multipart.MultipartFile;
 
 import repositories.ServicioRepository;
 import domain.Centro;
@@ -52,12 +58,35 @@ public class ServicioService {
 	}
 
 	//Guardar -----------------------------------------------------------
-	public Servicio save(final Servicio servicio) {
+	public Servicio save(final Servicio servicio, final MultipartFile file) throws IOException {
 		Servicio result;
+		Collection<Servicio> checkServicio;
 
 		Assert.notNull(servicio);
-		Assert.isTrue(servicio.getDuración() > 0.15, "duracion no valida");
-		Assert.isTrue(this.checkDuracion(servicio.getDuración()), "duracion no cumple patron");
+		if (servicio.getNombre().contains("Otro"))
+			servicio.setNombre(servicio.getNombre().split(",")[1]);
+		else
+			servicio.setNombre(servicio.getNombre().split(",")[0]);
+		Assert.isTrue(servicio.getDuración() >= 0.15, "duracion no valida");
+
+		checkServicio = new ArrayList<>();
+		checkServicio = this.findServiceByCenterNameIdentifier(servicio.getCentro().getId(), servicio.getIdentificador(), servicio.getNombre());
+		Assert.isTrue(checkServicio.size() == 0, "ya existe servicio");
+
+		if (!file.isEmpty()) {
+			final byte[] img = file.getBytes();
+			final byte[] encodeBase64 = Base64.encode(img);
+			final String base64DataString = new String(encodeBase64, "UTF-8");
+			servicio.setImagen(base64DataString);
+		} else if (servicio.getId() == 0) {
+			final URL url = new URL("https://storage.googleapis.com/imagenes_sport/default.png");
+			final InputStream is = url.openStream();
+			final byte[] fileContent = IOUtils.toByteArray(is);
+			final byte[] encodeBase64 = Base64.encode(fileContent);
+			final String base64DataString = new String(encodeBase64, "UTF-8");
+			servicio.setImagen(base64DataString);
+		}
+
 		this.gestorService.checkPrincipal();
 
 		result = this.servicioRepository.save(servicio);
@@ -89,6 +118,14 @@ public class ServicioService {
 		Assert.notNull(horarioId);
 		servicio = this.servicioRepository.findServiceByHorarioId(horarioId);
 		return servicio;
+	}
+
+	public Collection<Servicio> findServiceByCenterNameIdentifier(final int centroId, final String identifier, final String nombre) {
+		Collection<Servicio> result;
+		Assert.notNull(centroId);
+		result = new ArrayList<>(this.servicioRepository.findServiceByCenterNameIdentifier(centroId, identifier, nombre));
+
+		return result;
 	}
 
 	public Collection<Servicio> findServiciosByGestorId(final int gestorId) {

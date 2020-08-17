@@ -21,63 +21,50 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-<display:table name="servicio" class="displaytag"
-  requestURI="${requestURI}" id="row">
-  
-  <!-- Attributes -->
-	
-	<display:column>
-	<B><spring:message code="servicio.nombre" />:</B>
-	<jstl:out value="${row.nombre}"></jstl:out>
-	
 
-	<p>
-		<img src="${row.imagen}" width="100" height="100">
-	</p>
-	<p>
-		<B><spring:message code="servicio.descripcion" />:</B>
-		<jstl:if test="${empty row.descripcion}">
-    	-
-		</jstl:if>
-		<jstl:out value="${row.descripcion}"></jstl:out>
-	</p>
-	<p>
-		<B><spring:message code="servicio.precio" />:</B>
-		<jstl:out value="${row.precio}"></jstl:out>
-		
-	</p>
-		<p>
-		<B><spring:message code="servicio.duracion" />:</B>
-		<jstl:out value="${row.duración}"></jstl:out>
-		
-	</p>
-	
+<div class="container bg-light pb-5">
 
-	
-</display:column>
-</display:table>
+	<div class="row py-5 mx-auto">
+		 <div class="col-12 col-sm-12 col-md-6 mx-auto text-center my-auto">
+      		<img style="height:350px!important; width:450px!important;" class="img-fluid imagen2 shadow" style="width: 50rem;" src="data:image/jpeg;base64,${servicio.imagen}">
+    	</div>
+    	<div class="col-12 col-sm-12 col-md-6 mx-auto text-center mt-4">
+			<h3><strong><jstl:out value="${servicio.nombre}"></jstl:out>-<jstl:out value="${servicio.identificador}"></jstl:out></strong></h3>
+			<div>
+				<jstl:if test="${empty  servicio.descripcion}">
+					<p class="mt-3 pl-2 text-left font-weight-light font-italic"><spring:message code="servicio.nodescripcion" /></p>
+				</jstl:if>
+					<p class="mt-3 pl-2 text-left font-weight-light font-italic"><jstl:out value="${servicio.descripcion}"></jstl:out></p>
+				
 
+				<p class="mb-1 pl-2 text-left mt-3"><i class="fas fa-square my-auto mr-1" style="color: #6ac27f; font-size: 10px;  vertical-align: middle;"></i><B style="vertical-align: middle;"><spring:message code="servicio.precio" /></B><em style="vertical-align: middle;"><jstl:out value="  ${servicio.precio}"></jstl:out></em></p>
+				<p class="mt-1 pl-2 text-left"><i class="fas fa-square my-auto mr-1" style="color: #6ac27f; font-size: 10px;  vertical-align: middle;"></i><B style="vertical-align: middle;"><spring:message code="servicio.duracion" /></B><em style="vertical-align: middle;"><jstl:out value="  ${servicio.duración}"></jstl:out></em></p>
+			</div>
+    	</div> 
+	</div>
 
 <security:authorize access="hasRole('GESTOR')">
-<input type="button" name="edit"
-			value="<spring:message code="servicio.volver" />"
-			onclick="javascript: window.location.replace('centro/gestor/display.do?centroId=${servicio.centro.id}');" />
+
+<div class="mt-sm-2 pl-2 mr-5 ml-5 mr-sm-0 ml-sm-0 ml-md-0 mr-md-0">
+<input type="button" class="btn btn-secondary btn-sm" name="display"
+							value="<spring:message code="servicio.volver" />"
+				onclick="location.href='centro/gestor/display.do?centroId=${servicio.centro.id}'" />
+				
+</div>
+
 </security:authorize>
+
 
 <security:authorize access="hasRole('USUARIO')">
-<input type="button" name="edit"
-			value="<spring:message code="servicio.crear" />"
-			onclick="javascript: window.location.replace('reserva/usuario/create.do?servicioId=${servicio.id}');" />
-			
-<input type="button" name="edit"
-			value="<spring:message code="servicio.volver" />"
-			onclick="javascript: window.location.replace('centro/usuario/display.do?centroId=${servicio.centro.id}');" />
+<input type="button" class="btn btn-primary btn-sm" name="display"
+							value="<spring:message code="servicio.crear" />"
+				onclick="location.href='reserva/usuario/create.do?servicioId=${servicio.id}'" />
+
+<input type="button" class="btn btn-primary btn-sm" name="display"
+							value="<spring:message code="servicio.volver" />"
+				onclick="location.href='centro/usuario/display.do?centroId=${servicio.centro.id}'" />
 </security:authorize>
+</div>
 
-			
 
-<!-- 
-<spring:url value="perfil/servicio/edit.do" var="editURL">
-				<spring:param name="servicioId" value="${row.id}" />
-			</spring:url>
-			<a href="${editURL}"><spring:message code="servicio.editar" /></a> -->
+</div>

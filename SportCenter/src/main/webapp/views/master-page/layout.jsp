@@ -48,6 +48,8 @@
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
 <link rel="stylesheet" href="styles/primario.css" type="text/css">
 <link rel="stylesheet" href="styles/imagen.css" type="text/css">
+
+
 <link href="https://fonts.googleapis.com/css2?family=Thasadith:ital@1&display=swap" rel="stylesheet">
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap" rel="stylesheet">
@@ -86,15 +88,18 @@
 			<tiles:insertAttribute name="title" />
 		</h1>-->
 		<tiles:insertAttribute name="body" />	
-		<jstl:if test="${message != null}">
+		</div>
+		<div class="ml-sm-0 mr-sm-0 ml-md-3 mr-md-3 ml-lg-5 mr-lg-5 bg-light">
+		<tiles:insertAttribute name="footer" />
+
+		<!--<jstl:if test="${message != null}">
 			<br />
-			<span class="message"><spring:message code="${message}" /></span>
+			 <span class="message"><spring:message code="${message}" /></span> 
 		</jstl:if>	
 	</div>
 	<div class="ml-sm-0 mr-sm-0 ml-md-3 mr-md-3 ml-lg-5 mr-lg-5 mt-auto bg-light">
-		<tiles:insertAttribute name="footer" />
+		<tiles:insertAttribute name="footer" />-->
 	</div>
-
 </body>
 
 </html>

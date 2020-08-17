@@ -3,6 +3,8 @@ package controllers.gestor;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CentroService;
@@ -71,17 +74,17 @@ public class ServicioGestorController extends AbstractController {
 
 	// Save -----------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(Servicio servicio, final BindingResult binding) {
+	public ModelAndView save(@Valid final Servicio servicio, final BindingResult binding, @RequestParam(required = false, defaultValue = "None") final MultipartFile file) {
 		ModelAndView result;
 
-		servicio = this.servicioService.reconstruct(servicio, binding);
+		//servicio = this.servicioService.reconstruct(servicio, binding);
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(servicio);
 		else
 			try {
 
-				this.servicioService.save(servicio);
+				this.servicioService.save(servicio, file);
 				result = new ModelAndView("redirect:/centro/gestor/display.do?centroId=" + servicio.getCentro().getId());
 			} catch (final Throwable oops) {
 				if (oops.getMessage().contains("Failed to convert property value of type java.lang.String to required type java.lang.Double for property precio; nested exception is java.lang.NumberFormatException:"))
@@ -90,16 +93,11 @@ public class ServicioGestorController extends AbstractController {
 					result = this.createEditModelAndView(servicio, "request.servicio.duracion.error");
 				else if (oops.getMessage().equals("duracion no cumple patron"))
 					result = this.createEditModelAndView(servicio, "request.servicio.duracion.patron");
+				else if (oops.getMessage().equals("ya existe servicio"))
+					result = this.createEditModelAndView(servicio, "request.servicio.existe");
 				else
 					result = this.createEditModelAndView(servicio, "servicio.commit.error");
 			}
-		return result;
-	}
-
-	protected ModelAndView createEditModelAndView(final Servicio servicio) {
-		Assert.notNull(servicio);
-		ModelAndView result;
-		result = this.createEditModelAndView(servicio, null);
 		return result;
 	}
 
@@ -141,6 +139,14 @@ public class ServicioGestorController extends AbstractController {
 		return result;
 	}
 
+	protected ModelAndView createEditModelAndView(final Servicio servicio) {
+
+		Assert.notNull(servicio);
+		ModelAndView result;
+		result = this.createEditModelAndView(servicio, null);
+		return result;
+	}
+
 	protected ModelAndView createEditModelAndView(final Servicio servicio, final String message) {
 		assert servicio != null;
 
@@ -149,6 +155,8 @@ public class ServicioGestorController extends AbstractController {
 		result = new ModelAndView("servicio/edit");
 		result.addObject("servicio", servicio);
 		result.addObject("message", message);
+
 		return result;
+
 	}
 }

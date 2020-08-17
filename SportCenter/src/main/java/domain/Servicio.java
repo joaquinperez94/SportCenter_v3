@@ -7,11 +7,11 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -22,7 +22,8 @@ public class Servicio extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private String	nombre;
-	private byte[]	imagen;
+	private String	identificador;
+	private String	imagen;
 	private String	descripcion;
 	private double	precio;
 	private double	duración;
@@ -37,11 +38,21 @@ public class Servicio extends DomainEntity {
 		this.nombre = nombre;
 	}
 
-	public byte[] getImagen() {
+	@NotBlank
+	public String getIdentificador() {
+		return this.identificador;
+	}
+
+	public void setIdentificador(final String identificador) {
+		this.identificador = identificador;
+	}
+
+	@Lob
+	public String getImagen() {
 		return this.imagen;
 	}
 
-	public void setImagen(final byte[] imagen) {
+	public void setImagen(final String imagen) {
 		this.imagen = imagen;
 	}
 
@@ -54,7 +65,6 @@ public class Servicio extends DomainEntity {
 	}
 
 	@NotNull
-	@Min(1)
 	@Digits(fraction = 2, integer = 8)
 	public double getPrecio() {
 		return this.precio;

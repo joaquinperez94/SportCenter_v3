@@ -8,7 +8,10 @@
  * 
  */
 
-
+.imagen2{
+	max-width: 100% !important;
+	height: auto !important;
+}
 .error {
 	color: red;
 	font-weight: bolder;
@@ -34,8 +37,25 @@
     margin:auto;
 }
 
+.custom {
+    width: 70px !important;
+}
+.cell {
+    vertical-align: middle;
+    display: table-cell;
+}
+td > * {
+    vertical-align : middle;
+}
+html,body { height:100% !important;
+background-size: cover;}
 
-html,body { height:auto !important;}
+.extender34{
+	 height: 100%;
+
+
+}
+
 
 
 section {
@@ -43,18 +63,11 @@ section {
 }
 .otra{
 	 overflow-x: hidden !important;
+	 height:100%;
 }
 
 .bg { 
-	 height: 100%;
-  /* The image used */
-background-color: #FFFFFF;
-  /* Full height */
-  height: auto !important; 
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: repeat;
-  background-size: cover;
+
 }
 
 .extender{
@@ -101,7 +114,21 @@ font-family: 'Thasadith', sans-serif;
 	display:none;
 }
 
+.btn-group.special {
+  display: flex;
+}
+
+.footer-mia {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.special .btn {
+  flex: 1
+}
 color2: #343A40;
+#6ac27f
 
 
 

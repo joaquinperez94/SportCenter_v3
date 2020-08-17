@@ -22,106 +22,209 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<display:table name="centro" class="displaytag"
-	requestURI="${requestURI}" id="row">
+<div class="container bg-light pb-5">
 
-	<display:column>
-	<p>
-	<B><spring:message code="centro.nombre" /></B>
-	<jstl:out value="${row.nombre}"></jstl:out>
-	</p>
-	<p>
-	<B><spring:message code="centro.descripcion" /></B>
-	<jstl:out value="${row.descripcion}"></jstl:out>
-	</p>
-	<p>
-	<B><spring:message code="centro.direccion" /></B>
-	<jstl:out value="${row.direccion}"></jstl:out>
-	</p>
-	<p>
-	<B><spring:message code="centro.tipo" /></B>
-	<jstl:out value="${row.tipo}"></jstl:out>
-	</p>
-	<p>
-	<B><spring:message code="centro.valoracion" /></B>
-	<jstl:out value="${row.valoracion}"></jstl:out>
-	</p>
-	</display:column>
-</display:table>
-
-
-<script type="text/javascript">
-	function confirmAnadir(centroId) {
-		confirm=confirm('<spring:message code="centro.usuario.anadir"/>');
-		if (confirm)
-		  window.location.href ="centro/usuario/anadir.do?centroId=" + centroId;
-		  else
-			  window.location.href ="centro/usuario/display.do?centroId=" + centroId;
-	}
-</script>
-<security:authorize access="hasRole('USUARIO')">
-<jstl:if test="${!YaAnadido}">
-<input type="button" name="anadir"
-				value="<spring:message code="centro.anadir" />"
-				onclick="confirmAnadir(${row.id});" />
-</jstl:if>
-</security:authorize>
-
-<h2><spring:message code="centro.servicios.nombre.tabla" /></h2>
-	<jstl:if test="${serviciosEmpty}">
-		<spring:message code="centro.servicios.vacios" />
-	</jstl:if>
-	<jstl:if test="${serviciosEmpty==false}">	
-	<display:table name="servicios" id="row" class="displaytag">
-		<spring:message code="centro.servicios.nombre" var="tituloCabecera" />
-		<display:column property="nombre" title="${tituloCabecera}" sortable="false" >
-			<jstl:out value="${row.nombre}"></jstl:out>
-		</display:column>
+	<div class="row py-5 mx-auto">
+		 <div class="col-12 col-sm-12 col-md-6 mx-auto text-center my-auto">
+      		<img class="img-fluid imagen2 shadow" style="width: 50rem;" src="data:image/jpeg;base64,${centro.imagen}">
+    	</div>
+    	<div class="col-12 col-sm-12 col-md-6 mx-auto text-center mt-4">
+			<h3><strong><jstl:out value="${centro.nombre}"></jstl:out></strong></h3>
+			<div>
+				<p class="mt-3 pl-2 text-left font-weight-light font-italic"><jstl:out value="${centro.descripcion}"></jstl:out></p>
 				
-		<security:authorize access="hasRole('GESTOR')">
-		<display:column sortable="false">
-			<input type="button" name="display"
-			value="<spring:message code="servicio.ver" />"
-			onclick="javascript: window.location.replace('servicio/gestor/display.do?servicioId=${row.id}');" />
-		</display:column>
-		
-		<display:column sortable="false">
-			<input type="button" name="edit"
-			value="<spring:message code="servicio.editar" />"
-			onclick="javascript: window.location.replace('servicio/gestor/edit.do?servicioId=${row.id}');" />
-		</display:column>
-		
-		<display:column sortable="false">
-			<input type="button" name="list"
-			value="<spring:message code="servicio.horario.ver" />"
-			onclick="javascript: window.location.replace('horario/gestor/list.do?servicioId=${row.id}');" />
-		</display:column>		
-		</security:authorize>
-		
-		
-		<security:authorize access="hasRole('USUARIO')">
-		<display:column sortable="false">
-			<input type="button" name="display"
-			value="<spring:message code="servicio.ver" />"
-			onclick="javascript: window.location.replace('servicio/usuario/display.do?servicioId=${row.id}');" />
-		</display:column>		
-		<display:column sortable="false">
-			<input type="button" name="list"
-			value="<spring:message code="servicio.horario.ver" />"
-			onclick="javascript: window.location.replace('horario/usuario/list.do?servicioId=${row.id}');" />
-		</display:column>
-		</security:authorize>
-		
-		
-	</display:table>
-	</jstl:if>
-	
+
+				
+				<!-- 5 ESTRELLAS-->
+				<jstl:if test="${(centro.valoracion==5.0)}">
+					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
+				</jstl:if>
+				
+				
+				<!-- 4 ESTRELLAS Y MEDIA-->
+				<jstl:if test="${(centro.valoracion>=4.5) && (centro.valoracion<5)}">
+					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="as fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
+				</jstl:if>
+				<!-- 4 ESTRELLAS-->
+				<jstl:if test="${(centro.valoracion>=4.0) && (centro.valoracion<4.5)}">
+					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
+				</jstl:if>
+				
+				<!-- 3 ESTRELLAS y media-->
+				<jstl:if test="${(centro.valoracion>=3.5) && (centro.valoracion<4.0)}">
+					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="as fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
+				</jstl:if>
+				
+				<!-- 3 ESTRELLAS-->
+				<jstl:if test="${(centro.valoracion>=3.0) && (centro.valoracion<3.5)}">
+					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
+				</jstl:if>
+				
+				<!-- 2 ESTRELLAS Y media-->
+				<jstl:if test="${(centro.valoracion>=2.5) && (centro.valoracion<3.0)}">
+					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="as fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
+				</jstl:if>
+				
+				<!-- 2 ESTRELLAS-->
+				<jstl:if test="${(centro.valoracion>=2.0) && (centro.valoracion<2.5)}">
+					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
+				</jstl:if>
+				
+				
+				<!-- 1 ESTRELLA Y MEDIA-->
+				<jstl:if test="${(centro.valoracion>=1.5) && (centro.valoracion<2.0)}">
+					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="as fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
+				</jstl:if>
+				
+				
+				
+				<!-- 1 ESTRELLA -->
+				<jstl:if test="${(centro.valoracion>=1.0) && (centro.valoracion<1.5)}">
+					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
+					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
+				</jstl:if>
+				
+				
+				<!-- MEDIA -->
+				<jstl:if test="${(centro.valoracion<1.0)}">
+					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
+					<i class="fas fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
+				</jstl:if>
+				
+				<!-- NINGUNA -->
+				<jstl:if test="${(centro.valoracion==0.0)}">
+					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
+					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
+				</jstl:if>
+				
+				
+				
+				
+				<p class="mb-1 pl-2 text-left"><i class="fas fa-square my-auto mr-1" style="color: #6ac27f; font-size: 10px;  vertical-align: middle;"></i><B style="vertical-align: middle;"><spring:message code="centro.direccion" /></B><em style="vertical-align: middle;"><jstl:out value="  ${centro.direccion}"></jstl:out></em></p>
+				<p class="mt-1 pl-2 text-left"><i class="fas fa-square my-auto mr-1" style="color: #6ac27f; font-size: 10px;  vertical-align: middle;"></i><B style="vertical-align: middle;"><spring:message code="centro.tipo" /></B><em style="vertical-align: middle;"><jstl:out value="  ${centro.tipo}"></jstl:out></em></p>
+			</div>
+    	</div> 
+	</div>
+
+
+
+
+<div class="mt-1 mt-sm-2 mr-5 ml-5 mr-sm-0 ml-sm-0 ml-md-0 mr-md-0">
+<h3><spring:message code="centro.servicios.nombre.tabla" /></h3>
+<table class="table  table-striped shadow table-sm">
+  <thead>
+    <tr class="bg-primary">
+      <th class="mx-auto text-center"  style="width: 45.00%" ><spring:message code="centro.servicios.nombre" /></th>
+      <th style="width: 55.00%" scope="col"></th>
+
+    </tr>
+  </thead>
+  <tbody>
+  	<jstl:forEach var="row" items="${servicios}">
+  	<security:authorize access="hasRole('GESTOR')">
+  		<tr>
+	      <td class="mx-auto text-center" style="vertical-align: middle;"><p><jstl:out value="${row.nombre}"></jstl:out>-<jstl:out value="${row.identificador}"></jstl:out></p></td>
+	      	<td class="mx-auto text-center" style="vertical-align: middle;">
+	      	<div class="container">
+  				<div class="row">
+	  				<div class="col-12 col-sm-4">
+					<input type="button" class="btn btn-primary btn-sm mb-2 mb-sm-1 custom" name="display"
+							value="<spring:message code="servicio.ver" />"
+							onclick="location.href='servicio/gestor/display.do?servicioId=${row.id}'" />
+					</div>
+					<div class="col-12 col-sm-4">
+					<input type="button" class="btn btn-primary btn-sm mb-2 mb-sm-1 custom " name="display"
+							value="<spring:message code="servicio.editar" />"
+							onclick="location.href='servicio/gestor/edit.do?servicioId=${row.id}'" />
+					</div>
+					<div class="col-12 col-sm-4">	
+					<input type="button" class="btn btn-primary btn-sm mb-2 mb-sm-1 custom " name="display"
+							value="<spring:message code="servicio.horario.ver" />"
+							onclick="location.href='horario/gestor/list.do?servicioId=${row.id}'" />
+					</div>
+
+				</div>
+			</div>
+			</td>
+		</tr>
+    	</security:authorize>   
+  	</jstl:forEach>
+  
+  </tbody>
+</table>
+</div>
 <security:authorize access="hasRole('GESTOR')">
 <jstl:if test="${mostrarAnadir}">
-	<div>
-		<input type="button" name="edit"
-			value="<spring:message code="centro.servicio.crear" />"
-			onclick="javascript: window.location.replace('servicio/gestor/create.do?centroId=${centro.id}');" />
-	</div>
+<div class="mt-sm-2 mr-5 ml-5 mr-sm-0 ml-sm-0 ml-md-0 mr-md-0">
+<input type="button" class="btn btn-primary btn-sm" name="display"
+							value="<spring:message code="centro.servicio.crear" />"
+							onclick="location.href='servicio/gestor/create.do?centroId=${centro.id}'" />
+</div>
 </jstl:if>
 </security:authorize>
+</div>
+
+

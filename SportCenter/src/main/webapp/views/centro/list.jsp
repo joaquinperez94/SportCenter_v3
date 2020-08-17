@@ -91,14 +91,14 @@
 	</jstl:forEach>
 </div>
 
+
 <ul class="pagination justify-content-center">
 
     <jstl:url value="centro/gestor/my-center.do" var="prev">
         <jstl:param name="page" value="${page-1}"/>
     </jstl:url>
-    <jstl:if test="${page > 1}">
-        <!-- <a href="<jstl:out value="${prev}" />" class="pn prev">Prev</a> -->
-        <li class="page-item disabled"><a class="page-link" href="${prev}">Previous</a></li>
+    <jstl:if test="${page > 1}">    
+        <li class="page-item"><a class="page-link" href="${prev}">Previous</a></li>
     </jstl:if>
 
     <jstl:forEach begin="1" end="${maxPages}" step="1" varStatus="i">

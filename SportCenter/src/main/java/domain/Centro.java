@@ -27,7 +27,7 @@ public class Centro extends DomainEntity {
 	private String	descripcion;
 	private String	tipo;
 	private String	direccion;
-	private int		valoracion;
+	private double	valoracion;
 
 
 	@NotBlank
@@ -57,7 +57,7 @@ public class Centro extends DomainEntity {
 		this.descripcion = descripcion;
 	}
 
-	@Pattern(regexp = "(Polideportivo)|(Pabellón)|(Gimnasio)|(Campo Fútbol)|(Pista)")
+	@Pattern(regexp = "(Polideportivo)|(Pabellón)|(Gimnasio)|(Campo Fútbol)|(Pista) | (Otro)")
 	public String getTipo() {
 		return this.tipo;
 	}
@@ -75,11 +75,11 @@ public class Centro extends DomainEntity {
 		this.direccion = direccion;
 	}
 
-	public Integer getValoracion() {
+	public double getValoracion() {
 		return this.valoracion;
 	}
 
-	public void setValoracion(final Integer valoracion) {
+	public void setValoracion(final double valoracion) {
 		this.valoracion = valoracion;
 	}
 

@@ -28,10 +28,10 @@
 	<div class="row">
 		<div class="col-md-7 mx-auto mt-5">			
 			<jstl:if test="${centro.id ==0 }">
-				<h1><spring:message code="gestor.gestor.tittle1" /></h1>
+				<h1><spring:message code="centro.gestor.tittle1" /></h1>
 			</jstl:if>
 			<jstl:if test="${centro.id !=0 }">
-				<h1><spring:message code="gestor.gestor.tittle2" /></h1>
+				<h1><spring:message code="centro.gestor.tittle2" /></h1>
 			</jstl:if>
 			<hr class="bg-primary mt-0 pt-0">
 			<form:form action="centro/gestor/edit.do" enctype="multipart/form-data" modelAttribute="centro">
@@ -66,7 +66,7 @@
 				</div>
 				<div class="row form-group">	
 						<form:label path="direccion" class="col-form-label col-md-4 d-flex ">
-							<spring:message code="centro.direccion" />:<p class="text-danger">*</p>
+							<spring:message code="centro.direccion1" />:<p class="text-danger">*</p>
 						</form:label>
 						<div class="col-md-8">
 							<form:input type="text" path="direccion" class="form-control"/>
@@ -74,8 +74,8 @@
 						</div>
 				</div>
 				<div class="row form-group">	
-						<form:label path="tipo" class="col-form-label col-md-4">
-							<spring:message code="centro.tipo" />:
+						<form:label path="tipo" class="col-form-label col-md-4 d-flex">
+							<spring:message code="centro.tipo1" />:<p class="text-danger">*</p>
 						</form:label>
 						<div class="col-md-8">
 							<form:select type="select" path="tipo" class="form-control">
@@ -110,7 +110,7 @@
 				</script>
 				
 				
-				<jstl:if test="${not empty message}">
+				<jstl:if test="${message != null}">
 	 				<p class="text-danger mt-0 mb-2"><spring:message code="${message}"/></p>
 				</jstl:if>
 				
@@ -120,7 +120,7 @@
 				<button type="submit" name="save" class="btn btn-primary"><spring:message code="centro.guardar"/></button>
 				
 				<jstl:if test="${centro.id !=0 }">
-					<acme:submitirmensaje name="delete" code="centro.borrar" code2="centro.confirmar.borrado"/>
+					<button onclick="javascript: return confirm('<spring:message code="centro.confirmar.borrado" />')" type="submit" name="delete" class="btn btn-danger"><spring:message code="centro.guardar"/></button>	
 				</jstl:if>		
 
 				<button class="btn btn-secondary" onclick="location.href='centro/gestor/my-center.do?d-16544-p=1'" type="button">

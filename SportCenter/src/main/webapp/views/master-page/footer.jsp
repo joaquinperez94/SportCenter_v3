@@ -14,18 +14,13 @@
 
 <jsp:useBean id="date" class="java.util.Date" />
 
-<hr />
 
 
-        <div class="row justify-content-between text-center">
-            <div class="col-md-4 text-md-left">
-                <p class="text-muted">Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> SportCenter Inc. amet consectetur adipisicing elit.</p>
-            </div>
-            <div class="col-md-4 text-md-right">
-                <div class="h3">
-                    <i class="fa fa-facebook-square" aria-hidden="true"></i>
-                    <i class="fa fa-google-plus-square" aria-hidden="true"></i>
-                    <i class="fa fa-twitter-square" aria-hidden="true"></i>
-                </div>
-            </div>
-        </div>
+
+			
+                <p style="font-size: 12px;" class="text-muted mx-auto text-center mb-0 pb-0">Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> SportCenter Inc.
+            
+                    <i style="font-size: 15px;" class="fa fa-facebook-square" aria-hidden="true"></i>
+                    <i style="font-size: 15px;" class="fa fa-google-plus-square" aria-hidden="true"></i>
+                    <i style="font-size: 15px;" class="fa fa-twitter-square" aria-hidden="true"></i></p>
+   

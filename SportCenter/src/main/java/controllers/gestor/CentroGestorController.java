@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -100,6 +99,10 @@ public class CentroGestorController extends AbstractController {
 	public ModelAndView save(@Valid final Centro centro, final BindingResult binding, @RequestParam(required = false, defaultValue = "None") final MultipartFile file) {
 		ModelAndView result;
 
+		if (centro.getTipo().equals("-----")) {
+			result = this.createEditModelAndView(centro, "centro.commit.tipo");
+			return result;
+		}
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(centro);
 		else
@@ -146,7 +149,6 @@ public class CentroGestorController extends AbstractController {
 		gestor = this.gestorService.findByPrincipal();
 		centro = this.centroService.findOne(centroId);
 
-		//TODOS LOS ARTCULOS DE UN PERIDICO
 		servicios = this.servicioService.findServiciosByCentroId(centroId);
 		comentarios = this.comentarioService.findComentariosByCentroId(centroId);
 
@@ -183,11 +185,9 @@ public class CentroGestorController extends AbstractController {
 
 	@RequestMapping(value = "/my-center", method = RequestMethod.GET)
 	public ModelAndView listPorGestor(@RequestParam(required = false) Integer page) {
-		Page<Centro> centrosPaginados;
 		final ModelAndView result;
 		final List<Centro> centros;
 		Gestor gestorConectado;
-		final int totalPorPagina = 2;
 
 		gestorConectado = this.gestorService.findByPrincipal();
 		centros = new ArrayList<>(this.centroService.findCentrosByGestorSinPage(gestorConectado.getId()));
@@ -207,11 +207,7 @@ public class CentroGestorController extends AbstractController {
 			result.addObject("centros", pagedListHolder.getPageList());
 		}
 
-		centrosPaginados = this.centroService.findCentrosByGestor(gestorConectado.getId(), page, totalPorPagina);
-		//final PagedListHolder<Centro> pagedListHolder = new PagedListHolder<>(centrosPaginados.getContent());
-
 		result.addObject("requestURI", "centro/gestor/my-center.do");
-		//result.addObject("centros", centros);
 		result.addObject("mostrarBotonGestor", true);
 		result.addObject("maxPages", pagedListHolder.getPageCount());
 		result.addObject("page", page);
