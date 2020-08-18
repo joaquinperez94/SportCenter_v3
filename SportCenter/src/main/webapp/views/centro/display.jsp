@@ -31,7 +31,7 @@
     	<div class="col-12 col-sm-12 col-md-6 mx-auto text-center mt-4">
 			<h3><strong><jstl:out value="${centro.nombre}"></jstl:out></strong></h3>
 			<div>
-				<p class="mt-3 pl-2 text-left font-weight-light font-italic"><jstl:out value="${centro.descripcion}"></jstl:out></p>
+				<p class="mt-3 pl-2 text-left font-weight-light font-italic mx-auto text-center"><jstl:out value="${centro.descripcion}"></jstl:out></p>
 				
 
 				
@@ -139,7 +139,7 @@
 				
 				
 				<!-- MEDIA -->
-				<jstl:if test="${(centro.valoracion<1.0)}">
+				<jstl:if test="${(centro.valoracion>0.0) && (centro.valoracion<1.0)}">
 					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
 					<i class="fas fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
 					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
@@ -172,8 +172,12 @@
 
 
 
-<div class="mt-1 mt-sm-2 mr-5 ml-5 mr-sm-0 ml-sm-0 ml-md-0 mr-md-0">
+<div class="mt-1 mt-sm-2 mr-2 ml-2 mr-sm-0 ml-sm-0 ml-md-0 mr-md-0">
 <h3><spring:message code="centro.servicios.nombre.tabla" /></h3>
+<jstl:if test="${empty servicios}">
+<p><spring:message code="centro.servicios.vacios" /></p>
+</jstl:if>
+<jstl:if test="${not empty servicios}">
 <table class="table  table-striped shadow table-sm">
   <thead>
     <tr class="bg-primary">
@@ -183,6 +187,8 @@
     </tr>
   </thead>
   <tbody>
+  	
+  	
   	<jstl:forEach var="row" items="${servicios}">
   	<security:authorize access="hasRole('GESTOR')">
   		<tr>
@@ -211,10 +217,57 @@
 			</td>
 		</tr>
     	</security:authorize>   
+    	
+    	<security:authorize access="isAnonymous()">
+  		<tr>
+	      <td class="mx-auto text-center py-0 mb-0 pb-0 pt-2" style="vertical-align:middle;"><p><jstl:out value="${row.nombre}"></jstl:out>-<jstl:out value="${row.identificador}"></jstl:out></p></td>
+	      	<td class="mx-auto text-center py-0 mb-0 pb-0" style="vertical-align: middle;">
+	      	<div class="container">
+  				<div class="row ">
+	  				<div class="col-12 col-sm-6">
+					<input type="button" class="btn btn-primary btn-sm mb-1 mb-sm-0 mb-sm-0 custom2" name="display"
+							value="<spring:message code="servicio.ver" />"
+							onclick="location.href='servicio/display.do?servicioId=${row.id}'" />
+					</div>
+					<div class="col-12 col-sm-6">	
+					<input type="button" class="btn btn-primary btn-sm mb-1 mb-sm-0 mb-sm-0 custom2" name="display"
+							value="<spring:message code="servicio.horario.ver" />"
+							onclick="location.href='horario/list.do?servicioId=${row.id}'" />
+					</div>
+				</div>
+			</div>
+			</td>
+		</tr>
+    	</security:authorize>   
+
+  	
+  	<security:authorize access="hasRole('USUARIO')">
+  		<tr>
+	      <td class="mx-auto text-center py-0 mb-0 pb-0 pt-2" style="vertical-align: middle;"><p><jstl:out value="${row.nombre}"></jstl:out>-<jstl:out value="${row.identificador}"></jstl:out></p></td>
+	      	<td class="mx-auto text-center" style="vertical-align: middle;">
+	      	<div class="container">
+  				<div class="row">
+	  				<div class="col-12 col-sm-6">
+					<input type="button" class="btn btn-primary btn-sm mb-1 mb-sm-0 mb-sm-0 custom2" name="display"
+							value="<spring:message code="servicio.ver" />"
+							onclick="location.href='servicio/usuario/display.do?servicioId=${row.id}'" />
+					</div>
+					<div class="col-12 col-sm-6">	
+					<input type="button" class="btn btn-primary btn-sm mb-1 mb-sm-0 mb-sm-0 custom2" name="display"
+							value="<spring:message code="servicio.horario.ver" />"
+							onclick="location.href='horario/usuario/list.do?servicioId=${row.id}'" />
+					</div>
+
+				</div>
+			</div>
+			</td>
+		</tr>
+    	</security:authorize>   
   	</jstl:forEach>
   
   </tbody>
 </table>
+</jstl:if>
 </div>
 <security:authorize access="hasRole('GESTOR')">
 <jstl:if test="${mostrarAnadir}">

@@ -132,7 +132,7 @@ public class ServicioGestorController extends AbstractController {
 			final Integer centroId = servicio.getCentro().getId();
 
 			this.servicioService.delete(servicio);
-			result = new ModelAndView("redirect:/servicio/gestor/display.do?centroId=" + centroId);
+			result = new ModelAndView("redirect:/centro/gestor/display.do?centroId=" + centroId);
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(servicio, "servicio.commit.error");
 		}

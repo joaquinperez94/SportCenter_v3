@@ -51,13 +51,13 @@
 					<jstl:if test="${mostrarBotonGestor}">
     				<div class="row mt-auto form-row">
     				<div class="col-6">
-    				<input type="button" class="btn btn-primary mt-auto btn-md btn-block font-weight-bold" name="edit"
+    				<input type="button" class="btn btn-primary mt-auto btn-md btn-block" name="edit"
 						value="<spring:message code="centro.editar" />"
 						onclick="location.href='centro/gestor/edit.do?centroId=${x.id}'" />
 						
 						</div>
 						<div class="col-6">
-						<input type="button" class="btn btn-primary mt-auto btn-md btn-block font-weight-bold" name="display"
+						<input type="button" class="btn btn-primary mt-auto btn-md btn-block" name="display"
 						value="<spring:message code="centro.ver" />"
 						onclick="location.href='centro/gestor/display.do?centroId=${x.id}'" />
     				</div>
@@ -66,7 +66,7 @@
     				<jstl:if test="${!mostrarBotonGestor}">
     				<div class="row mt-auto form-row text-center">
     				<div class="col-12">
-						<input type="button" class="btn btn-primary mt-auto btn-md btn-block font-weight-bold" name="display"
+						<input type="button" class="btn btn-primary mt-auto btn-md btn-block" name="display"
 						value="<spring:message code="centro.ver" />"
 						onclick="location.href='centro/gestor/display.do?centroId=${x.id}'" />
     				</div>
@@ -75,15 +75,24 @@
 
     				</security:authorize>
     				<security:authorize access="hasRole('USUARIO')">
-						    				<div class="row mt-auto form-row text-center">
-    				<div class="col-12">
-						<input type="button" class="btn btn-primary mt-auto btn-md btn-block font-weight-bold" name="display"
-						value="<spring:message code="centro.ver" />"
-						onclick="location.href='centro/USUARIO/display.do?centroId=${x.id}'" />
-    				</div>
-    				</div>
+						<div class="row mt-auto form-row text-center">
+		    				<div class="col-12">
+								<input type="button" class="btn btn-primary mt-auto btn-md btn-block" name="display"
+								value="<spring:message code="centro.ver" />"
+								onclick="location.href='centro/usuario/display.do?centroId=${x.id}'" />
+		    				</div>
+	    				</div>
     				</security:authorize>
     				
+    				<security:authorize access="isAnonymous()">
+    					<div class="row mt-auto form-row text-center">
+		    				<div class="col-12">
+								<input type="button" class="btn btn-primary mt-auto btn-md btn-block" name="display"
+								value="<spring:message code="centro.ver" />"
+								onclick="location.href='centro/display.do?centroId=${x.id}'" />
+		    				</div>
+	    				</div>
+    				</security:authorize>
 
   				</div>
 			</div>
@@ -94,11 +103,11 @@
 
 <ul class="pagination justify-content-center">
 
-    <jstl:url value="centro/gestor/my-center.do" var="prev">
+    <jstl:url value="${requestURI}" var="prev">
         <jstl:param name="page" value="${page-1}"/>
     </jstl:url>
     <jstl:if test="${page > 1}">    
-        <li class="page-item"><a class="page-link" href="${prev}">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="${prev}"><spring:message code="paginacion.anterior" /></a></li>
     </jstl:if>
 
     <jstl:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
@@ -114,20 +123,18 @@
  
             </jstl:when>
             <jstl:otherwise>
-                <jstl:url value="centro/gestor/my-center.do" var="url">
+                <jstl:url value="${requestURI}" var="url">
                     <jstl:param name="page" value="${i.index}"/>
                 </jstl:url>
-                <!-- <a href='<jstl:out value="${url}" />'>${i.index}</a> -->
                  <li class="page-item"><a class="page-link" href="${url}">${i.index}</a></li>
             </jstl:otherwise>
         </jstl:choose>
     </jstl:forEach>
-    <jstl:url value="/centro/gestor/my-center.do" var="next">
+    <jstl:url value="${requestURI}" var="next">
         <jstl:param name="page" value="${page + 1}"/>
     </jstl:url>
     <jstl:if test="${page + 1 <= maxPages}">
-        <!-- <a href='<jstl:out value="${next}" />' class="pn next">Next</a> -->
-        <li class="page-item"><a class="page-link" href="${next}">Next</a></li>
+        <li class="page-item"><a class="page-link" href="${next}"><spring:message code="paginacion.siguiente" /></a></li>
     </jstl:if>
 </ul>
 

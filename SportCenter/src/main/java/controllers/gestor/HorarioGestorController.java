@@ -160,6 +160,7 @@ public class HorarioGestorController extends AbstractController {
 		result = new ModelAndView("horario/edit");
 		result.addObject("horario", horario);
 		result.addObject("message", message);
+		result.addObject("duracion", horario.getServicio().getDuración());
 		//result.addObject("requestURI", "horario/edit.do");
 
 		return result;

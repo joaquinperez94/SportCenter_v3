@@ -39,7 +39,6 @@ public class Horario extends DomainEntity {
 		this.horaInicio = horaInicio;
 	}
 
-	@NotBlank
 	public String getMinutosInicio() {
 		return this.minutosInicio;
 	}
@@ -48,6 +47,7 @@ public class Horario extends DomainEntity {
 		this.minutosInicio = minutosInicio;
 	}
 
+	@NotBlank
 	public String getHoraFin() {
 		return this.horaFin;
 	}

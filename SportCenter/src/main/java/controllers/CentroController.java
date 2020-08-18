@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +18,6 @@ import services.ComentarioService;
 import services.ServicioService;
 import domain.Centro;
 import domain.Comentario;
-import domain.Gestor;
 import domain.Servicio;
 
 @Controller
@@ -62,13 +60,10 @@ public class CentroController extends AbstractController {
 	}
 
 	//Listar
-	@RequestMapping(value = "/my-center", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listPorGestor(@RequestParam(required = false) Integer page) {
-		final Page<Centro> centrosPaginados;
 		final ModelAndView result;
 		final List<Centro> centros;
-		final Gestor gestorConectado;
-		final int totalPorPagina = 2;
 
 		centros = new ArrayList<>(this.centroService.findAll());
 		final PagedListHolder<Centro> pagedListHolder = new PagedListHolder<>(centros);
@@ -87,12 +82,7 @@ public class CentroController extends AbstractController {
 			result.addObject("centros", pagedListHolder.getPageList());
 		}
 
-		//centrosPaginados = this.centroService.findCentrosByGestor(gestorConectado.getId(), page, totalPorPagina);
-		//final PagedListHolder<Centro> pagedListHolder = new PagedListHolder<>(centrosPaginados.getContent());
-
-		result.addObject("requestURI", "centro/gestor/my-center.do");
-		//result.addObject("centros", centros);
-		result.addObject("mostrarBotonGestor", true);
+		result.addObject("requestURI", "centro/list.do");
 		result.addObject("maxPages", pagedListHolder.getPageCount());
 		result.addObject("page", page);
 

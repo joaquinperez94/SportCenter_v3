@@ -49,6 +49,14 @@ public class HorarioService {
 	//Guardar -----------------------------------------------------------
 	public Horario save(final Horario horario) {
 		Horario result;
+		final String horaI = horario.getHoraInicio().split(":")[0];
+		final String minI = horario.getHoraInicio().split(":")[1];
+		final String horaF = horario.getHoraFin().split(":")[0];
+		final String minF = horario.getHoraFin().split(":")[1];
+		horario.setHoraInicio(horaI);
+		horario.setMinutosInicio(minI);
+		horario.setHoraFin(horaF);
+		horario.setMinutosFin(minF);
 
 		Assert.notNull(horario);
 
