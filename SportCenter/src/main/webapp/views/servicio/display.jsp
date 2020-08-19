@@ -30,11 +30,11 @@
     	</div>
     	<div class="col-12 col-sm-12 col-md-6 mx-auto text-center mt-4">
 			<h3><strong><jstl:out value="${servicio.nombre}"></jstl:out>-<jstl:out value="${servicio.identificador}"></jstl:out></strong></h3>
-			<div>
+			<div >
 				<jstl:if test="${empty  servicio.descripcion}">
-					<p class="mt-3 pl-2 text-left font-weight-light font-italic"><spring:message code="servicio.nodescripcion" /></p>
+					<p class="mt-3 pl-2 font-weight-light font-italic" class="text-center mx-auto"><spring:message code="servicio.nodescripcion" /></p>
 				</jstl:if>
-					<p class="mt-3 pl-2 text-left font-weight-light font-italic"><jstl:out value="${servicio.descripcion}"></jstl:out></p>
+					<p class="mt-3 pl-2 font-weight-light font-italic " class="text-center mx-auto"><jstl:out value="${servicio.descripcion}"></jstl:out></p>
 				
 
 				<p class="mb-1 pl-2 text-left mt-3"><i class="fas fa-square my-auto mr-1" style="color: #6ac27f; font-size: 10px;  vertical-align: middle;"></i><B style="vertical-align: middle;"><spring:message code="servicio.precio" /></B><em style="vertical-align: middle;"><jstl:out value="  ${servicio.precio}"></jstl:out></em></p>
@@ -56,11 +56,11 @@
 
 
 <security:authorize access="hasRole('USUARIO')">
-<input type="button" class="btn btn-primary btn-sm ml-1 ml-lg-1 ml-xl-5" name="display"
+<input type="button" class="btn btn-primary btn-sm ml-1 ml-lg-1 ml-xl-5" style="width:70px;" name="display"
 							value="<spring:message code="servicio.crear" />"
 				onclick="location.href='reserva/usuario/create.do?servicioId=${servicio.id}'" />
 
-<input type="button" class="btn btn-primary btn-sm" name="display"
+<input type="button" class="btn btn-secondary btn-sm" style="width:70px;" name="display"
 							value="<spring:message code="servicio.volver" />"
 				onclick="location.href='centro/usuario/display.do?centroId=${servicio.centro.id}'" />
 </security:authorize>

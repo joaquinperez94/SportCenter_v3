@@ -54,7 +54,7 @@
 					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
 					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
 					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
-					<i class="as fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
 					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
 				</jstl:if>
 				<!-- 4 ESTRELLAS-->
@@ -74,7 +74,7 @@
 					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
 					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
 					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
-					<i class="as fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
 					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
 					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
 				</jstl:if>
@@ -95,7 +95,7 @@
 					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
 					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
 					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
-					<i class="as fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
 					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
 					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
 					<strong style="vertical-align: middle; font-size: 20px;"><jstl:out value="  ${centro.valoracion}"></jstl:out></strong></p>
@@ -117,7 +117,7 @@
 				<jstl:if test="${(centro.valoracion>=1.5) && (centro.valoracion<2.0)}">
 					<p class="mt-3 pl-3 text-left font-weight-light font-italic">
 					<i class="fas fa-star" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
-					<i class="as fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
+					<i class="fas fa-star-half-alt" style="color: #F1EB2A; font-size: 25px;  vertical-align: middle;"></i>
 					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
 					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">
 					<img src="images/estrella.svg" width="25px" height="25px" class="img-responsive rounded">

@@ -169,6 +169,17 @@ public class CentroService {
 		return result;
 	}
 
+	public Collection<Centro> findCentrosByUsuarioExclude(final int usuarioId) {
+		Collection<Centro> centrosUsuario;
+		Collection<Centro> todos;
+
+		centrosUsuario = new ArrayList<>(this.centroRepository.findCentrosByUsuario(usuarioId));
+		todos = new ArrayList<>(this.findAll());
+		todos.removeAll(centrosUsuario);
+
+		return todos;
+	}
+
 	public void anadirCentroFavorito(final Centro centro, final Usuario usuario) {
 		Collection<Centro> centrosUsuarios;
 		Collection<Usuario> usuariosCentro;

@@ -67,16 +67,17 @@ public class CentroUsuarioController extends AbstractController {
 	//	Lista todos --------------------------------------------------------
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
-
+		Usuario usuarioConectado;
 		ModelAndView result;
 		Collection<Centro> centros;
 
-		centros = this.centroService.findAll();
+		usuarioConectado = this.usuarioService.findByPrincipal();
+		centros = this.centroService.findCentrosByUsuarioExclude(usuarioConectado.getId());
 
 		result = new ModelAndView("centro/list");
 		result.addObject("requestURI", "centro/usuario/list.do");
 		result.addObject("centros", centros);
-
+		result.addObject("mostrarBotonUsuario", true);
 		return result;
 
 	}
@@ -94,7 +95,7 @@ public class CentroUsuarioController extends AbstractController {
 		result = new ModelAndView("centro/list");
 		result.addObject("requestURI", "centro/usuario/list.do");
 		result.addObject("centros", centros);
-		result.addObject("mostrarBotonGestor", true);
+		result.addObject("mostrarBotonUsuario", false);
 
 		return result;
 
@@ -116,7 +117,7 @@ public class CentroUsuarioController extends AbstractController {
 			//this.reservaService.delete(reserva);
 			result = new ModelAndView("redirect:my-center.do");
 		} catch (final Throwable oops) {
-			result = new ModelAndView("centro/display");
+			result = new ModelAndView("centro/list");
 			//if (oops.getMessage().equals("error fecha cercana"))
 			//result = this.lista("reserva.commit.error.cercana");
 			//else

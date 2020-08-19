@@ -41,6 +41,13 @@
     margin:auto;
 }
 
+.option-button {
+    height:100%;
+}
+
+.media-object {
+    height: 100px;
+}
 .custom {
     width: 120px !important;
 }

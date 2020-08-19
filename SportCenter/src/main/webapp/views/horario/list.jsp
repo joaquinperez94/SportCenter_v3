@@ -53,7 +53,7 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	 <security:authorize access="hasRole('GESTOR')">
 			    	<th >
 			    		<jstl:forEach var="row" items="${horariosLunes}">
 			    			<div class="mx-auto text-center">
@@ -63,9 +63,20 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	</security:authorize>
 			    </tr>
 		    </jstl:if>
+		    
+		    <jstl:if test="${empty horariosLunes}">
+		    	<tr>
+			    	<th  style="vertical-align: middle;"><div class="mx-auto text-center "><spring:message code="horario.titulo.lunes" /></div></th>
+		    		<th style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.cerrado" /></div></th>
+		    		<security:authorize access="hasRole('GESTOR')">
+		    		<th></th>
+		    		</security:authorize>
+		    	</tr>
+		    </jstl:if>
+		    
 		    <jstl:if test="${not empty horariosMartes}">			
 			  	<tr>
 			    	<th  style="vertical-align: middle;"><div class="mx-auto text-center "><spring:message code="horario.titulo.martes" /></div></th>
@@ -82,7 +93,7 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	 <security:authorize access="hasRole('GESTOR')">
 			    	<th >
 			    		<jstl:forEach var="row" items="${horariosMartes}">
 			    			<div class="mx-auto text-center">
@@ -92,7 +103,7 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	</security:authorize>
 			    </tr>
 		    </jstl:if>
 		    
@@ -100,7 +111,9 @@
 		    	<tr>
 			    	<th  style="vertical-align: middle;"><div class="mx-auto text-center "><spring:message code="horario.titulo.martes" /></div></th>
 		    		<th style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.cerrado" /></div></th>
+		    		<security:authorize access="hasRole('GESTOR')">
 		    		<th></th>
+		    		</security:authorize>
 		    	</tr>
 		    </jstl:if>
 		    
@@ -120,7 +133,7 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	 <security:authorize access="hasRole('GESTOR')">
 			    	<th >
 			    		<jstl:forEach var="row" items="${horariosMiercoles}">
 			    			<div class="mx-auto text-center">
@@ -130,14 +143,16 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	</security:authorize>
 			    </tr>
 		    </jstl:if>
 		    <jstl:if test="${empty horariosMiercoles}">
 		    	<tr>
 			    	<th  style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.titulo.miercoles" /></div></th>
 		    		<th style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.cerrado" /></div></th>
+		    		<security:authorize access="hasRole('GESTOR')">
 		    		<th></th>
+		    		</security:authorize>
 		    	</tr>
 		    </jstl:if>
 		    
@@ -157,7 +172,7 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	 <security:authorize access="hasRole('GESTOR')">
 			    	<th >
 			    		<jstl:forEach var="row" items="${horariosJueves}">
 			    			<div class="mx-auto text-center">
@@ -167,14 +182,16 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	</security:authorize>
 			    </tr>
 		    </jstl:if>
 		    <jstl:if test="${empty horariosJueves}">
 		    	<tr>
 			    	<th  style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.titulo.jueves" /></div></th>
 		    		<th style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.cerrado" /></div></th>
+		    		<security:authorize access="hasRole('GESTOR')">
 		    		<th></th>
+		    		</security:authorize>
 		    	</tr>
 		    </jstl:if>
 		    
@@ -195,7 +212,7 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	 <security:authorize access="hasRole('GESTOR')">
 			    	<th style="vertical-align: middle;">
 			    		<jstl:forEach var="row" items="${horariosViernes}">
 			    			<div class="mx-auto text-center">
@@ -205,14 +222,16 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	</security:authorize>
 			    </tr>
 		    </jstl:if>
 		    <jstl:if test="${empty horariosViernes}">
 		    	<tr>
 			    	<th  style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.titulo.viernes" /></div></th>
 		    		<th style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.cerrado" /></div></th>
+		    		 <security:authorize access="hasRole('GESTOR')">
 		    		<th></th>
+		    		</security:authorize>
 		    	</tr>
 		    </jstl:if>
 		    
@@ -232,7 +251,7 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	 <security:authorize access="hasRole('GESTOR')">
 			    	<th >
 			    		<jstl:forEach var="row" items="${horariosSabado}">
 			    			<div class="mx-auto text-center">
@@ -242,14 +261,16 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	</security:authorize>
 			    </tr>
 		    </jstl:if>
 		    <jstl:if test="${empty horariosSabado}">
 		    	<tr>
 			    	<th  style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.titulo.sabado" /></div></th>
 		    		<th style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.cerrado" /></div></th>
+		    		<security:authorize access="hasRole('GESTOR')">
 		    		<th></th>
+		    		</security:authorize>
 		    	</tr>
 		    </jstl:if>
 		    
@@ -269,7 +290,7 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	 <security:authorize access="hasRole('GESTOR')">
 			    	<th >
 			    		<jstl:forEach var="row" items="${horariosDomingo}">
 			    			<div class="mx-auto text-center">
@@ -279,24 +300,27 @@
 			    			</div>
 			    		</jstl:forEach>
 			    	</th>
-			    	
+			    	</security:authorize>
 			    </tr>
 		    </jstl:if>
 		    <jstl:if test="${empty horariosDomingo}">
 		    	<tr>
 			    	<th  style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.titulo.domingo" /></div></th>
 		    		<th style="vertical-align: middle;"><div class="mx-auto text-center"><spring:message code="horario.cerrado" /></div></th>
+		    		<security:authorize access="hasRole('GESTOR')">
 		    		<th></th>
+		    		</security:authorize>
 		    	</tr>
 		    </jstl:if>
 		    
 		   </tbody>
 		</table>
+	<security:authorize access="hasRole('GESTOR')">	
 	<input type="button" class="btn btn-primary btn-sm mt-2 mt-sm-3" name="display"
 							value="<spring:message code="horario.crear" />"
 							onclick="location.href='horario/gestor/create.do?servicioId=${servicioId}'" />
 			
-			
+		</security:authorize>	
 	</div>
 	
 					
