@@ -22,73 +22,96 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<div class="extender2 container bg-light">
+	<div class="row">
+		<div class="col-md-7 mx-auto mt-5">
+				<h3><jstl:out value="${reserva.servicio.nombre}"></jstl:out>-<jstl:out value="${reserva.servicio.identificador}"></jstl:out></h3>
+				<hr class="bg-primary mt-0 pt-0">	
+				<div class="row form-group ml-1 ml-sm-1 mr-1 mr-sm-1">
+					  	<div class="col-form-label col-md-4 ">
+							<spring:message code="reserva.format.fechaReserva2" var="pattern"></spring:message>
+							<fmt:formatDate value="${reserva.fechaReserva}" pattern="${pattern}" var="newdatevar" />
+							<spring:message code="reserva.fechaReserva" />
+						</div>
+						<div class="col-md-8 form-control text-center mx-auto">
+							<c:out value="${newdatevar}" />
+						</div>
+				</div>
+				
+				<div class="row form-group ml-1 ml-sm-1 mr-1 mr-sm-1">
+					  	<div class="col-form-label col-md-4 ">
+							<spring:message code="reserva.horaInicio2" />
+						</div>
+						<div class="col-md-8 form-control text-center mx-auto">
+							<c:out value="${reserva.horaInicio}" />
+						</div>
+				</div>
+				
+				<div class="row form-group ml-1 ml-sm-1 mr-1 mr-sm-1">
+					  	<div class="col-form-label col-md-4 ">
+							<spring:message code="reserva.horaFin2" />
+						</div>
+						<div class="col-md-8 form-control text-center mx-auto">
+							<c:out value="${reserva.horaFin}" />
+						</div>
+				</div>
+				<div class="row form-group ml-1 ml-sm-1 mr-1 mr-sm-1">
+					  	<div class="col-form-label col-md-4 ">
+							<spring:message code="reserva.comentario" />
+						</div>
+						<div style="height:auto;" class="col-md-8 text-center form-control pb-3 pb-sm-3" id="mio45">
+						
+		
+							
+						</div>
+						<script>
+						if(!jQuery.isEmptyObject('${reserva.comentario}')){
+							$('#mio45').text("${reserva.comentario}");
+						}
+						if(jQuery.isEmptyObject('${reserva.comentario}')){
+							$('#mio45').text("-");
+						}
+						</script>
+				</div>
+				
+				<br>
+		<security:authorize access="hasRole('USUARIO')">
 
-<display:table name="reserva" class="displaytag"
-	requestURI="${requestURI}" id="row">
-	<display:column>
-	
-	<B><spring:message code="reserva.servicio" />:</B>
-	<jstl:out value="${row.servicio.nombre}"></jstl:out>
-	
-	<p>
-	<spring:message code="reserva.format.fechaReserva2" var="pattern"></spring:message>
-	<fmt:formatDate value="${row.fechaReserva}" pattern="${pattern}" var="newdatevar" />
-	<B><spring:message code="reserva.fechaReserva"></spring:message>: </B>
-	<c:out value="${newdatevar}" />
-	</p>
-
-	<p>
-	<B><spring:message code="reserva.horaInicio2" />:</B>
-	<jstl:out value="${row.horaInicio}"></jstl:out>
-	</p>
-	
-	<p>
-	<B><spring:message code="reserva.horaFin2" />:</B>
-	<jstl:out value="${row.horaFin}"></jstl:out>
-	</p>
-	
-	<p>
-	<B><spring:message code="reserva.comentario" />:</B>
-	<jstl:out value="${row.comentario}"></jstl:out>
-	</p>
-	
-	</display:column>
-  
-</display:table>
-
-
-<security:authorize access="hasRole('USUARIO')">
-<script type="text/javascript">
-	function confirmDelete(reservaId) {
+		<script type="text/javascript">
+		function confirmDelete(reservaId) {
 		confirm=confirm('<spring:message code="reserva.confirmar.cancelación"/>');
 		if (confirm)
 		  window.location.href ="reserva/usuario/cancelar.do?reservaId=" + reservaId;
 		  else
-			  window.location.href ="reserva/usuario/list.do?d-16544-p=1";
-	}
-</script>
+			  window.location.href ="reserva/usuario/display.do?reservaId=" + reservaId;
+			}
+		</script>
 
 	
-<input type="button" name="delete"
+		<input type="button" name="delete" class="btn btn-danger btn-sm mt-2 mt-sm-2 ml-3 ml-sm-3"
 				value="<spring:message code="reserva.cancelar" />"
-				onclick="confirmDelete(${row.id});" />
-				
-</security:authorize>
+				onclick="confirmDelete(${reserva.id});" />
 
-<security:authorize access="hasRole('GESTOR')">
-<script type="text/javascript">
-	function confirmDelete(reservaId) {
-		confirm=confirm('<spring:message code="reserva.confirmar.cancelación"/>');
-		if (confirm)
+		</security:authorize>
+		
+				<security:authorize access="hasRole('GESTOR')">
+		<script type="text/javascript">
+	function confirmDelete2(reservaId) {
+		confirm3=confirm('<spring:message code="reserva.confirmar.cancelación"/>');
+		if (confirm3)
 		  window.location.href ="reserva/gestor/cancelar.do?reservaId=" + reservaId;
 		  else
-			  window.location.href ="reserva/gestor/list.do?d-16544-p=1";
+			  window.location.href ="reserva/gestor/display.do?reservaId=" + reservaId;
 	}
-</script>
+	</script>
 
 	
-<input type="button" name="cancelar"
-				value="<spring:message code="reserva.cancelar" />"
-				onclick="confirmDelete(${row.id});" />
+	<input type="button" name="cancelar"
+				value="<spring:message code="reserva.cancelar" />" class="bbtn btn-danger btn-sm mt-2 mt-sm-2 ml-3 ml-sm-3"
+				onclick="confirmDelete2(${reserva.id});" />
+
+	</security:authorize>
 				
-</security:authorize>
+		</div>
+	</div>
+</div>

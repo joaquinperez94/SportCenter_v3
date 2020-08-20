@@ -80,8 +80,9 @@ public class ReservaGestorController extends AbstractController {
 
 		result = new ModelAndView("reserva/list");
 		result.addObject("requestURI", "reserva/gestor/list.do");
-		result.addObject("reservasHoy", reservasHoy);
-		result.addObject("reservasOtros", reservasOtros);
+		//result.addObject("reservasHoy", reservasHoy);
+		//result.addObject("reservasOtros", reservasOtros);
+		result.addObject("reservas", reservasOtros);
 		//result.addObject("mostrarBotonGestor", true);
 
 		return result;

@@ -324,8 +324,9 @@ public class ReservaService {
 		gestor = this.gestorService.findByPrincipal();
 		serviciosGestor = new ArrayList<>(this.servicioService.findServiciosByGestorId(gestor.getId()));
 		Assert.isTrue(serviciosGestor.contains(reserva.getServicio()));
-		reserva.setActiva(false);
-		this.reservaRepository.save(reserva);
+		//reserva.setActiva(false);
+		this.reservaRepository.delete(reserva);
+		//this.reservaRepository.save(reserva);
 	}
 
 	public HashMap<String, Collection<Reserva>> reservasDeServiciosGestor(final int gestorId) {
