@@ -28,6 +28,7 @@
 	    	<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
   	</properties>
 
+
 	<!-- Indexing information -->
 
 	<name>SportCenter</name>
@@ -43,8 +44,7 @@
         <artifactId>heroku-maven-plugin</artifactId>
         <version>3.0.3</version>
       </plugin>
-      
-      <!-- Despliegue en Heroku -->
+         <!-- Despliegue en Heroku -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -68,6 +68,7 @@
 					</execution>
 				</executions>
 			</plugin>
+   
 
 			<!-- Java compiler -->
 
