@@ -86,7 +86,6 @@
 			  window.location.href ="reserva/usuario/display.do?reservaId=" + reservaId;
 			}
 		</script>
-
 	
 		<input type="button" name="delete" class="btn btn-danger btn-sm mt-2 mt-sm-2 ml-3 ml-sm-3"
 				value="<spring:message code="reserva.cancelar" />"
