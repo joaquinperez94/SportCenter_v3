@@ -18,7 +18,7 @@
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://sportcentertfg-2.cynravqwc6gc.eu-west-3.rds.amazonaws.com:3306/SportCenter" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://sportcenter5.cynravqwc6gc.eu-west-3.rds.amazonaws.com:3306/SportCenter5" />
 			<property name="javax.persistence.jdbc.user" value="admin" />
 			<property name="javax.persistence.jdbc.password" value="Antena.Feliz.20" />
 
