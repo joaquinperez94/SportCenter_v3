@@ -37,7 +37,7 @@
         </button>
 
          <a class="navbar-brand" href="#">
-                <img src="images/logov3.png" width="50" height="30" class="d-inline-block align-top" alt="">
+                
                 SportCenter
             </a>
       

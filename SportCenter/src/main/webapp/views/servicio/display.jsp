@@ -56,7 +56,7 @@
 
 
 <security:authorize access="hasRole('USUARIO')">
-<input type="button" class="btn btn-primary btn-sm ml-1 ml-lg-1 ml-xl-5" style="width:70px;" name="display"
+<input type="button" class="btn btn-primary btn-sm ml-1 ml-lg-1 ml-xl-5" style="width:90px;" name="display"
 							value="<spring:message code="servicio.crear" />"
 				onclick="location.href='reserva/usuario/create.do?servicioId=${servicio.id}'" />
 

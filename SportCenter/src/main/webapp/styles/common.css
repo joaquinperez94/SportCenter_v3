@@ -62,12 +62,17 @@
 td > * {
     vertical-align : middle;
 }
-html,body { height:100% !important;
+
+
+html, body { height:100% !important;
 background-size: cover;}
+
+.dropdown-menu{
+  position:relative;
+  }
 
 .extender34{
 	 height: 100%;
-
 
 }
 
@@ -83,6 +88,10 @@ section {
 
 .bg { 
 
+}
+
+.navega{
+position: absolute !important;	
 }
 
 .extender{
