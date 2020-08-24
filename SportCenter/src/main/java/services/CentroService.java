@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
-import javax.servlet.ServletContext;
-
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,9 +41,6 @@ public class CentroService {
 	HorarioService				horarioService;
 	@Autowired
 	UsuarioService				usuarioService;
-
-	@Autowired
-	ServletContext				context;
 
 
 	// Constructors -----------------------------------------------------------
