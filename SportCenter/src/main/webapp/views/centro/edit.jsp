@@ -120,7 +120,7 @@
 				<button type="submit" name="save" class="btn btn-primary"><spring:message code="centro.guardar"/></button>
 				
 				<jstl:if test="${centro.id !=0 }">
-					<button onclick="javascript: return confirm('<spring:message code="centro.confirmar.borrado" />')" type="submit" name="delete" class="btn btn-danger"><spring:message code="centro.guardar"/></button>	
+					<button onclick="javascript: return confirm('<spring:message code="centro.confirmar.borrado" />')" type="submit" name="delete" class="btn btn-danger"><spring:message code="servicio.borrar"/></button>	
 				</jstl:if>		
 
 				<button class="btn btn-secondary" onclick="location.href='centro/gestor/my-center.do?d-16544-p=1'" type="button">

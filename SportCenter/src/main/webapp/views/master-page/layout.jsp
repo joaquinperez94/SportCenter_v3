@@ -77,9 +77,7 @@
 </script>
 
 </head>
-	<div class="ml-sm-0 mr-sm-0 ml-md-3 mr-md-3 ml-lg-5 mr-lg-5">
-		<tiles:insertAttribute name="header" />
-	</div>
+
 	
 
 <body class="bg d-flex flex-column min-vh-100">
@@ -87,6 +85,7 @@
 		<!--<h1>
 			<tiles:insertAttribute name="title" />
 		</h1>-->
+		<tiles:insertAttribute name="header" />
 		<tiles:insertAttribute name="body" />	
 		</div>
 		<div class="ml-sm-0 mr-sm-0 ml-md-3 mr-md-3 ml-lg-5 mr-lg-5 bg-light">
@@ -101,5 +100,6 @@
 		<tiles:insertAttribute name="footer" />-->
 	</div>
 </body>
+
 
 </html>
